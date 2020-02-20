@@ -70,9 +70,9 @@ Example:
 
 ### 1. Get all users' information <a name="get-all-users'-information"></a>
 
-**Request:	`GET admin/user/all`**
+**Request:	`GET admin/users`**
 
-Example: admin/user/all
+Example: admin/users
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -128,13 +128,10 @@ Example: admin/user/all
 
 ### 2. Update a specific user's setting <a name="update-a-specific-user's-setting"></a>
 
-**Request:	`PUT admin/user/setting/update`**
-
-// userId can't be updated
+**Request:	`PUT admin/users/{userId}`**
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
-userId       | String        | Required            | userId
 username     | String        | Required            | username
 email        | String        | Required            | email
 password     | String        | Required            | password
@@ -150,7 +147,6 @@ Example:
 *Request body:*
 
     {
-    	"userId": "1",
     	"username": "peter",
     	"email": "peter@gmail.com",
     	"password": "123456Abbb",
@@ -162,14 +158,14 @@ Example:
 
     {
     	"user": {
-    	"userId": "1",
-    	"username": "peter",
-    	"email": "peter@gmail.com",
-    	"password": "123456Abbb",
-    	"firstname": "peter1",
-    	"lastname": "sun1",
-    	"createAt": "some date",
-    	"updateAt": "some date"
+            "userId": "1",
+            "username": "peter",
+            "email": "peter@gmail.com",
+            "password": "123456Abbb",
+            "firstname": "peter1",
+            "lastname": "sun1",
+            "createAt": "some date",
+            "updateAt": "some date"
     	},
     	"status": "success"
     }
@@ -183,9 +179,9 @@ Example:
 
 ### 3. Delete a user <a name="delete-a-user"></a>
 
-**Request:	`DELETE admin/user/delete/{userId}`**
+**Request:	`DELETE admin/users/{userId}`**
 
-Example: admin/user/delete/1
+Example: admin/users/1
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -303,9 +299,9 @@ Example:
 
 ### 3. Get Setting(get user's information) <a name="get-setting"></a>
 
-**Request:	`GET user/setting/{userId}`**
+**Request:	`GET user/{userId}`**
 
-Example: user/setting/1
+Example: user/1
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -336,13 +332,11 @@ Example: user/setting/1
 
 ### 4. Update Setting(change password, name, etc..) <a name="update-setting"></a>
 
-**Request:	PUT user/setting/update**
+**Request:	`PUT user/{userId}`**
 
-// userId can't be updated
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
-userId       | String        | Required            | userId
 username     | String        | Required            | username
 email        | String        | Required            | email
 password     | String        | Required            | password
@@ -358,7 +352,6 @@ Example:
 *Request body:*
 
     {
-    	"userId": "1",
     	"username": "peter",
     	"email": "peter@gmail.com",
     	"password": "123456Abbb",
@@ -370,15 +363,15 @@ Example:
 
     {
     	"user": {
-    	"userId": "1",
-    	"username": "peter",
-    	"email": "peter@gmail.com",
-    	"password": "123456Abbb",
-    	"firstname": "peter1",
-    	"lastname": "sun1",
-    	"createAt": "some date",
-    	"updateAt": "some date"
-    	},
+            "userId": "1",
+            "username": "peter",
+            "email": "peter@gmail.com",
+            "password": "123456Abbb",
+            "firstname": "peter1",
+            "lastname": "sun1",
+            "createAt": "some date",
+            "updateAt": "some date"
+            },
     	"status": "success"
     }
 
@@ -395,9 +388,9 @@ Example:
 
 ### 1. Get all the transactions <a name="get-all-the-transactions"></a>
 
-**Request:	`GET user/transaction/all/{userId}`**
+**Request:	`GET user/{userId}/transactions`**
 
-Example: user/transaction/all/1
+Example: user/1/transactions
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -453,13 +446,12 @@ Example: user/transaction/all/1
 
 ### 2. Make a transaction <a name="make-a-transaction"></a>
 
-**Request:	`POST user/transaction/add`**
+**Request:	`POST user/{userId}/transactions`**
 
 *buy a stock*
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
-userId       | String        | Required            | userId
 stock_symbol | String        | Required            | stock_symbol
 stock_name   | String        | Required            | stock_name
 buy_or_sell  | String        | Required            | buy or sell
@@ -471,7 +463,6 @@ currency     | String        | Required            | currency
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
-userId       | String        | Required            | userId
 stock_symbol | String        | Required            | stock_symbol
 stock_name   | String        | Required            | stock_name
 buy_or_sell  | String        | Required            | buy or sell
@@ -479,7 +470,7 @@ sell_price   | Double        | Required            | sell_price
 sell_amount  | Double        | Required            | sell_amount
 currency     | String        | Required            | currency
 
-Example: user/transaction/add
+Example: user/1/transactions
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -488,7 +479,6 @@ Example: user/transaction/add
 *Request body(buy):*
 
     {
-        "userId": "1",
         "stock_symbol": "AAPL",
         "stock_name": "Apple Inc",
         "buy_or_sell": "buy",
@@ -518,7 +508,6 @@ Example: user/transaction/add
 *Request body(sell):*
 
     {
-        "userId": "1",
         "stock_symbol": "AAPL",
         "stock_name": "Apple Inc",
         "buy_or_sell": "sell",
@@ -558,9 +547,9 @@ Example: user/transaction/add
 
 ### 1. Get a user's portfolio <a name="get-a-user's-portfolio"></a>
 
-**Request:	`GET user/portfolio/{userId}`**
+**Request:	`GET user/{userId}/portfolio`**
 
-Example: user/portfolio/1
+Example: user/1/portfolio
 
     header: {
         "Authorization" : "Bearer <jwt token>"
