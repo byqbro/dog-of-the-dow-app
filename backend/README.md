@@ -1,19 +1,40 @@
 # API Design
 
-# Admin API
+* Admin API
+    * [Login](#login-admin)
+    * [Manage users](#manage-users)
+        * [Get all users' information](#get-all-users'-information)
+        * [Update a specific user's setting](#update-a-specific-user's-setting)
+        * [Delete a user](#delete-a-user)
+        
+* User API
+    * [Register](#register)
+    * [Login](#login-user)
+    * [Setting](#get-setting)
+        * [Get Setting(get user's information)](#get-setting)
+        * [Update Setting(change password, name, etc..)](#update-setting)
+    * [Transactions](#transactions)
+        * [Get all the transactions](#get-all-the-transactions)
+        * [Make a transaction](#make-a-transaction)
+    * [Portfolio](#portfolio)
+        * [Get a user's portfolio](#get-a-user's-portfolio)
+        * [Make a transaction](#make-a-transaction)
 
-## Login
+## Admin API
+
+### Login <a name="login-admin"></a>
 
 **Request:	`POST admin/login`**
 
-    Parameters   | Data Type     | Required / Optional | Description / Requirement
-    ------------ | ------------- | ------------------- | -------------------------
-    email        | String        | Required            | email 
-    password     | String        | Required            | password 
+Parameters   | Data Type     | Required / Optional | Description / Requirement
+------------ | ------------- | ------------------- | -------------------------
+email        | String        | Required            | email 
+password     | String        | Required            | password 
+    
 
 Example:
 
-Request body:
+*Request body:*
 
     {
     	"email": "peter@gmail.com",
@@ -43,6 +64,8 @@ Request body:
     	"error": "error message",
     	"status": "fail"
     }
+    
+------
 
 ## Manage users
 
@@ -56,7 +79,7 @@ Example: admin/user/all
         "Authorization" : "Bearer <jwt token>"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"users": [
@@ -97,7 +120,7 @@ Response(Success):
     	"status": "success"
     }
 
-Response(Fail):
+*Response(Fail):*
 
     {
     	"error": "error message",
@@ -110,14 +133,14 @@ Response(Fail):
 
 // userId can't be updated
 
-    Parameters   | Data Type     | Required / Optional | Description / Requirement
-    ------------ | ------------- | ------------------- | -------------------------
-    userId       | String        | Required            | userId
-    username     | String        | Required            | username
-    email        | String        | Required            | email
-    password     | String        | Required            | password
-    firstname    | String        | Required            | first name
-    lastname     | String        | Required            | last name
+Parameters   | Data Type     | Required / Optional | Description / Requirement
+------------ | ------------- | ------------------- | -------------------------
+userId       | String        | Required            | userId
+username     | String        | Required            | username
+email        | String        | Required            | email
+password     | String        | Required            | password
+firstname    | String        | Required            | first name
+lastname     | String        | Required            | last name
 
 Example:
 
@@ -125,7 +148,7 @@ Example:
         "Authorization" : "Bearer <jwt token>"
     }
 
-Request body:
+*Request body:*
 
     {
     	"userId": "1",
@@ -136,7 +159,7 @@ Request body:
     	"lastname": "sun1"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"user": {
@@ -152,7 +175,7 @@ Response(Success):
     	"status": "success"
     }
 
-Response(Fail):
+*Response(Fail):*
 
     {
     	"error": "error message",
@@ -169,40 +192,44 @@ Example: admin/user/delete/1
         "Authorization" : "Bearer <jwt token>"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"status": "success"
     }
 
-Response(Fail):
+*Response(Fail):*
 
     {
     	"error": "error message",
     	"status": "fail"
     }
 
-# User API
+
+
+------
+
+## User API
 
 Authentication(User)
 
-## **1. Register**
+### 1. Register
 
 **Request:	`POST user/register`**
 
-    Parameters   | Data Type     | Required / Optional | Description / Requirement
-    ------------ | ------------- | ------------------- | -------------------------
-    username     | String        | Required            | length 6-30, no space, should be unique
-    email        | String        | Required            | email
-    password     | String        | Required            | length 8-20, must have upper, lowercase and digits, no space
-    firstname    | String        | Required            | first name
-    lastname     | String        | Required            | last name
+Parameters   | Data Type     | Required / Optional | Description / Requirement
+------------ | ------------- | ------------------- | -------------------------
+username     | String        | Required            | length 6-30, no space, should be unique
+email        | String        | Required            | email
+password     | String        | Required            | length 8-20, must have upper, lowercase and digits, no space
+firstname    | String        | Required            | first name
+lastname     | String        | Required            | last name
 
 // would check if meets the requirement
 
 Example:
 
-Request body:
+*Request body:*
 
     {
     	"username": "peter",
@@ -212,7 +239,7 @@ Request body:
     	"lastname": "sun"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"user": {
@@ -226,32 +253,32 @@ Response(Success):
     	"status": "success"
     }
 
-Response(Fail):
+*Response(Fail):*
 
     {
     	"error": "error message",
     	"status": "fail"
     }
 
-## 2. Login
+### 2. Login <a name="login-user"></a>
 
 **Request:	`POST user/login`**
 
-    Parameters   | Data Type     | Required / Optional | Description / Requirement
-    ------------ | ------------- | ------------------- | -------------------------
-    email        | String        | Required            | email 
-    password     | String        | Required            | password 
+Parameters   | Data Type     | Required / Optional | Description / Requirement
+------------ | ------------- | ------------------- | -------------------------
+email        | String        | Required            | email 
+password     | String        | Required            | password 
 
 Example:
 
-Request body:
+*Request body:*
 
     {
     	"email": "peter@gmail.com",
     	"password": "123456Ab"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"user": {
@@ -268,14 +295,14 @@ Response(Success):
     	"status": "success"
     }
 
-Response(Fail):
+*Response(Fail):*
 
     {
     	"error": "error message",
     	"status": "fail"
     }
 
-## 3. Get Setting(get user's information)
+### 3. Get Setting(get user's information)
 
 **Request:	`GET user/setting/{userId}`**
 
@@ -285,7 +312,7 @@ Example: user/setting/1
         "Authorization" : "Bearer <jwt token>"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"user": {
@@ -301,27 +328,27 @@ Response(Success):
     	"status": "success",
     }
 
-Response(Fail):
+*Response(Fail):*
 
     {
     	"error": "error message",
     	"status": "fail"
     }
 
-## 4. Update Setting(change password, name, etc..)
+### 4. Update Setting(change password, name, etc..)
 
 **Request:	PUT user/setting/update**
 
 // userId can't be updated
 
-    Parameters   | Data Type     | Required / Optional | Description / Requirement
-    ------------ | ------------- | ------------------- | -------------------------
-    userId       | String        | Required            | userId
-    username     | String        | Required            | username
-    email        | String        | Required            | email
-    password     | String        | Required            | password
-    firstname    | String        | Required            | first name
-    lastname     | String        | Required            | last name
+Parameters   | Data Type     | Required / Optional | Description / Requirement
+------------ | ------------- | ------------------- | -------------------------
+userId       | String        | Required            | userId
+username     | String        | Required            | username
+email        | String        | Required            | email
+password     | String        | Required            | password
+firstname    | String        | Required            | first name
+lastname     | String        | Required            | last name
 
 Example:
 
@@ -329,7 +356,7 @@ Example:
         "Authorization" : "Bearer <jwt token>"
     }
 
-Request body:
+*Request body:*
 
     {
     	"userId": "1",
@@ -340,7 +367,7 @@ Request body:
     	"lastname": "sun1"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"user": {
@@ -356,16 +383,18 @@ Response(Success):
     	"status": "success"
     }
 
-Response(Fail):
+*Response(Fail):*
 
     {
     	"error": "error message",
     	"status": "fail"
     }
+    
+------
 
-# Transactions
+## Transactions
 
-## 1. Get all the transactions
+### 1. Get all the transactions
 
 **Request:	`GET user/transaction/all/{userId}`**
 
@@ -375,7 +404,7 @@ Example: user/transaction/all/1
         "Authorization" : "Bearer <jwt token>"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"transactions": [
@@ -416,40 +445,40 @@ Response(Success):
     	"status": "success"
     }
 
-Response(Fail):
+*Response(Fail):*
 
     {
     	"error": "error message",
     	"status": "fail"
     }
 
-## 2. Make a transaction
+### 2. Make a transaction
 
 **Request:	`POST user/transaction/add`**
 
 *buy a stock*
 
-    Parameters   | Data Type     | Required / Optional | Description / Requirement
-    ------------ | ------------- | ------------------- | -------------------------
-    userId       | String        | Required            | userId
-    stock_symbol | String        | Required            | stock_symbol
-    stock_name   | String        | Required            | stock_name
-    buy_or_sell  | String        | Required            | buy or sell
-    buy_price    | Double        | Required            | buy_price
-    buy_amount   | Double        | Required            | buy_amount
-    currency     | String        | Required            | currency
+Parameters   | Data Type     | Required / Optional | Description / Requirement
+------------ | ------------- | ------------------- | -------------------------
+userId       | String        | Required            | userId
+stock_symbol | String        | Required            | stock_symbol
+stock_name   | String        | Required            | stock_name
+buy_or_sell  | String        | Required            | buy or sell
+buy_price    | Double        | Required            | buy_price
+buy_amount   | Double        | Required            | buy_amount
+currency     | String        | Required            | currency
 
 *sell a stock*
 
-    Parameters   | Data Type     | Required / Optional | Description / Requirement
-    ------------ | ------------- | ------------------- | -------------------------
-    userId       | String        | Required            | userId
-    stock_symbol | String        | Required            | stock_symbol
-    stock_name   | String        | Required            | stock_name
-    buy_or_sell  | String        | Required            | buy or sell
-    sell_price   | Double        | Required            | sell_price
-    sell_amount  | Double        | Required            | sell_amount
-    currency     | String        | Required            | currency
+Parameters   | Data Type     | Required / Optional | Description / Requirement
+------------ | ------------- | ------------------- | -------------------------
+userId       | String        | Required            | userId
+stock_symbol | String        | Required            | stock_symbol
+stock_name   | String        | Required            | stock_name
+buy_or_sell  | String        | Required            | buy or sell
+sell_price   | Double        | Required            | sell_price
+sell_amount  | Double        | Required            | sell_amount
+currency     | String        | Required            | currency
 
 Example: user/transaction/add
 
@@ -457,7 +486,7 @@ Example: user/transaction/add
         "Authorization" : "Bearer <jwt token>"
     }
 
-Request body(buy):
+*Request body(buy):*
 
     {
         "userId": "1",
@@ -469,7 +498,7 @@ Request body(buy):
         "currency": "USD"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"transaction":
@@ -487,7 +516,7 @@ Response(Success):
     	"status": "success"
     }
 
-Request body(sell):
+*Request body(sell):*
 
     {
         "userId": "1",
@@ -499,7 +528,7 @@ Request body(sell):
         "currency": "USD"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"transaction":
@@ -517,16 +546,18 @@ Response(Success):
     	"status": "success"
     }
 
-Response(Fail):
+*Response(Fail):*
 
     {
     	"error": "error message",
     	"status": "fail"
     }
 
-# Portfolio
+------
 
-## 1. Get a user's portfolio
+## Portfolio
+
+### 1. Get a user's portfolio
 
 **Request:	`GET user/portfolio/{userId}`**
 
@@ -536,7 +567,7 @@ Example: user/portfolio/1
         "Authorization" : "Bearer <jwt token>"
     }
 
-Response(Success):
+*Response(Success):*
 
     {
     	"user": {
@@ -564,7 +595,7 @@ Response(Success):
     	"status": "success"
     }
 
-Response(Fail):
+*Response(Fail):*
 
     {
     	"error": "error message",
