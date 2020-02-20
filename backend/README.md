@@ -18,7 +18,6 @@
         * [Make a transaction](#make-a-transaction)
     * [Portfolio](#portfolio)
         * [Get a user's portfolio](#get-a-user's-portfolio)
-        * [Make a transaction](#make-a-transaction)
 
 ## Admin API
 
@@ -69,7 +68,7 @@ Example:
 
 ## Manage users
 
-### 1. Get all users' information
+### 1. Get all users' information <a name="get-all-users'-information"></a>
 
 **Request:	`GET admin/user/all`**
 
@@ -127,7 +126,7 @@ Example: admin/user/all
     	"status": "fail"
     }
 
-### 2. Update a specific user's setting
+### 2. Update a specific user's setting <a name="update-a-specific-user's-setting"></a>
 
 **Request:	`PUT admin/user/setting/update`**
 
@@ -182,7 +181,7 @@ Example:
     	"status": "fail"
     }
 
-### 3. Delete a user
+### 3. Delete a user <a name="delete-a-user"></a>
 
 **Request:	`DELETE admin/user/delete/{userId}`**
 
@@ -213,7 +212,7 @@ Example: admin/user/delete/1
 
 Authentication(User)
 
-### 1. Register
+### 1. Register <a name="register"></a>
 
 **Request:	`POST user/register`**
 
@@ -302,7 +301,7 @@ Example:
     	"status": "fail"
     }
 
-### 3. Get Setting(get user's information)
+### 3. Get Setting(get user's information) <a name="get-setting"></a>
 
 **Request:	`GET user/setting/{userId}`**
 
@@ -335,7 +334,7 @@ Example: user/setting/1
     	"status": "fail"
     }
 
-### 4. Update Setting(change password, name, etc..)
+### 4. Update Setting(change password, name, etc..) <a name="update-setting"></a>
 
 **Request:	PUT user/setting/update**
 
@@ -394,7 +393,7 @@ Example:
 
 ## Transactions
 
-### 1. Get all the transactions
+### 1. Get all the transactions <a name="get-all-the-transactions"></a>
 
 **Request:	`GET user/transaction/all/{userId}`**
 
@@ -452,7 +451,7 @@ Example: user/transaction/all/1
     	"status": "fail"
     }
 
-### 2. Make a transaction
+### 2. Make a transaction <a name="make-a-transaction"></a>
 
 **Request:	`POST user/transaction/add`**
 
@@ -557,7 +556,7 @@ Example: user/transaction/add
 
 ## Portfolio
 
-### 1. Get a user's portfolio
+### 1. Get a user's portfolio <a name="get-a-user's-portfolio"></a>
 
 **Request:	`GET user/portfolio/{userId}`**
 
