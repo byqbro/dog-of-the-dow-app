@@ -36,32 +36,32 @@ Example:
 *Request body:*
 
     {
-    	"email": "peter@gmail.com",
-    	"password": "123456Ab"
+        "email": "peter@gmail.com",
+        "password": "123456Ab"
     }
 
 *Response(Success):*
 
     {
-    	"admin": {
-    		"adminId": "1",
-    		"username": "admin",
-    		"email": "peter@gmail.com",
-    		"password": "123456Ab",
-    		"firstname": "peter",
-    		"lastname": "sun",
-    		"createAt": "some date",
-    		"updateAt": "some date"
-    	},
-    	"token": "xxxx",
-    	"status": "success"
+        "admin": {
+            "adminId": "1",
+            "username": "admin",
+            "email": "peter@gmail.com",
+            "password": "123456Ab",
+            "firstname": "peter",
+            "lastname": "sun",
+            "createAt": "some date",
+            "updateAt": "some date"
+        },
+        "token": "xxxx",
+        "status": "success"
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
     
 ------
@@ -81,49 +81,49 @@ Example: admin/users
 *Response(Success):*
 
     {
-    	"users": [
-    		{
-    			"userId": "1",
-    			"username": "peter",
-    			"email": "peter@gmail.com",
-    			"password": "123456Ab",
-    			"firstname": "peter",
-    			"lastname": "sun",
-    			"createAt": "some date",
-    			"updateAt": "some date",
-    			"token": "xxxx"
-    		},
-    		{
-    			"userId": "2",
-    			"username": "peter2",
-    			"email": "peter2@gamil.com",
-    			"password": "123456Ab",
-    			"firstname": "peter2",
-    			"lastname": "sun2",
-    			"createAt": "some date",
-    			"updateAt": "some date",
-    			"token": "xxxx"
-    		},
-    		{
-    			"userId": "3",
-    			"username": "peter3",
-    			"email": "peter3@gamil.com",
-    			"password": "123456Ab",
-    			"firstname": "peter3",
-    			"lastname": "sun3",
-    			"createAt": "some date",
-    			"updateAt": "some date",
-    			"token": "xxxx"
-    		}
-    	],
-    	"status": "success"
+        "users": [
+            {
+                "userId": "1",
+                "username": "peter",
+                "email": "peter@gmail.com",
+                "password": "123456Ab",
+                "firstname": "peter",
+                "lastname": "sun",
+                "createAt": "some date",
+                "updateAt": "some date",
+                "token": "xxxx"
+            },
+            {
+                "userId": "2",
+                "username": "peter2",
+                "email": "peter2@gamil.com",
+                "password": "123456Ab",
+                "firstname": "peter2",
+                "lastname": "sun2",
+                "createAt": "some date",
+                "updateAt": "some date",
+                "token": "xxxx"
+            },
+            {
+                "userId": "3",
+                "username": "peter3",
+                "email": "peter3@gamil.com",
+                "password": "123456Ab",
+                "firstname": "peter3",
+                "lastname": "sun3",
+                "createAt": "some date",
+                "updateAt": "some date",
+                "token": "xxxx"
+            }
+        ],
+        "status": "success"
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
 
 ### 2. Update a specific user's setting <a name="update-a-specific-user's-setting"></a>
@@ -147,17 +147,17 @@ Example:
 *Request body:*
 
     {
-    	"username": "peter",
-    	"email": "peter@gmail.com",
-    	"password": "123456Abbb",
-    	"firstname": "peter1",
-    	"lastname": "sun1"
+        "username": "peter",
+        "email": "peter@gmail.com",
+        "password": "123456Abbb",
+        "firstname": "peter1",
+        "lastname": "sun1"
     }
 
 *Response(Success):*
 
     {
-    	"user": {
+        "user": {
             "userId": "1",
             "username": "peter",
             "email": "peter@gmail.com",
@@ -166,15 +166,15 @@ Example:
             "lastname": "sun1",
             "createAt": "some date",
             "updateAt": "some date"
-    	},
-    	"status": "success"
+        },
+        "status": "success"
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
 
 ### 3. Delete a user <a name="delete-a-user"></a>
@@ -190,14 +190,14 @@ Example: admin/users/1
 *Response(Success):*
 
     {
-    	"status": "success"
+        "status": "success"
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
 
 
@@ -227,32 +227,32 @@ Example:
 *Request body:*
 
     {
-    	"username": "peter",
-    	"email": "peter@gmail.com",
-    	"password": "123456Ab",
-    	"firstname": "peter",
-    	"lastname": "sun"
+        "username": "peter",
+        "email": "peter@gmail.com",
+        "password": "123456Ab",
+        "firstname": "peter",
+        "lastname": "sun"
     }
 
 *Response(Success):*
 
     {
-    	"user": {
-    		"username": "peter",
-    		"email": "peter@gmail.com",
-    		"password": "123456Ab",
-    		"firstname": "peter",
-    		"lastname": "sun"
-    	},
-    	"token": "xxxx",
-    	"status": "success"
+        "user": {
+            "username": "peter",
+            "email": "peter@gmail.com",
+            "password": "123456Ab",
+            "firstname": "peter",
+            "lastname": "sun"
+        },
+        "token": "xxxx",
+        "status": "success"
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
 
 ### 2. Login <a name="login-user"></a>
@@ -269,32 +269,32 @@ Example:
 *Request body:*
 
     {
-    	"email": "peter@gmail.com",
-    	"password": "123456Ab"
+        "email": "peter@gmail.com",
+        "password": "123456Ab"
     }
 
 *Response(Success):*
 
     {
-    	"user": {
-    		"userId": "1",
-    		"username": "peter",
-    		"email": "peter@gmail.com",
-    		"password": "123456Ab",
-    		"firstname": "peter",
-    		"lastname": "sun",
-    		"createAt": "some date",
-    		"updateAt": "some date"
-    	},
-    	"token": "xxxx",
-    	"status": "success"
+        "user": {
+            "userId": "1",
+            "username": "peter",
+            "email": "peter@gmail.com",
+            "password": "123456Ab",
+            "firstname": "peter",
+            "lastname": "sun",
+            "createAt": "some date",
+            "updateAt": "some date"
+        },
+        "token": "xxxx",
+        "status": "success"
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
 
 ### 3. Get Setting(get user's information) <a name="get-setting"></a>
@@ -310,24 +310,24 @@ Example: user/1
 *Response(Success):*
 
     {
-    	"user": {
-    		"userId": "1",
-    		"username": "peter",
-    		"email": "peter@gmail.com",
-    		"password": "123456Ab",
-    		"firstname": "peter",
-    		"lastname": "sun",
-    		"createAt": "some date",
-    		"updateAt": "some date"
-    	},
-    	"status": "success",
+        "user": {
+            "userId": "1",
+            "username": "peter",
+            "email": "peter@gmail.com",
+            "password": "123456Ab",
+            "firstname": "peter",
+            "lastname": "sun",
+            "createAt": "some date",
+            "updateAt": "some date"
+        },
+        "status": "success",
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
 
 ### 4. Update Setting(change password, name, etc..) <a name="update-setting"></a>
@@ -352,17 +352,17 @@ Example:
 *Request body:*
 
     {
-    	"username": "peter",
-    	"email": "peter@gmail.com",
-    	"password": "123456Abbb",
-    	"firstname": "peter1",
-    	"lastname": "sun1"
+        "username": "peter",
+        "email": "peter@gmail.com",
+        "password": "123456Abbb",
+        "firstname": "peter1",
+        "lastname": "sun1"
     }
 
 *Response(Success):*
 
     {
-    	"user": {
+        "user": {
             "userId": "1",
             "username": "peter",
             "email": "peter@gmail.com",
@@ -371,15 +371,15 @@ Example:
             "lastname": "sun1",
             "createAt": "some date",
             "updateAt": "some date"
-            },
-    	"status": "success"
+        },
+        "status": "success"
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
     
 ------
@@ -399,49 +399,49 @@ Example: user/1/transactions
 *Response(Success):*
 
     {
-    	"transactions": [
-    		{
-    			"userId": "1",
-    			"transactionId": "1",
-    			"stock_symbol": "AAPL",
-    			"stock_name": "Apple Inc",
-    			"buy_or_sell": "buy",
-    			"buy_price": 321.55,
-    			"buy_amount": 100,
-    			"currency": "USD",
-    			"createAt": "some date"
-    		},
-    		{
-    			"userId": "1",
-    			"transactionId": "2",
-    			"stock_symbol": "BA",
-    			"stock_name": "Boeing Co",
-    			"buy_or_sell": "buy",
-    			"buy_price": 344.67,
-    			"buy_amount": 100,
-    			"currency": "USD",
-    			"createAt": "some date"
-    		},
-    		{
-    			"userId": "1",
-    			"transactionId": "3",
-    			"stock_symbol": "AAPL",
-    			"stock_name": "Apple Inc",
-    			"buy_or_sell": "sell",
-    			"sell_price": 326.55,
-    			"sell_amount": 50,
-    			"currency": "USD",
-    			"createAt": "some date"
-    		}
-    	],
-    	"status": "success"
+        "transactions": [
+            {
+                "userId": "1",
+                "transactionId": "1",
+                "stock_symbol": "AAPL",
+                "stock_name": "Apple Inc",
+                "buy_or_sell": "buy",
+                "buy_price": 321.55,
+                "buy_amount": 100,
+                "currency": "USD",
+                "createAt": "some date"
+            },
+            {
+                "userId": "1",
+                "transactionId": "2",
+                "stock_symbol": "BA",
+                "stock_name": "Boeing Co",
+                "buy_or_sell": "buy",
+                "buy_price": 344.67,
+                "buy_amount": 100,
+                "currency": "USD",
+                "createAt": "some date"
+            },
+            {
+                "userId": "1",
+                "transactionId": "3",
+                "stock_symbol": "AAPL",
+                "stock_name": "Apple Inc",
+                "buy_or_sell": "sell",
+                "sell_price": 326.55,
+                "sell_amount": 50,
+                "currency": "USD",
+                "createAt": "some date"
+            }
+        ],
+        "status": "success"
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
 
 ### 2. Make a transaction <a name="make-a-transaction"></a>
@@ -490,19 +490,18 @@ Example: user/1/transactions
 *Response(Success):*
 
     {
-    	"transaction":
-    		{
-    			"userId": "1",
-    			"transactionId": "1",
-    			"stock_symbol": "AAPL",
-    			"stock_name": "Apple Inc",
-    			"buy_or_sell": "buy",
-    			"buy_price": 321.55,
-    			"buy_amount": 100,
-    			"currency": "USD",
-    			"createAt": "some date"
-    		},
-    	"status": "success"
+        "transaction": {
+            "userId": "1",
+            "transactionId": "1",
+            "stock_symbol": "AAPL",
+            "stock_name": "Apple Inc",
+            "buy_or_sell": "buy",
+            "buy_price": 321.55,
+            "buy_amount": 100,
+            "currency": "USD",
+            "createAt": "some date"
+        },
+        "status": "success"
     }
 
 *Request body(sell):*
@@ -519,26 +518,25 @@ Example: user/1/transactions
 *Response(Success):*
 
     {
-    	"transaction":
-    		{
-    			"userId": "1",
-    			"transactionId": "3",
-    			"stock_symbol": "AAPL",
-    			"stock_name": "Apple Inc",
-    			"buy_or_sell": "sell",
-    			"sell_price": 326.55,
-    			"sell_amount": 50,
-    			"currency": "USD",
-    			"createAt": "some date"
-    		},
-    	"status": "success"
+        "transaction": {
+            "userId": "1",
+            "transactionId": "3",
+            "stock_symbol": "AAPL",
+            "stock_name": "Apple Inc",
+            "buy_or_sell": "sell",
+            "sell_price": 326.55,
+            "sell_amount": 50,
+            "currency": "USD",
+            "createAt": "some date"
+        },
+        "status": "success"
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
 
 ------
@@ -558,34 +556,34 @@ Example: user/1/portfolio
 *Response(Success):*
 
     {
-    	"user": {
-    		"userId": "1",
-    		"username": "peter",
-    		"email": "peter@gmail.com",
-    		"password": "123456Ab",
-    		"firstname": "peter",
-    		"lastname": "sun",
-    		"createAt": "some date",
-    		"updateAt": "some date"
-    	},
-    	"portfolio": [
-    		{
-    			"stock_symbol": "AAPL",
-    			"stock_name": "Apple Inc",
-    			"amount": 100
-    		},
-    		{
-    			"stock_symbol": "BA",
-    			"stock_name": "Boeing Co",
-    			"amount": 100
-    		}
-    	],
-    	"status": "success"
+        "user": {
+            "userId": "1",
+            "username": "peter",
+            "email": "peter@gmail.com",
+            "password": "123456Ab",
+            "firstname": "peter",
+            "lastname": "sun",
+            "createAt": "some date",
+            "updateAt": "some date"
+        },
+        "portfolio": [
+            {
+                "stock_symbol": "AAPL",
+                "stock_name": "Apple Inc",
+                "amount": 100
+            },
+            {
+                "stock_symbol": "BA",
+                "stock_name": "Boeing Co",
+                "amount": 100
+            }
+        ],
+        "status": "success"
     }
 
 *Response(Fail):*
 
     {
-    	"error": "error message",
-    	"status": "fail"
+        "error": "error message",
+        "status": "fail"
     }
