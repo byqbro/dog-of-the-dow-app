@@ -48,8 +48,8 @@ Example:
             "username": "admin",
             "email": "peter@gmail.com",
             "password": "123456Ab",
-            "firstname": "peter",
-            "lastname": "sun",
+            "firstName": "peter",
+            "lastName": "sun",
             "createAt": "some date",
             "updateAt": "some date"
         },
@@ -87,8 +87,8 @@ Example: admin/users
                 "username": "peter",
                 "email": "peter@gmail.com",
                 "password": "123456Ab",
-                "firstname": "peter",
-                "lastname": "sun",
+                "firstName": "peter",
+                "lastName": "sun",
                 "createAt": "some date",
                 "updateAt": "some date",
                 "token": "xxxx"
@@ -98,8 +98,8 @@ Example: admin/users
                 "username": "peter2",
                 "email": "peter2@gamil.com",
                 "password": "123456Ab",
-                "firstname": "peter2",
-                "lastname": "sun2",
+                "firstName": "peter2",
+                "lastName": "sun2",
                 "createAt": "some date",
                 "updateAt": "some date",
                 "token": "xxxx"
@@ -109,8 +109,8 @@ Example: admin/users
                 "username": "peter3",
                 "email": "peter3@gamil.com",
                 "password": "123456Ab",
-                "firstname": "peter3",
-                "lastname": "sun3",
+                "firstName": "peter3",
+                "lastName": "sun3",
                 "createAt": "some date",
                 "updateAt": "some date",
                 "token": "xxxx"
@@ -135,8 +135,8 @@ Parameters   | Data Type     | Required / Optional | Description / Requirement
 username     | String        | Required            | username
 email        | String        | Required            | email
 password     | String        | Required            | password
-firstname    | String        | Required            | first name
-lastname     | String        | Required            | last name
+firstName    | String        | Required            | first name
+lastName     | String        | Required            | last name
 
 Example:
 
@@ -150,8 +150,8 @@ Example:
         "username": "peter",
         "email": "peter@gmail.com",
         "password": "123456Abbb",
-        "firstname": "peter1",
-        "lastname": "sun1"
+        "firstName": "peter1",
+        "lastName": "sun1"
     }
 
 *Response(Success):*
@@ -162,8 +162,8 @@ Example:
             "username": "peter",
             "email": "peter@gmail.com",
             "password": "123456Abbb",
-            "firstname": "peter1",
-            "lastname": "sun1",
+            "firstName": "peter1",
+            "lastName": "sun1",
             "createAt": "some date",
             "updateAt": "some date"
         },
@@ -217,8 +217,8 @@ Parameters   | Data Type     | Required / Optional | Description / Requirement
 username     | String        | Required            | length 6-30, no space, should be unique
 email        | String        | Required            | email
 password     | String        | Required            | length 8-20, must have upper, lowercase and digits, no space
-firstname    | String        | Required            | first name
-lastname     | String        | Required            | last name
+firstName    | String        | Required            | first name
+lastName     | String        | Required            | last name
 
 // would check if meets the requirement
 
@@ -230,19 +230,22 @@ Example:
         "username": "peter",
         "email": "peter@gmail.com",
         "password": "123456Ab",
-        "firstname": "peter",
-        "lastname": "sun"
+        "firstName": "peter",
+        "lastName": "sun"
     }
 
 *Response(Success):*
 
     {
         "user": {
+            "userId": "1",
             "username": "peter",
             "email": "peter@gmail.com",
             "password": "123456Ab",
-            "firstname": "peter",
-            "lastname": "sun"
+            "firstName": "peter",
+            "lastName": "sun",
+            "createAt": "some date",
+            "updateAt": "some date"
         },
         "token": "xxxx",
         "status": "success"
@@ -281,8 +284,8 @@ Example:
             "username": "peter",
             "email": "peter@gmail.com",
             "password": "123456Ab",
-            "firstname": "peter",
-            "lastname": "sun",
+            "firstName": "peter",
+            "lastName": "sun",
             "createAt": "some date",
             "updateAt": "some date"
         },
@@ -315,8 +318,8 @@ Example: user/1
             "username": "peter",
             "email": "peter@gmail.com",
             "password": "123456Ab",
-            "firstname": "peter",
-            "lastname": "sun",
+            "firstName": "peter",
+            "lastName": "sun",
             "createAt": "some date",
             "updateAt": "some date"
         },
@@ -340,8 +343,8 @@ Parameters   | Data Type     | Required / Optional | Description / Requirement
 username     | String        | Required            | username
 email        | String        | Required            | email
 password     | String        | Required            | password
-firstname    | String        | Required            | first name
-lastname     | String        | Required            | last name
+firstName    | String        | Required            | first name
+lastName     | String        | Required            | last name
 
 Example:
 
@@ -355,8 +358,8 @@ Example:
         "username": "peter",
         "email": "peter@gmail.com",
         "password": "123456Abbb",
-        "firstname": "peter1",
-        "lastname": "sun1"
+        "firstName": "peter1",
+        "lastName": "sun1"
     }
 
 *Response(Success):*
@@ -367,8 +370,8 @@ Example:
             "username": "peter",
             "email": "peter@gmail.com",
             "password": "123456Abbb",
-            "firstname": "peter1",
-            "lastname": "sun1",
+            "firstName": "peter1",
+            "lastName": "sun1",
             "createAt": "some date",
             "updateAt": "some date"
         },
@@ -561,8 +564,8 @@ Example: user/1/portfolio
             "username": "peter",
             "email": "peter@gmail.com",
             "password": "123456Ab",
-            "firstname": "peter",
-            "lastname": "sun",
+            "firstName": "peter",
+            "lastName": "sun",
             "createAt": "some date",
             "updateAt": "some date"
         },
