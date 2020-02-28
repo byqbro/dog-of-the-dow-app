@@ -1,7 +1,7 @@
 package com.shxn.app.ws.dogofthedowapp.service.impl;
 
-import com.shxn.app.ws.dogofthedowapp.io.repositories.UserRepository;
 import com.shxn.app.ws.dogofthedowapp.io.entity.UserEntity;
+import com.shxn.app.ws.dogofthedowapp.io.repositories.UserRepository;
 import com.shxn.app.ws.dogofthedowapp.service.UserService;
 import com.shxn.app.ws.dogofthedowapp.shared.Utils;
 import com.shxn.app.ws.dogofthedowapp.shared.dto.UserDto;
@@ -40,11 +40,12 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(user, userEntity);
 
         String publicUserId = utils.generateUserId(PUBLIC_USER_ID_LEN);
+        String dateTimeNow = utils.generateDateTimeNow();
+
         userEntity.setUserId(publicUserId);
         userEntity.setEncryptPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userEntity.setCreateAt("testCreateAt");
-        userEntity.setUpdateAt("testUpdateAt");
-        userEntity.setToken("testToken");
+        userEntity.setCreateAt(dateTimeNow);
+        userEntity.setUpdateAt(dateTimeNow);
 
         UserEntity storeUserDetails = userRepository.save(userEntity);
 
@@ -76,5 +77,19 @@ public class UserServiceImpl implements UserService {
         }
 
         return new User(userEntity.getEmail(), userEntity.getEncryptPassword(), new ArrayList<>());
+    }
+
+    @Override
+    public UserDto getUserByUserId(String userId) {
+        UserDto returnValue = new UserDto();
+        UserEntity userEntity = userRepository.findByUserId(userId);
+
+        if (userEntity == null) {
+            throw new UsernameNotFoundException(userId);
+        }
+
+        BeanUtils.copyProperties(userEntity, returnValue);
+
+        return returnValue;
     }
 }

@@ -5,13 +5,11 @@ public class UserRest {
     private String userId;
     private String username;
     private String email;
-    private String password;
     private String firstName;
     private String lastName;
     private String createAt;
     private String updateAt;
 
-    private String token;
     private String status;
 
     public String getUserId() {
@@ -36,14 +34,6 @@ public class UserRest {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -76,14 +66,6 @@ public class UserRest {
 
     public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getStatus() {

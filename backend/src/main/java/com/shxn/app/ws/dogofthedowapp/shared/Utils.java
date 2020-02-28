@@ -3,6 +3,8 @@ package com.shxn.app.ws.dogofthedowapp.shared;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 @Component
@@ -23,5 +25,14 @@ public class Utils {
         }
 
         return new String(sb);
+    }
+
+    public String generateDateTimeNow() {
+//        LocalDateTime dateTime = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+//        String dateTimeNow = dateTime.format(formatter);
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+        Date date = new Date(System.currentTimeMillis());
+        return formatter.format(date);
     }
 }
