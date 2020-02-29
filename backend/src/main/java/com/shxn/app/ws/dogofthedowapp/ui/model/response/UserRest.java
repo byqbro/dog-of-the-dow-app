@@ -10,8 +10,6 @@ public class UserRest {
     private String createAt;
     private String updateAt;
 
-    private String status;
-
     public String getUserId() {
         return userId;
     }
@@ -68,11 +66,4 @@ public class UserRest {
         this.updateAt = updateAt;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

@@ -1,10 +1,12 @@
 package com.shxn.app.ws.dogofthedowapp.service.impl;
 
+import com.shxn.app.ws.dogofthedowapp.exceptions.UserServiceException;
 import com.shxn.app.ws.dogofthedowapp.io.entity.UserEntity;
 import com.shxn.app.ws.dogofthedowapp.io.repositories.UserRepository;
 import com.shxn.app.ws.dogofthedowapp.service.UserService;
 import com.shxn.app.ws.dogofthedowapp.shared.Utils;
 import com.shxn.app.ws.dogofthedowapp.shared.dto.UserDto;
+import com.shxn.app.ws.dogofthedowapp.ui.model.response.ErrorMessages;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -59,6 +61,7 @@ public class UserServiceImpl implements UserService {
     public UserDto getUser(String email) {
         UserEntity userEntity = userRepository.findByEmail(email);
 
+        //TODO: may change exception to UserServiceException
         if (userEntity == null) {
             throw new UsernameNotFoundException(email);
         }
@@ -72,6 +75,7 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByEmail(email);
 
+        //TODO: may change exception to UserServiceException
         if (userEntity == null) {
             throw new UsernameNotFoundException(email);
         }
@@ -84,11 +88,36 @@ public class UserServiceImpl implements UserService {
         UserDto returnValue = new UserDto();
         UserEntity userEntity = userRepository.findByUserId(userId);
 
+        //TODO: may change exception to UserServiceException
         if (userEntity == null) {
             throw new UsernameNotFoundException(userId);
         }
 
         BeanUtils.copyProperties(userEntity, returnValue);
+
+        return returnValue;
+    }
+
+    @Override
+    public UserDto updateUser(String userId, UserDto userDto) {
+        UserDto returnValue = new UserDto();
+        UserEntity userEntity = userRepository.findByUserId(userId);
+
+        if (userEntity == null) {
+            throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
+        }
+
+        //TODO: may check if the following attributes sent is empty or not
+        userEntity.setUsername(userDto.getUsername());
+        userEntity.setEmail(userDto.getEmail());
+        userEntity.setEncryptPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        userEntity.setFirstName(userDto.getFirstName());
+        userEntity.setLastName(userDto.getLastName());
+        userEntity.setUpdateAt(utils.generateDateTimeNow());
+
+        UserEntity updatedUserDetails = userRepository.save(userEntity);
+
+        BeanUtils.copyProperties(updatedUserDetails, returnValue);
 
         return returnValue;
     }
