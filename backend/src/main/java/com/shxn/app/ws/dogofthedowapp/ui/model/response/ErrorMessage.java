@@ -6,16 +6,10 @@ public class ErrorMessage {
 
     private Date timestamp;
     private String error;
-    private String status;
-
-    public ErrorMessage() {
-        this.status = "fail";
-    }
 
     public ErrorMessage(Date timestamp, String error) {
         this.timestamp = timestamp;
         this.error = error;
-        this.status = "fail";
     }
 
     public Date getTimestamp() {
@@ -34,11 +28,4 @@ public class ErrorMessage {
         this.error = error;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }
