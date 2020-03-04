@@ -434,7 +434,7 @@ Example:    /mobile-app-ws/users/transactions
 *Request body(buy):*
 
     {
-    	"userId": "tpThhQkkXC9mSv5VmPPKdtdqRCA9qc",
+        "userId": "tpThhQkkXC9mSv5VmPPKdtdqRCA9qc",
         "stockSymbol": "AAPL",
         "stockName": "Apple Inc",
         "buyOrSell": "buy",
@@ -459,7 +459,7 @@ Example:    /mobile-app-ws/users/transactions
 *Request body(sell):*
 
     {
-    	"userId": "tpThhQkkXC9mSv5VmPPKdtdqRCA9qc",
+        "userId": "tpThhQkkXC9mSv5VmPPKdtdqRCA9qc",
         "stockSymbol": "AAPL",
         "stockName": "Apple Inc",
         "buyOrSell": "sell",
