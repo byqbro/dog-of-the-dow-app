@@ -23,7 +23,8 @@
 
 ### Login <a name="login-admin"></a>
 
-**Request:	`POST admin/login`**
+**Request:	`POST /mobile-app-ws/users/login`** <br>
+different roles have different Authorities but will use the same endpoint
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
@@ -36,43 +37,36 @@ Example:
 *Request body:*
 
     {
-        "email": "peter@gmail.com",
+        "email": "admin@admin.com",
         "password": "123456Ab"
     }
 
 *Response(Success):*
 
-    {
-        "admin": {
-            "adminId": "1",
-            "username": "admin",
-            "email": "peter@gmail.com",
-            "password": "123456Ab",
-            "firstName": "peter",
-            "lastName": "sun",
-            "createAt": "some date",
-            "updateAt": "some date"
-        },
-        "token": "xxxx",
-        "status": "success"
+    header: {
+        "Authorization" : "Bearer <jwt token>",
+        "UserId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ"
     }
 
 *Response(Fail):*
 
-    {
-        "error": "error message",
-        "status": "fail"
-    }
+    will get 403 Forbidden status
     
 ------
 
 ## Manage users
 
 ### 1. Get all users' information <a name="get-all-users'-information"></a>
+**Request:	`GET /mobile-app-ws/users`**
+will response all the users in the database in one response
 
-**Request:	`GET admin/users`**
+**Request:	`GET /mobile-app-ws/users?page={int}&limit={int}`**
+will response a number of users in the database in one response
+    
+    value = "page", defaultValue = "0"
+    value = "limit", defaultValue = "25"
 
-Example: admin/users
+Example:    /mobile-app-ws/users?page=0&limit=3
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -80,55 +74,46 @@ Example: admin/users
 
 *Response(Success):*
 
-    {
-        "users": [
-            {
-                "userId": "1",
-                "username": "peter",
-                "email": "peter@gmail.com",
-                "password": "123456Ab",
-                "firstName": "peter",
-                "lastName": "sun",
-                "createAt": "some date",
-                "updateAt": "some date",
-                "token": "xxxx"
-            },
-            {
-                "userId": "2",
-                "username": "peter2",
-                "email": "peter2@gamil.com",
-                "password": "123456Ab",
-                "firstName": "peter2",
-                "lastName": "sun2",
-                "createAt": "some date",
-                "updateAt": "some date",
-                "token": "xxxx"
-            },
-            {
-                "userId": "3",
-                "username": "peter3",
-                "email": "peter3@gamil.com",
-                "password": "123456Ab",
-                "firstName": "peter3",
-                "lastName": "sun3",
-                "createAt": "some date",
-                "updateAt": "some date",
-                "token": "xxxx"
-            }
-        ],
-        "status": "success"
-    }
+    [
+        {
+            "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
+            "username": "peter",
+            "email": "peter@gmail.com",
+            "firstName": "peter",
+            "lastName": "sun",
+            "createAt": "some date",
+            "updateAt": "some date"
+        },
+        {
+            "userId": "wMmlY8M52TAfr2xWpnkSLrwj19MoSi",
+            "username": "peter2",
+            "email": "peter2@gamil.com",
+            "firstName": "peter2",
+            "lastName": "sun2",
+            "createAt": "some date",
+            "updateAt": "some date"
+        },
+        {
+            "userId": "OHcFr1TMJp9jKLegwV6NZxgVp6xHjR",
+            "username": "peter3",
+            "email": "peter3@gamil.com",
+            "firstName": "peter3",
+            "lastName": "sun3",
+            "createAt": "some date",
+            "updateAt": "some date"
+        }
+    ]
 
 *Response(Fail):*
 
     {
-        "error": "error message",
-        "status": "fail"
+        "timestamp": "xxxxx",
+        "error": "error message"
     }
 
 ### 2. Update a specific user's setting <a name="update-a-specific-user's-setting"></a>
 
-**Request:	`PUT admin/users/{userId}`**
+**Request:	`PUT /mobile-app-ws/users/{userId}`**
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
@@ -138,7 +123,7 @@ password     | String        | Required            | password
 firstName    | String        | Required            | first name
 lastName     | String        | Required            | last name
 
-Example:
+Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -157,31 +142,27 @@ Example:
 *Response(Success):*
 
     {
-        "user": {
-            "userId": "1",
-            "username": "peter",
-            "email": "peter@gmail.com",
-            "password": "123456Abbb",
-            "firstName": "peter1",
-            "lastName": "sun1",
-            "createAt": "some date",
-            "updateAt": "some date"
-        },
-        "status": "success"
+        "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
+        "username": "peter",
+        "email": "peter@gmail.com",
+        "firstName": "peter1",
+        "lastName": "sun1",
+        "createAt": "some date",
+        "updateAt": "some date"
     }
 
 *Response(Fail):*
 
     {
-        "error": "error message",
-        "status": "fail"
+        "timestamp": "xxxxx",
+        "error": "error message"
     }
 
 ### 3. Delete a user <a name="delete-a-user"></a>
 
-**Request:	`DELETE admin/users/{userId}`**
+**Request:  `DELETE /mobile-app-ws/users/{userId}`**
 
-Example: admin/users/1
+Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -190,14 +171,15 @@ Example: admin/users/1
 *Response(Success):*
 
     {
-        "status": "success"
+        "operationResult": "SUCCESS",
+        "operationName": "DELETE"
     }
 
 *Response(Fail):*
 
     {
-        "error": "error message",
-        "status": "fail"
+        "timestamp": "xxxxx",
+        "error": "error message"
     }
 
 
@@ -210,7 +192,7 @@ Authentication(User)
 
 ### 1. Register <a name="register"></a>
 
-**Request:	`POST user/register`**
+**Request:	`POST /mobile-app-ws/users`**
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
@@ -237,30 +219,25 @@ Example:
 *Response(Success):*
 
     {
-        "user": {
-            "userId": "1",
-            "username": "peter",
-            "email": "peter@gmail.com",
-            "password": "123456Ab",
-            "firstName": "peter",
-            "lastName": "sun",
-            "createAt": "some date",
-            "updateAt": "some date"
-        },
-        "token": "xxxx",
-        "status": "success"
+        "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
+        "username": "peter",
+        "email": "peter@gmail.com",
+        "firstName": "peter",
+        "lastName": "sun",
+        "createAt": "some date",
+        "updateAt": "some date"
     }
 
 *Response(Fail):*
 
     {
-        "error": "error message",
-        "status": "fail"
+        "timestamp": "xxxxx",
+        "error": "error message"
     }
 
 ### 2. Login <a name="login-user"></a>
 
-**Request:	`POST user/login`**
+**Request:	`POST /mobile-app-ws/users/login`**
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
@@ -278,33 +255,20 @@ Example:
 
 *Response(Success):*
 
-    {
-        "user": {
-            "userId": "1",
-            "username": "peter",
-            "email": "peter@gmail.com",
-            "password": "123456Ab",
-            "firstName": "peter",
-            "lastName": "sun",
-            "createAt": "some date",
-            "updateAt": "some date"
-        },
-        "token": "xxxx",
-        "status": "success"
+    header: {
+        "Authorization" : "Bearer <jwt token>",
+        "UserId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ"
     }
 
 *Response(Fail):*
 
-    {
-        "error": "error message",
-        "status": "fail"
-    }
+    will get 403 Forbidden status
 
 ### 3. Get Setting(get user's information) <a name="get-setting"></a>
 
-**Request:	`GET user/{userId}`**
+**Request:	`GET /mobile-app-ws/users/{userId}`**
 
-Example: user/1
+Example:    /mobile-app-ws/user/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -313,29 +277,25 @@ Example: user/1
 *Response(Success):*
 
     {
-        "user": {
-            "userId": "1",
-            "username": "peter",
-            "email": "peter@gmail.com",
-            "password": "123456Ab",
-            "firstName": "peter",
-            "lastName": "sun",
-            "createAt": "some date",
-            "updateAt": "some date"
-        },
-        "status": "success",
+        "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
+        "username": "peter",
+        "email": "peter@gmail.com",
+        "firstName": "peter",
+        "lastName": "sun",
+        "createAt": "some date",
+        "updateAt": "some date"
     }
 
 *Response(Fail):*
 
     {
-        "error": "error message",
-        "status": "fail"
+        "timestamp": "xxxxx",
+        "error": "error message"
     }
 
 ### 4. Update Setting(change password, name, etc..) <a name="update-setting"></a>
 
-**Request:	`PUT user/{userId}`**
+**Request:	`PUT /mobile-app-ws/users/{userId}`**
 
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
@@ -346,7 +306,7 @@ password     | String        | Required            | password
 firstName    | String        | Required            | first name
 lastName     | String        | Required            | last name
 
-Example:
+Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -365,24 +325,20 @@ Example:
 *Response(Success):*
 
     {
-        "user": {
-            "userId": "1",
-            "username": "peter",
-            "email": "peter@gmail.com",
-            "password": "123456Abbb",
-            "firstName": "peter1",
-            "lastName": "sun1",
-            "createAt": "some date",
-            "updateAt": "some date"
-        },
-        "status": "success"
+        "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
+        "username": "peter",
+        "email": "peter@gmail.com",
+        "firstName": "peter1",
+        "lastName": "sun1",
+        "createAt": "some date",
+        "updateAt": "some date"
     }
 
 *Response(Fail):*
 
     {
-        "error": "error message",
-        "status": "fail"
+        "timestamp": "xxxxx",
+        "error": "error message"
     }
     
 ------
@@ -391,9 +347,9 @@ Example:
 
 ### 1. Get all the transactions <a name="get-all-the-transactions"></a>
 
-**Request:	`GET user/{userId}/transactions`**
+**Request:	`GET /mobile-app-ws/users/{userId}/transactions`**
 
-Example: user/1/transactions
+Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ/transactions
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -401,79 +357,75 @@ Example: user/1/transactions
 
 *Response(Success):*
 
-    {
-        "transactions": [
-            {
-                "userId": "1",
-                "transactionId": "1",
-                "stock_symbol": "AAPL",
-                "stock_name": "Apple Inc",
-                "buy_or_sell": "buy",
-                "buy_price": 321.55,
-                "buy_amount": 100,
-                "currency": "USD",
-                "createAt": "some date"
-            },
-            {
-                "userId": "1",
-                "transactionId": "2",
-                "stock_symbol": "BA",
-                "stock_name": "Boeing Co",
-                "buy_or_sell": "buy",
-                "buy_price": 344.67,
-                "buy_amount": 100,
-                "currency": "USD",
-                "createAt": "some date"
-            },
-            {
-                "userId": "1",
-                "transactionId": "3",
-                "stock_symbol": "AAPL",
-                "stock_name": "Apple Inc",
-                "buy_or_sell": "sell",
-                "sell_price": 326.55,
-                "sell_amount": 50,
-                "currency": "USD",
-                "createAt": "some date"
-            }
-        ],
-        "status": "success"
-    }
+    [
+        {
+            "transactionId": "iDwK7FPn9pCaS5FVLkHnCvujzZuwptAUj3bYrfNT",
+            "stockSymbol": "AAPL",
+            "stockName": "Apple Inc",
+            "buyOrSell": "buy",
+            "price": 321.55,
+            "amount": 100,
+            "currency": "USD",
+            "createAt": "some date"
+        },
+        {
+            "transactionId": "EpWsrbfPVS0kaaE2N1c2yfyHjEiBMb1qkguOwhiP",
+            "stockSymbol": "BA",
+            "stockName": "Boeing Co",
+            "buyOrSell": "buy",
+            "price": 344.67,
+            "amount": 100,
+            "currency": "USD",
+            "createAt": "some date"
+        },
+        {
+            "transactionId": "OfklBwqnggtMF0q4at7ph0dTyDeN1CpYsa1B4L8f",
+            "stockSymbol": "AAPL",
+            "stockName": "Apple Inc",
+            "buyOrSell": "sell",
+            "price": 326.55,
+            "amount": 50,
+            "currency": "USD",
+            "createAt": "some date"
+        }
+    ]
 
 *Response(Fail):*
 
     {
-        "error": "error message",
-        "status": "fail"
+        "timestamp": "xxxxx",
+        "error": "error message"
     }
 
 ### 2. Make a transaction <a name="make-a-transaction"></a>
 
-**Request:	`POST user/{userId}/transactions`**
+**Request:	`POST /mobile-app-ws/users/transactions`**
 
 *buy a stock*
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
-stock_symbol | String        | Required            | stock_symbol
-stock_name   | String        | Required            | stock_name
-buy_or_sell  | String        | Required            | buy or sell
-buy_price    | Double        | Required            | buy_price
-buy_amount   | Double        | Required            | buy_amount
+userId       | String        | Required            | userId
+stockSymbol  | String        | Required            | stock symbol
+stockName    | String        | Required            | stock name
+buyOrSell    | String        | Required            | buy or sell
+price        | double        | Required            | buy price
+amount       | double        | Required            | buy amount
 currency     | String        | Required            | currency
 
 *sell a stock*
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
-stock_symbol | String        | Required            | stock_symbol
-stock_name   | String        | Required            | stock_name
-buy_or_sell  | String        | Required            | buy or sell
-sell_price   | Double        | Required            | sell_price
-sell_amount  | Double        | Required            | sell_amount
+userId       | String        | Required            | userId
+stockSymbol  | String        | Required            | stock symbol
+stockName    | String        | Required            | stock name
+buyOrSell    | String        | Required            | buy or sell
+price        | double        | Required            | sell price
+amount       | double        | Required            | sell amount
 currency     | String        | Required            | currency
 
-Example: user/1/transactions
+Example:    /mobile-app-ws/users/transactions
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -482,64 +434,58 @@ Example: user/1/transactions
 *Request body(buy):*
 
     {
-        "stock_symbol": "AAPL",
-        "stock_name": "Apple Inc",
-        "buy_or_sell": "buy",
-        "buy_price": 321.55,
-        "buy_amount": 100,
+    	"userId": "tpThhQkkXC9mSv5VmPPKdtdqRCA9qc",
+        "stockSymbol": "AAPL",
+        "stockName": "Apple Inc",
+        "buyOrSell": "buy",
+        "price": 321.55,
+        "amount": 100,
         "currency": "USD"
     }
 
 *Response(Success):*
 
     {
-        "transaction": {
-            "userId": "1",
-            "transactionId": "1",
-            "stock_symbol": "AAPL",
-            "stock_name": "Apple Inc",
-            "buy_or_sell": "buy",
-            "buy_price": 321.55,
-            "buy_amount": 100,
-            "currency": "USD",
-            "createAt": "some date"
-        },
-        "status": "success"
+        "transactionId": "nYY6THQesYHvtHSRkPVz5yEne6mJyvVhjlwn9JIo",
+        "stockSymbol": "AAPL",
+        "stockName": "Apple Inc",
+        "buyOrSell": "buy",
+        "price": 321.55,
+        "amount": 100,
+        "currency": "USD",
+        "createAt": "some date"
     }
 
 *Request body(sell):*
 
     {
-        "stock_symbol": "AAPL",
-        "stock_name": "Apple Inc",
-        "buy_or_sell": "sell",
-        "sell_price": 326.55,
-        "sell_amount": 50,
+    	"userId": "tpThhQkkXC9mSv5VmPPKdtdqRCA9qc",
+        "stockSymbol": "AAPL",
+        "stockName": "Apple Inc",
+        "buyOrSell": "sell",
+        "price": 421.55,
+        "amount": 50,
         "currency": "USD"
     }
 
 *Response(Success):*
 
     {
-        "transaction": {
-            "userId": "1",
-            "transactionId": "3",
-            "stock_symbol": "AAPL",
-            "stock_name": "Apple Inc",
-            "buy_or_sell": "sell",
-            "sell_price": 326.55,
-            "sell_amount": 50,
-            "currency": "USD",
-            "createAt": "some date"
-        },
-        "status": "success"
+        "transactionId": "sR4rhzRkJTzPRzzLxnGOHXg9DKQXYfoAm0Izd8QF",
+        "stockSymbol": "AAPL",
+        "stockName": "Apple Inc",
+        "buyOrSell": "sell",
+        "price": 421.55,
+        "amount": 50,
+        "currency": "USD",
+        "createAt": "some date"
     }
 
 *Response(Fail):*
 
     {
-        "error": "error message",
-        "status": "fail"
+        "timestamp": "xxxxx",
+        "error": "error message"
     }
 
 ------
@@ -548,9 +494,9 @@ Example: user/1/transactions
 
 ### 1. Get a user's portfolio <a name="get-a-user's-portfolio"></a>
 
-**Request:	`GET user/{userId}/portfolio`**
+**Request:	`GET /user/{userId}/portfolio`**
 
-Example: user/1/portfolio
+Example: /user/1/portfolio
 
     header: {
         "Authorization" : "Bearer <jwt token>"
@@ -587,6 +533,6 @@ Example: user/1/portfolio
 *Response(Fail):*
 
     {
-        "error": "error message",
-        "status": "fail"
+        "timestamp": "xxxxx",
+        "error": "error message"
     }
