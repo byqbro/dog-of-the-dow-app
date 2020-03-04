@@ -28,7 +28,7 @@ public class TransactionEntity implements Serializable {
     private double price;
 
     @Column(nullable = false, length = 30)
-    private long amount;
+    private double amount;
 
     @Column(nullable = false, length = 50)
     private String currency;
@@ -88,11 +88,11 @@ public class TransactionEntity implements Serializable {
         this.price = price;
     }
 
-    public long getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

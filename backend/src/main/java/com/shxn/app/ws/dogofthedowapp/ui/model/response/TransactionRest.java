@@ -7,7 +7,7 @@ public class TransactionRest {
     private String stockName;
     private String buyOrSell;
     private double price;
-    private long amount;
+    private double amount;
     private String currency;
     private String createAt;
 
@@ -51,11 +51,11 @@ public class TransactionRest {
         this.price = price;
     }
 
-    public long getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

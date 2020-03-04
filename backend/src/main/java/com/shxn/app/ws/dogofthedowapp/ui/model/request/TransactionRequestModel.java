@@ -7,7 +7,7 @@ public class TransactionRequestModel {
     private String stockName;
     private String buyOrSell;
     private double price;
-    private long amount;
+    private double amount;
     private String currency;
 
     public String getUserId() {
@@ -50,11 +50,11 @@ public class TransactionRequestModel {
         this.price = price;
     }
 
-    public long getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
