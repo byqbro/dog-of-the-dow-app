@@ -1,10 +1,8 @@
 package com.shxn.app.ws.dogofthedowapp.io.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name="users")
 public class UserEntity implements Serializable {
@@ -38,6 +36,9 @@ public class UserEntity implements Serializable {
 
     @Column(nullable = false, length = 50)
     private String updateAt;
+
+    @OneToMany(mappedBy = "userDetails", cascade = CascadeType.ALL)
+    private List<TransactionEntity> transactions;
 
     public long getId() {
         return id;
@@ -109,6 +110,14 @@ public class UserEntity implements Serializable {
 
     public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public List<TransactionEntity> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<TransactionEntity> transactions) {
+        this.transactions = transactions;
     }
 
 }

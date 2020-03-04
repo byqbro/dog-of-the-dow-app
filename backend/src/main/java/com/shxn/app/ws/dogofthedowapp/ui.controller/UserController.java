@@ -1,17 +1,21 @@
 package com.shxn.app.ws.dogofthedowapp.ui.controller;
 
 import com.shxn.app.ws.dogofthedowapp.exceptions.UserServiceException;
+import com.shxn.app.ws.dogofthedowapp.service.TransactionService;
 import com.shxn.app.ws.dogofthedowapp.service.UserService;
+import com.shxn.app.ws.dogofthedowapp.shared.dto.TransactionDto;
 import com.shxn.app.ws.dogofthedowapp.shared.dto.UserDto;
+import com.shxn.app.ws.dogofthedowapp.ui.model.request.TransactionRequestModel;
 import com.shxn.app.ws.dogofthedowapp.ui.model.request.UserDetailsRequestModel;
-import com.shxn.app.ws.dogofthedowapp.ui.model.response.ErrorMessages;
-import com.shxn.app.ws.dogofthedowapp.ui.model.response.OperationStatusModel;
-import com.shxn.app.ws.dogofthedowapp.ui.model.response.RequestOperationStatus;
-import com.shxn.app.ws.dogofthedowapp.ui.model.response.UserRest;
+import com.shxn.app.ws.dogofthedowapp.ui.model.response.*;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +25,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    TransactionService transactionService;
 
     @GetMapping(path = "/{id}")
     public UserRest getUser(@PathVariable String id) {
@@ -40,11 +47,14 @@ public class UserController {
             throw new UserServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
         }
 
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(userDetails, userDto);
+        ModelMapper modelMapper = new ModelMapper();
+        UserDto userDto = modelMapper.map(userDetails, UserDto.class);
+
+//        UserDto userDto = new UserDto();
+//        BeanUtils.copyProperties(userDetails, userDto);
 
         UserDto createUser = userService.createUser(userDto);
-        BeanUtils.copyProperties(createUser, returnValue);
+        returnValue = modelMapper.map(createUser, UserRest.class);
 
         return returnValue;
     }
@@ -90,6 +100,38 @@ public class UserController {
 			BeanUtils.copyProperties(userDto, userModel);
 			returnValue.add(userModel);
 		}
+
+        return returnValue;
+    }
+
+    @PostMapping(path = "/transactions")
+    public TransactionRest createTransaction(@RequestBody TransactionRequestModel transactionDetails) {
+        TransactionRest returnValue = new TransactionRest();
+
+        if (transactionDetails.getUserId().isEmpty()) {
+            throw new UserServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
+        }
+
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        TransactionDto transactionDto = modelMapper.map(transactionDetails,TransactionDto.class);
+
+        TransactionDto createTransaction = transactionService.createTransaction(transactionDto);
+        BeanUtils.copyProperties(createTransaction, returnValue);
+
+        return returnValue;
+    }
+
+    @GetMapping(path = "/{id}/transactions")
+    public List<TransactionRest> getUserTransactions(@PathVariable String id) {
+        List<TransactionRest> returnValue = new ArrayList<>();
+
+        List<TransactionDto> transactionDto = transactionService.getTransactions(id);
+
+        if (transactionDto != null && !transactionDto.isEmpty()) {
+            Type listType = new TypeToken<List<TransactionRest>>() {}.getType();
+            returnValue = new ModelMapper().map(transactionDto, listType);
+        }
 
         return returnValue;
     }

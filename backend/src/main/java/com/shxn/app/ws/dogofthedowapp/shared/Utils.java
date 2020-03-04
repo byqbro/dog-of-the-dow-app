@@ -17,6 +17,10 @@ public class Utils {
         return generateRandomString(length);
     }
 
+    public String generateTransactionId(int length) {
+        return generateRandomString(length);
+    }
+
     private String generateRandomString(int length) {
         StringBuilder sb = new StringBuilder(length);
 
