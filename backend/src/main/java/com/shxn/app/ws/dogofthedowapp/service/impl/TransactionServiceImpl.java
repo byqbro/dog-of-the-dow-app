@@ -20,8 +20,6 @@ import java.util.List;
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
-    private final int PUBLIC_TRANSACTION_ID_LEN = 40;
-
     @Autowired
     UserRepository userRepository;
 
@@ -44,7 +42,7 @@ public class TransactionServiceImpl implements TransactionService {
         TransactionEntity transactionEntity = new TransactionEntity();
         BeanUtils.copyProperties(transactionDto, transactionEntity);
 
-        String publicTransactionId = utils.generateTransactionId(PUBLIC_TRANSACTION_ID_LEN);
+        String publicTransactionId = utils.generateTransactionId(Utils.PUBLIC_TRANSACTION_ID_LEN);
         String dateTimeNow = utils.generateDateTimeNow();
 
         transactionEntity.setTransactionId(publicTransactionId);
