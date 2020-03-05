@@ -24,8 +24,6 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final int PUBLIC_USER_ID_LEN = 30;
-
     @Autowired
     UserRepository userRepository;
 
@@ -39,17 +37,17 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserDto user) {
 
         if (userRepository.findByEmail(user.getEmail()) != null) {
-            throw new RuntimeException("Record already exists");
+            throw new UserServiceException("Record already exists");
         }
 
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(user, userEntity);
 
-        String publicUserId = utils.generateUserId(PUBLIC_USER_ID_LEN);
+        String publicUserId = utils.generateUserId(Utils.PUBLIC_USER_ID_LEN);
         String dateTimeNow = utils.generateDateTimeNow();
 
         userEntity.setUserId(publicUserId);
-        userEntity.setEncryptPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userEntity.setCreateAt(dateTimeNow);
         userEntity.setUpdateAt(dateTimeNow);
 
@@ -84,7 +82,7 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException(email);
         }
 
-        return new User(userEntity.getEmail(), userEntity.getEncryptPassword(), new ArrayList<>());
+        return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
     }
 
     @Override
@@ -113,7 +111,7 @@ public class UserServiceImpl implements UserService {
         //TODO: may check if the following attributes sent is empty or not
         userEntity.setUsername(userDto.getUsername());
         userEntity.setEmail(userDto.getEmail());
-        userEntity.setEncryptPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         userEntity.setFirstName(userDto.getFirstName());
         userEntity.setLastName(userDto.getLastName());
         userEntity.setUpdateAt(utils.generateDateTimeNow());
