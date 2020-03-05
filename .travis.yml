@@ -1,6 +1,10 @@
 sudo: required
 language: java
+before_install:
+  - chmod +x test/run.sh
 jdk:
 - openjdk8
+# services:
+# - docker
 script:
 - test/run.sh
