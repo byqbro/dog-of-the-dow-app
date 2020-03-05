@@ -1,5 +1,6 @@
 package com.shxn.app.ws.dogofthedowapp.service.impl;
 
+import com.shxn.app.ws.dogofthedowapp.exceptions.UserServiceException;
 import com.shxn.app.ws.dogofthedowapp.io.entity.UserEntity;
 import com.shxn.app.ws.dogofthedowapp.io.repositories.UserRepository;
 import com.shxn.app.ws.dogofthedowapp.shared.Utils;
@@ -14,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class UserServiceImplTest {
 
@@ -76,6 +77,23 @@ class UserServiceImplTest {
     }
 
     @Test
+    final void testCreateUserServiceException() {
+        when(userRepository.findByEmail(anyString())).thenReturn(userEntity);
+        UserDto userDto = new UserDto();
+        userDto.setUsername("peter");
+        userDto.setEmail("peter@gmail.com");
+        userDto.setPassword("123456Ab");
+        userDto.setFirstName("Peter");
+        userDto.setLastName("Sun");
+
+        assertThrows(UserServiceException.class,
+                () -> {
+                    userService.createUser(userDto);
+                }
+        );
+    }
+
+    @Test
     final void testCreateUser() {
         when(userRepository.findByEmail(anyString())).thenReturn(null);
         when(utils.generateUserId(anyInt())).thenReturn(userId);
@@ -84,9 +102,19 @@ class UserServiceImplTest {
         when(userRepository.save(any(UserEntity.class))).thenReturn(userEntity);
 
         UserDto userDto = new UserDto();
+        userDto.setUsername("peter");
+        userDto.setEmail("peter@gmail.com");
+        userDto.setPassword("123456Ab");
+        userDto.setFirstName("Peter");
+        userDto.setLastName("Sun");
+
         UserDto storedUserDetails = userService.createUser(userDto);
         assertNotNull(storedUserDetails);
         assertEquals(userEntity.getFirstName(), storedUserDetails.getFirstName());
+        assertEquals(userEntity.getLastName(), storedUserDetails.getLastName());
+        assertNotNull(storedUserDetails.getUserId());
+        verify(bCryptPasswordEncoder, times(1)).encode("123456Ab");
+        verify(userRepository, times(1)).save(any(UserEntity.class));
     }
 
 }
