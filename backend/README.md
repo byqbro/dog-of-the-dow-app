@@ -79,8 +79,8 @@ Example:    /mobile-app-ws/users?page=0&limit=3
             "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
             "username": "peter",
             "email": "peter@gmail.com",
-            "firstName": "peter",
-            "lastName": "sun",
+            "firstName": "Peter",
+            "lastName": "Sun",
             "createAt": "some date",
             "updateAt": "some date"
         },
@@ -88,8 +88,8 @@ Example:    /mobile-app-ws/users?page=0&limit=3
             "userId": "wMmlY8M52TAfr2xWpnkSLrwj19MoSi",
             "username": "peter2",
             "email": "peter2@gamil.com",
-            "firstName": "peter2",
-            "lastName": "sun2",
+            "firstName": "Peter2",
+            "lastName": "Sun2",
             "createAt": "some date",
             "updateAt": "some date"
         },
@@ -97,8 +97,8 @@ Example:    /mobile-app-ws/users?page=0&limit=3
             "userId": "OHcFr1TMJp9jKLegwV6NZxgVp6xHjR",
             "username": "peter3",
             "email": "peter3@gamil.com",
-            "firstName": "peter3",
-            "lastName": "sun3",
+            "firstName": "Peter3",
+            "lastName": "Sun3",
             "createAt": "some date",
             "updateAt": "some date"
         }
@@ -135,8 +135,8 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "username": "peter",
         "email": "peter@gmail.com",
         "password": "123456Abbb",
-        "firstName": "peter1",
-        "lastName": "sun1"
+        "firstName": "Peter1",
+        "lastName": "Sun1"
     }
 
 *Response(Success):*
@@ -145,8 +145,8 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
         "username": "peter",
         "email": "peter@gmail.com",
-        "firstName": "peter1",
-        "lastName": "sun1",
+        "firstName": "Peter1",
+        "lastName": "Sun1",
         "createAt": "some date",
         "updateAt": "some date"
     }
@@ -212,8 +212,8 @@ Example:
         "username": "peter",
         "email": "peter@gmail.com",
         "password": "123456Ab",
-        "firstName": "peter",
-        "lastName": "sun"
+        "firstName": "Peter",
+        "lastName": "Sun"
     }
 
 *Response(Success):*
@@ -222,8 +222,8 @@ Example:
         "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
         "username": "peter",
         "email": "peter@gmail.com",
-        "firstName": "peter",
-        "lastName": "sun",
+        "firstName": "Peter",
+        "lastName": "Sun",
         "createAt": "some date",
         "updateAt": "some date"
     }
@@ -280,8 +280,8 @@ Example:    /mobile-app-ws/user/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
         "username": "peter",
         "email": "peter@gmail.com",
-        "firstName": "peter",
-        "lastName": "sun",
+        "firstName": "Peter",
+        "lastName": "Sun",
         "createAt": "some date",
         "updateAt": "some date"
     }
@@ -318,8 +318,8 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "username": "peter",
         "email": "peter@gmail.com",
         "password": "123456Abbb",
-        "firstName": "peter1",
-        "lastName": "sun1"
+        "firstName": "Peter1",
+        "lastName": "Sun1"
     }
 
 *Response(Success):*
@@ -328,8 +328,8 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
         "username": "peter",
         "email": "peter@gmail.com",
-        "firstName": "peter1",
-        "lastName": "sun1",
+        "firstName": "Peter1",
+        "lastName": "Sun1",
         "createAt": "some date",
         "updateAt": "some date"
     }
@@ -536,3 +536,12 @@ Example: /user/1/portfolio
         "timestamp": "xxxxx",
         "error": "error message"
     }
+    
+    
+## Troubleshooting/Issue
+
+1. If you are using H2 In-Memory Database for development, try to use `<version>1.4.19X</version>`.
+Otherwise may meet some errors like:<br />
+*`"A file path that is implicitly relative to the current working directory is not allowed in the database 
+URL "jdbc:h2:test". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-182] 90011/90011".`*<br />
+Or *`Database not found, and IFEXISTS=true, so we cant auto-create it`*
