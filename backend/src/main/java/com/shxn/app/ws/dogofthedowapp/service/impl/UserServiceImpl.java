@@ -3,6 +3,7 @@ package com.shxn.app.ws.dogofthedowapp.service.impl;
 import com.shxn.app.ws.dogofthedowapp.exceptions.UserServiceException;
 import com.shxn.app.ws.dogofthedowapp.io.entity.UserEntity;
 import com.shxn.app.ws.dogofthedowapp.io.repositories.UserRepository;
+import com.shxn.app.ws.dogofthedowapp.security.UserPrincipal;
 import com.shxn.app.ws.dogofthedowapp.service.UserService;
 import com.shxn.app.ws.dogofthedowapp.shared.Utils;
 import com.shxn.app.ws.dogofthedowapp.shared.dto.UserDto;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -82,7 +82,9 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException(email);
         }
 
-        return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
+        return new UserPrincipal(userEntity);
+
+        //return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
     }
 
     @Override
