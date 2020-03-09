@@ -13,4 +13,24 @@ public class AppProperties {
     public String getTokenSecret() {
         return env.getProperty("tokenSecret");
     }
+
+    public String getAdminUsername() {
+        return env.getProperty("adminUsername");
+    }
+
+    public String getAdminEmail() {
+        return env.getProperty("adminEmail");
+    }
+
+    public String getAdminFirstName() {
+        return env.getProperty("adminFirstName");
+    }
+
+    public String getAdminLastName() {
+        return env.getProperty("adminLastName");
+    }
+
+    public String getAdminPassword() {
+        return env.getProperty("adminPassword");
+    }
 }
