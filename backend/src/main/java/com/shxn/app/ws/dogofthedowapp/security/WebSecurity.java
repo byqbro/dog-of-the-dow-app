@@ -4,12 +4,14 @@ import com.shxn.app.ws.dogofthedowapp.io.repositories.UserRepository;
 import com.shxn.app.ws.dogofthedowapp.service.UserService;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
@@ -32,7 +34,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(SecurityConstants.H2_CONSOLE)
                 .permitAll()
-                .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                //.antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                 .anyRequest().authenticated().and()
                 .addFilter(getAuthenticationFilter())
                 .addFilter(new AuthorizationFilter(authenticationManager(), userRepository))
