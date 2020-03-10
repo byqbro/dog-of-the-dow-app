@@ -1,7 +1,9 @@
 package com.shxn.app.ws.dogofthedowapp.service.impl;
 
 import com.shxn.app.ws.dogofthedowapp.exceptions.UserServiceException;
+import com.shxn.app.ws.dogofthedowapp.io.entity.RoleEntity;
 import com.shxn.app.ws.dogofthedowapp.io.entity.UserEntity;
+import com.shxn.app.ws.dogofthedowapp.io.repositories.RoleRepository;
 import com.shxn.app.ws.dogofthedowapp.io.repositories.UserRepository;
 import com.shxn.app.ws.dogofthedowapp.security.UserPrincipal;
 import com.shxn.app.ws.dogofthedowapp.service.UserService;
@@ -19,6 +21,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -32,6 +36,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     @Override
     public UserDto createUser(UserDto user) {
@@ -50,6 +57,16 @@ public class UserServiceImpl implements UserService {
         userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userEntity.setCreateAt(dateTimeNow);
         userEntity.setUpdateAt(dateTimeNow);
+
+        // Set roles
+        Collection<RoleEntity> roleEntities = new HashSet<>();
+        for (String role : user.getRoles()) {
+            RoleEntity roleEntity = roleRepository.findByName(role);
+            if (roleEntity != null) {
+                roleEntities.add(roleEntity);
+            }
+        }
+        userEntity.setRoles(roleEntities);
 
         UserEntity storeUserDetails = userRepository.save(userEntity);
 

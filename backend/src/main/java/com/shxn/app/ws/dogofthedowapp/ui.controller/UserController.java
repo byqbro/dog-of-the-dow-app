@@ -3,6 +3,7 @@ package com.shxn.app.ws.dogofthedowapp.ui.controller;
 import com.shxn.app.ws.dogofthedowapp.exceptions.UserServiceException;
 import com.shxn.app.ws.dogofthedowapp.service.TransactionService;
 import com.shxn.app.ws.dogofthedowapp.service.UserService;
+import com.shxn.app.ws.dogofthedowapp.shared.Roles;
 import com.shxn.app.ws.dogofthedowapp.shared.dto.TransactionDto;
 import com.shxn.app.ws.dogofthedowapp.shared.dto.UserDto;
 import com.shxn.app.ws.dogofthedowapp.ui.model.request.TransactionRequestModel;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -57,6 +60,7 @@ public class UserController {
 
 //        UserDto userDto = new UserDto();
 //        BeanUtils.copyProperties(userDetails, userDto);
+        userDto.setRoles(new HashSet<>(Arrays.asList(Roles.ROLE_USER.name())));
 
         UserDto createUser = userService.createUser(userDto);
         returnValue = modelMapper.map(createUser, UserRest.class);
