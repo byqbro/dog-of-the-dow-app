@@ -53,6 +53,10 @@ public class InitialUsersSetUp {
             return;
         }
 
+        if (userRepository.findByEmail(SecurityConstants.getAdminEmail()) != null) {
+            return;
+        }
+
         UserEntity adminUser = new UserEntity();
         adminUser.setUserId(utils.generateUserId(Utils.PUBLIC_USER_ID_LEN));
         adminUser.setUsername(SecurityConstants.getAdminUsername());
