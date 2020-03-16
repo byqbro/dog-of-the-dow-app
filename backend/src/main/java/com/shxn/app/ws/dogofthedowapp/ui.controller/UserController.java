@@ -27,6 +27,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("users") // http://localhost:8080/mobile-app-ws/users
+//@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired

@@ -18,6 +18,8 @@
         * [Make a transaction](#make-a-transaction)
     * [Portfolio](#portfolio)
         * [Get a user's portfolio](#get-a-user's-portfolio)
+        
+* Troubleshooting/Issue
 
 ## Admin API
 
@@ -43,9 +45,16 @@ Example:
 
 *Response(Success):*
 
-    header: {
+    // response in Postman
+    headers: {
         "Authorization" : "Bearer <jwt token>",
         "UserId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ"
+    }
+    
+    // response in browser
+    headers": {
+        "authorization": "Bearer <jwt token>",
+        "userid": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ"
     }
 
 *Response(Fail):*
@@ -68,7 +77,7 @@ will response a number of users in the database in one response
 
 Example:    /mobile-app-ws/users?page=0&limit=3
 
-    header: {
+    headers: {
         "Authorization" : "Bearer <jwt token>"
     }
 
@@ -125,7 +134,7 @@ lastName     | String        | Required            | last name
 
 Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
-    header: {
+    headers: {
         "Authorization" : "Bearer <jwt token>"
     }
 
@@ -164,7 +173,7 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
 Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
-    header: {
+    headers: {
         "Authorization" : "Bearer <jwt token>"
     }
 
@@ -255,9 +264,16 @@ Example:
 
 *Response(Success):*
 
-    header: {
+    // response in Postman
+    headers: {
         "Authorization" : "Bearer <jwt token>",
         "UserId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ"
+    }
+    
+    // response in browser
+    headers": {
+        "authorization": "Bearer <jwt token>",
+        "userid": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ"
     }
 
 *Response(Fail):*
@@ -270,7 +286,7 @@ Example:
 
 Example:    /mobile-app-ws/user/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
-    header: {
+    headers: {
         "Authorization" : "Bearer <jwt token>"
     }
 
@@ -308,7 +324,7 @@ lastName     | String        | Required            | last name
 
 Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
-    header: {
+    headers: {
         "Authorization" : "Bearer <jwt token>"
     }
 
@@ -351,7 +367,7 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
 Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ/transactions
 
-    header: {
+    headers: {
         "Authorization" : "Bearer <jwt token>"
     }
 
@@ -427,7 +443,7 @@ currency     | String        | Required            | currency
 
 Example:    /mobile-app-ws/users/transactions
 
-    header: {
+    headers: {
         "Authorization" : "Bearer <jwt token>"
     }
 
@@ -498,7 +514,7 @@ Example:    /mobile-app-ws/users/transactions
 
 Example: /user/1/portfolio
 
-    header: {
+    headers: {
         "Authorization" : "Bearer <jwt token>"
     }
 
@@ -545,3 +561,23 @@ Otherwise may meet some errors like:<br />
 *`"A file path that is implicitly relative to the current working directory is not allowed in the database 
 URL "jdbc:h2:test". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-182] 90011/90011".`*<br />
 Or *`Database not found, and IFEXISTS=true, so we cant auto-create it`*
+
+2. On the server side, set the response header attribute as capital words.<br />
+However, when using Postman to test, you will get the response as the same **capital** attribute, while via browser to send request,
+you will get response as the **lower case** attribute.
+
+        res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
+        res.addHeader("UserId", userDto.getUserId());
+
+        // response in Postman
+        headers: {
+            "Authorization" : "Bearer <jwt token>",
+            "UserId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ"
+        }
+        
+        // response in browser
+        headers": {
+            "authorization": "Bearer <jwt token>",
+            "userid": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ"
+        }
+        
