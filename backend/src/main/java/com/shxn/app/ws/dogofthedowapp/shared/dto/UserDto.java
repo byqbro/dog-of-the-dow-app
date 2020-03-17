@@ -12,7 +12,7 @@ public class UserDto implements Serializable {
     private String username;
     private String email;
     private String password;
-    private String encryptPassword;
+    private String encryptedPassword;
     private String firstName;
     private String lastName;
     private String createAt;
@@ -60,12 +60,12 @@ public class UserDto implements Serializable {
         this.password = password;
     }
 
-    public String getEncryptPassword() {
-        return encryptPassword;
+    public String getEncryptedPassword() {
+        return encryptedPassword;
     }
 
-    public void setEncryptPassword(String encryptPassword) {
-        this.encryptPassword = encryptPassword;
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 
     public String getFirstName() {

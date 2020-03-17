@@ -23,7 +23,7 @@ public class UserEntity implements Serializable {
     private String email;
 
     @Column(nullable = false)
-    private String encryptPassword;
+    private String encryptedPassword;
 
     @Column(nullable = false, length = 50)
     private String firstName;
@@ -72,12 +72,12 @@ public class UserEntity implements Serializable {
         this.email = email;
     }
 
-    public String getEncryptPassword() {
-        return encryptPassword;
+    public String getEncryptedPassword() {
+        return encryptedPassword;
     }
 
-    public void setEncryptPassword(String encryptPassword) {
-        this.encryptPassword = encryptPassword;
+    public void setEncryptedPassword(String encryptPassword) {
+        this.encryptedPassword = encryptPassword;
     }
 
     public String getFirstName() {

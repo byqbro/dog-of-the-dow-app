@@ -10,6 +10,9 @@ import java.util.Random;
 @Component
 public class Utils {
 
+    public final static int PUBLIC_USER_ID_LEN = 30;
+    public final static int PUBLIC_TRANSACTION_ID_LEN = 40;
+
     private final Random RANDOM = new SecureRandom();
     private final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
