@@ -1,6 +1,7 @@
 package com.shxn.app.ws.dogofthedowapp.shared.dto;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 public class UserDto implements Serializable {
 
@@ -17,8 +18,7 @@ public class UserDto implements Serializable {
     private String lastName;
     private String createAt;
     private String updateAt;
-
-    private String token;
+    private Collection<String> roles;
 
     public long getId() {
         return id;
@@ -100,11 +100,11 @@ public class UserDto implements Serializable {
         this.updateAt = updateAt;
     }
 
-    public String getToken() {
-        return token;
+    public Collection<String> getRoles() {
+        return roles;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setRoles(Collection<String> roles) {
+        this.roles = roles;
     }
 }

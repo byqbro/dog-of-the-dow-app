@@ -3,6 +3,7 @@ package com.shxn.app.ws.dogofthedowapp.ui.controller;
 import com.shxn.app.ws.dogofthedowapp.exceptions.UserServiceException;
 import com.shxn.app.ws.dogofthedowapp.service.TransactionService;
 import com.shxn.app.ws.dogofthedowapp.service.UserService;
+import com.shxn.app.ws.dogofthedowapp.shared.Roles;
 import com.shxn.app.ws.dogofthedowapp.shared.dto.TransactionDto;
 import com.shxn.app.ws.dogofthedowapp.shared.dto.UserDto;
 import com.shxn.app.ws.dogofthedowapp.ui.model.request.TransactionRequestModel;
@@ -13,14 +14,21 @@ import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 @RestController
 @RequestMapping("users") // http://localhost:8080/mobile-app-ws/users
+//@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -29,6 +37,8 @@ public class UserController {
     @Autowired
     TransactionService transactionService;
 
+    // @PostAuthorize("hasRole('ADMIN') or returnObject.userId == principal.userId")
+    @PreAuthorize("hasRole('ADMIN') or #id == principal.userId")
     @GetMapping(path = "/{id}")
     public UserRest getUser(@PathVariable String id) {
         UserRest returnValue = new UserRest();
@@ -52,6 +62,7 @@ public class UserController {
 
 //        UserDto userDto = new UserDto();
 //        BeanUtils.copyProperties(userDetails, userDto);
+        userDto.setRoles(new HashSet<>(Arrays.asList(Roles.ROLE_USER.name())));
 
         UserDto createUser = userService.createUser(userDto);
         returnValue = modelMapper.map(createUser, UserRest.class);
@@ -59,6 +70,7 @@ public class UserController {
         return returnValue;
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == principal.userId")
     @PutMapping(path = "/{id}")
     public UserRest updateUser(@PathVariable String id, @RequestBody UserDetailsRequestModel userDetails) {
         UserRest returnValue = new UserRest();
@@ -76,6 +88,7 @@ public class UserController {
         return returnValue;
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(path = "/{id}")
     public OperationStatusModel deleteUser(@PathVariable String id) {
         OperationStatusModel returnValue = new OperationStatusModel();
@@ -87,7 +100,7 @@ public class UserController {
         return returnValue;
     }
 
-    // TODO: make admin to do this
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<UserRest> getUsers(@RequestParam(value = "page", defaultValue = "0") int page,
                                    @RequestParam(value = "limit", defaultValue = "25") int limit) {
@@ -122,6 +135,7 @@ public class UserController {
         return returnValue;
     }
 
+    @PreAuthorize("hasRole('ADMIN') or #id == principal.userId")
     @GetMapping(path = "/{id}/transactions")
     public List<TransactionRest> getUserTransactions(@PathVariable String id) {
         List<TransactionRest> returnValue = new ArrayList<>();
