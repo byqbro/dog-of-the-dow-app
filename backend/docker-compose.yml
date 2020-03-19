@@ -15,6 +15,8 @@ services:
       tokenSecret: jf9i4jgu83nfl0sshlxn
       server.servlet.context-path: /mobile-app-ws
       server.port: 8080
+    networks:
+      - backend
 
   db:
     image: mysql:latest
@@ -25,4 +27,9 @@ services:
       MYSQL_PASSWORD: shihao
     ports:
       - "3306:3306"
+    networks:
+      - backend
+
+networks:
+  backend:
 
