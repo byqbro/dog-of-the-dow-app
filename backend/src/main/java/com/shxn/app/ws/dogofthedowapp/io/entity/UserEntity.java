@@ -2,6 +2,7 @@ package com.shxn.app.ws.dogofthedowapp.io.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 @Entity(name="users")
@@ -39,6 +40,12 @@ public class UserEntity implements Serializable {
 
     @OneToMany(mappedBy = "userDetails", cascade = CascadeType.ALL)
     private List<TransactionEntity> transactions;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
+    private Collection<RoleEntity> roles;
 
     public long getId() {
         return id;
@@ -120,4 +127,11 @@ public class UserEntity implements Serializable {
         this.transactions = transactions;
     }
 
+    public Collection<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<RoleEntity> roles) {
+        this.roles = roles;
+    }
 }

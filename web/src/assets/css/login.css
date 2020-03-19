@@ -1,0 +1,70 @@
+.login {
+  background-color: black;
+  height: 90%;
+  width: 650px;
+  position: absolute;
+}
+
+.formGroup {
+  margin-bottom: 130px;
+}
+
+/* .col-md-6 {
+  heig1ht: 585px;
+} */
+
+.form{
+  margin-top: 0;
+  margin-right: 150;
+  margin-left: 150;
+  max-width: 300px;
+  text-align: left;
+  padding-top: 20%;
+}
+
+
+#bg{
+  background-image: url('../img/background.jpg');
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 100vh;
+}
+
+#bgoverlay{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.45) !important;
+  top: 0;
+  bottom:  0;
+  height: 100%;
+  width: 100%;
+
+}
+
+#controlLabel{
+  font-size: 20px;
+  color:white;
+}
+
+/* .form-control{
+  background-color: transparent !important;
+  border: transparent !important;
+  border-bottom: 2px solid white !important;
+  border-radius: 10px !important;
+  box-shadow:  1px 3px 1px rgba(white) !important;
+  -webkit-text-fill-color: white !important;
+
+}
+
+
+.form-control::-webkit-input-placeholder {
+  color:rgb(0, 0, 0) !important;
+} */
+
+#errorStyle{
+  font-size: 15px;
+  color: red;
+  white-space: pre-wrap;
+}

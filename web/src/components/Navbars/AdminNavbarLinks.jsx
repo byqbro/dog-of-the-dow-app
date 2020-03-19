@@ -17,8 +17,19 @@
 */
 import React, { Component } from "react";
 import { NavItem, Nav, NavDropdown, MenuItem } from "react-bootstrap";
+import { withRouter } from 'react-router-dom';
 
 class AdminNavbarLinks extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  onLogOutPress() {
+    sessionStorage.clear();
+    this.props.history.push('/login');
+  }
+
   render() {
     const notification = (
       <div>
@@ -69,7 +80,7 @@ class AdminNavbarLinks extends Component {
             <MenuItem divider />
             <MenuItem eventKey={2.5}>Separated link</MenuItem>
           </NavDropdown>
-          <NavItem eventKey={3} href="#">
+          <NavItem eventKey={3} href="#" onClick={() => this.onLogOutPress()}>
             Log out
           </NavItem>
         </Nav>
@@ -78,4 +89,4 @@ class AdminNavbarLinks extends Component {
   }
 }
 
-export default AdminNavbarLinks;
+export default withRouter (AdminNavbarLinks);

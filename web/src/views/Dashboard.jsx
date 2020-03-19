@@ -46,6 +46,15 @@ class Dashboard extends Component {
     }
     return legend;
   }
+
+  componentDidMount() {
+    // console.log("userId:" + sessionStorage.getItem('userId'));
+    if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null) {
+      this.props.history.push('/login');
+    }
+    
+  }
+
   render() {
     return (
       <div className="content">
