@@ -66,7 +66,7 @@ class Sidebar extends Component {
           <a
             className="simple-text logo-normal"
           >
-            Dow of the Dow
+            Dog of the Dow
           </a>
         </div>
         <div className="sidebar-wrapper">
