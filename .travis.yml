@@ -1,10 +1,24 @@
 sudo: required
-language: java
+services:
+  - docker
 before_install:
-  - chmod +x test/run.sh
-jdk:
-- openjdk8
-# services:
-# - docker
+  - cd web
+  - docker build -t xli68/web:latest .
+
 script:
-- test/run.sh
+  - cd web
+  - docker run -e CI=true xli68/web:latest npm run test -- --coverage
+
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "us-west-1"
+  app: "dog-of-the-dow"
+  env: "DogOfTheDow-env"
+  bucket_name: "elasticbeanstalk-us-west-1-143309766575"
+  bucket_path: "dog-of-the-dow"
+  on:
+    branch: xianan
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
