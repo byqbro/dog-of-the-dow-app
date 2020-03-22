@@ -6,7 +6,6 @@ before_install:
   - docker build -t xli68/web:latest .
 
 script:
-  - cd web
   - docker run -e CI=true xli68/web:latest npm run test -- --coverage
 
 
