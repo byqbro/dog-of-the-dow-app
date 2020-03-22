@@ -64,7 +64,7 @@ class Admin extends Component {
       title: <span data-notify="icon" className="pe-7s-gift" />,
       message: (
         <div>
-          Welcome to <b>Dow of the Dow for admin</b>
+          Welcome to <b>Dog of the Dow for admin</b>
         </div>
       ),
       level: level,
@@ -145,7 +145,7 @@ class Admin extends Component {
       title: <span data-notify="icon" className="pe-7s-gift" />,
       message: (
         <div>
-          Welcome to <b>Dow of the Dow for admin</b> - time to do money.
+          Welcome to <b>Dog of the Dow for admin</b> - time to do money.
         </div>
       ),
       level: level,

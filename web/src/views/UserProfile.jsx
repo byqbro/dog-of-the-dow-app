@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Light Bootstrap Dashboard React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React, { Component } from "react";
 import {
   Grid,
@@ -38,7 +21,7 @@ const IP = config['IP'];
 const PORT = config['PORT'];
 const CONTEXT_PATH = config['CONTEXT-PATH'];
 
-class AdminProfile extends Component {
+class UserProfile extends Component {
 
   constructor(props) {
     super(props);
@@ -54,14 +37,19 @@ class AdminProfile extends Component {
   }
 
   componentDidMount() {
-    if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null) {
+    if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null ) {
       this.props.history.push('/login');
     }
 
-    const userId = sessionStorage.getItem('userId');
+    const profileUserId = sessionStorage.getItem('profileUserId');
+    if (profileUserId == null) {
+      this.props.history.push('/admin/users');
+    }
+
+    // console.log("userprofile userId:" + profileUserId);
 
     axios
-    .get(`http://${IP}:${PORT}${CONTEXT_PATH}/users/${userId}`, {
+    .get(`http://${IP}:${PORT}${CONTEXT_PATH}/users/${profileUserId}`, {
       headers: {
         "Authorization" : sessionStorage.getItem('jwt')
       }
@@ -227,4 +215,4 @@ class AdminProfile extends Component {
   }
 }
 
-export default AdminProfile;
+export default UserProfile;

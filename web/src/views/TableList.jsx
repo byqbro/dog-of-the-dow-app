@@ -20,7 +20,11 @@ import { Grid, Row, Col, Table } from "react-bootstrap";
 
 import Card from "components/Card/Card.jsx";
 import { thArray, tdArray } from "variables/Variables.jsx";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserEdit } from '@fortawesome/free-solid-svg-icons'
+
 import axios from 'axios';
+import { Button } from "@material-ui/core";
 
 const config = require('../config.json');
 const IP = config['IP'];
@@ -34,7 +38,12 @@ class TableList extends Component {
     this.state = {
       usersInfo: [],
     }
+
+    this.renderUser= this.renderUser.bind(this);
+    this.onRowClick = this.onRowClick.bind(this);
+
   }
+
 
   componentDidMount() {
     if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null) {
@@ -47,12 +56,18 @@ class TableList extends Component {
         "Authorization" : sessionStorage.getItem('jwt')
       }
     }).then((response) => {
-      console.log(response);
+      // console.log(response);
       this.setState({usersInfo: response.data});
     }).catch((err) => {
       console.log(err);
     });
 
+  }
+
+  onRowClick(user) {
+    //console.log("userId:" + user.userId);
+    sessionStorage.setItem('profileUserId', user.userId);
+    this.props.history.push('/admin/user/profile');
   }
 
   renderUser(user, index) {
@@ -66,9 +81,11 @@ class TableList extends Component {
         <td>{user.lastName}</td>
         <td>{user.createAt}</td>
         <td>{user.updateAt}</td>
+        <td><FontAwesomeIcon icon={faUserEdit} onClick={() => this.onRowClick(user)}/></td>
       </tr>
     )
   }
+
 
   render() {
     return (
@@ -85,14 +102,15 @@ class TableList extends Component {
                   <Table striped hover>
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>USERID</th>
-                        <th>USERNAME</th>
-                        <th>EMAIL</th>
-                        <th>FIRSTNAME</th>
-                        <th>LASTNAME</th>
-                        <th>CREATEAT</th>
-                        <th>UPDATEAT</th>
+                        <th>#</th>
+                        <th>User Id</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Create At</th>
+                        <th>Update At</th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
