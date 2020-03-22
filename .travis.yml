@@ -3,6 +3,7 @@ services:
   - docker
 before_install:
   - cd web
+  - gem install rake
   - docker build -t xli68/web:latest .
 
 deploy:
