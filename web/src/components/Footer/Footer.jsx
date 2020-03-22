@@ -42,7 +42,7 @@ class Footer extends Component {
           <p className="copyright pull-right">
             &copy; {new Date().getFullYear()}{" "}
             <a >
-              Dow of the Dow
+              Dog of the Dow
             </a>
             , time to do money
           </p>
