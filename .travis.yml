@@ -6,10 +6,6 @@ before_install:
   - cd web
   - docker build -t xli68/web:latest .
 
-script:
-  - docker run -e CI=true xli68/web:latest npm run test -- --coverage
-
-
 
 deploy:
   edge: true
