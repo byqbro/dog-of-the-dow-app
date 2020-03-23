@@ -8,7 +8,6 @@ before_install:
 
 
 deploy:
-  edge: true
   provider: elasticbeanstalk
   region: "us-west-1"
   app: "dog-of-the-dow"
