@@ -3,18 +3,16 @@ language: generic
 services:
   - docker
 before_install:
-  - cd web
-  - docker build -t xli68/web:latest .
+  - docker build -t xli68/dod-web -f ./web/Dockerfile.dev ./web
 
+script:
+  - docker run -e CI=true xli68/dod-web npm test -- --coverage
 
-deploy:
-  provider: elasticbeanstalk
-  region: "us-west-1"
-  app: "dog-of-the-dow"
-  env: "DogOfTheDow-env"
-  bucket_name: "elasticbeanstalk-us-west-1-143309766575"
-  bucket_path: "dog-of-the-dow"
-  on:
-    branch: xianan
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+after_success:
+  - docker build -t xli68/prod-dod-web ./web
+  - docker build -t xli68/prod-dod-spb ./backend
+  # login to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push to docker hub
+  - docker push xli68/prod-dod-web
+  - docker push xli68/prod-dod-spb
