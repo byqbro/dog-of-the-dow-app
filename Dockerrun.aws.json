@@ -5,14 +5,14 @@
       "name": "web",
       "image": "xli68/prod-dod-web",
       "hostname": "web",
-      "essential": false,
+      "essential": true,
       "memory": 128
     },
     {
       "name": "backend",
-      "image": "xl68/prod-dod-spb",
+      "image": "xli68/prod-dod-spb",
       "hostname": "spb-server",
-      "essential": true,
+      "essential": false,
       "memory": 128
     }
   ]
