@@ -13,3 +13,16 @@ after_success:
   # push to docker hub
   - docker push xli68/prod-dod-web
   - docker push xli68/prod-dod-spb
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: us-west-1
+  app: dod-production
+  env: DodProduction-env
+  bucket_name: elasticbeanstalk-us-west-1-143309766575
+  bucket_path: dod-production
+  on:
+    branch: xianan
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
