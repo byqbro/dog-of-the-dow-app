@@ -38,7 +38,5 @@ services:
     volumes: 
       - /app/node_modules
       - ./web:/app
-    ports:
-      - "3000:80"
     restart: on-failure
     container_name: web-app
