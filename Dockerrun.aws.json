@@ -12,7 +12,7 @@
       "name": "backend",
       "image": "xl68/prod-dod-spb",
       "hostname": "spb-server",
-      "essential": false,
+      "essential": true,
       "memory": 128
     }
   ]
