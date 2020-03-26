@@ -20,7 +20,7 @@ deploy:
   edge: true
   provider: elasticbeanstalk
   region: us-west-1
-  app: dod-production
+  app: dod-production 
   env: DodProduction-env
   bucket_name: elasticbeanstalk-us-west-1-143309766575
   bucket_path: dod-production
