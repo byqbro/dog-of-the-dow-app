@@ -7,6 +7,9 @@ import {
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import '../assets/css/login.css';
+import { isJSDocFunctionType } from "typescript";
+import { Container } from "@material-ui/core";
+import { compose } from "@material-ui/system";
 
 const config = require('../config.json');
 const IP = config['IP'];
@@ -91,3 +94,16 @@ class Login extends Component {
 }
 
 export default Login;
+
+
+
+// travis test spb junit
+
+// test:
+// if we dont mysql docker Container
+// not be able able run test
+// docker compose
+// mvn junit test
+// create another docker file: mvn images, run build/test
+
+// docker build images
