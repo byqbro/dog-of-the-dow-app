@@ -4,8 +4,9 @@ WORKDIR '/app'
 COPY ./package.json ./
 RUN npm install
 COPY . .
-CMD ["npm", "run", "start"]
+# CMD ["npm", "run", "start"]
 
 FROM nginx
-EXPOSE 3000
+EXPOSE 80
 COPY --from=builder /app/build /usr/share/nginx/html
+# at the end its a nginx images
