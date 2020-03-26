@@ -26,10 +26,10 @@ import { faUserEdit } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import { Button } from "@material-ui/core";
 
-const config = require('../config.json');
-const IP = config['IP'];
-const PORT = config['PORT'];
-const CONTEXT_PATH = config['CONTEXT-PATH'];
+require('dotenv').config();
+const HOST = process.env.REACT_APP_HOST;
+const PORT = process.env.REACT_APP_HOST_PORT;
+const CONTEXT_PATH = process.env.REACT_APP_CONTEXT_PATH;
 
 class TableList extends Component {
 
@@ -44,14 +44,13 @@ class TableList extends Component {
 
   }
 
-
   componentDidMount() {
     if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null) {
       this.props.history.push('/login');
     }
 
     axios
-    .get(`http://${IP}:${PORT}${CONTEXT_PATH}/users`, {
+    .get(`http://${HOST}:${PORT}${CONTEXT_PATH}/users`, {
       headers: {
         "Authorization" : sessionStorage.getItem('jwt')
       }

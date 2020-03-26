@@ -33,10 +33,10 @@ import avatar from "assets/img/faces/face-3.jpg";
 import logo from "assets/img/faces/logo.png";
 import axios from 'axios';
 
-const config = require('../config.json');
-const IP = config['IP'];
-const PORT = config['PORT'];
-const CONTEXT_PATH = config['CONTEXT-PATH'];
+require('dotenv').config();
+const HOST = process.env.REACT_APP_HOST;
+const PORT = process.env.REACT_APP_HOST_PORT;
+const CONTEXT_PATH = process.env.REACT_APP_CONTEXT_PATH;
 
 class AdminProfile extends Component {
 
@@ -61,7 +61,7 @@ class AdminProfile extends Component {
     const userId = sessionStorage.getItem('userId');
 
     axios
-    .get(`http://${IP}:${PORT}${CONTEXT_PATH}/users/${userId}`, {
+    .get(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${userId}`, {
       headers: {
         "Authorization" : sessionStorage.getItem('jwt')
       }
