@@ -11,10 +11,15 @@ import { isJSDocFunctionType } from "typescript";
 import { Container } from "@material-ui/core";
 import { compose } from "@material-ui/system";
 
-const config = require('../config.json');
-const IP = config['IP'];
-const PORT = config['PORT'];
-const CONTEXT_PATH = config['CONTEXT-PATH'];
+// const config = require('../config.json');
+// const HOST = config['HOST'];
+// const PORT = config['PORT'];
+// const CONTEXT_PATH = config['CONTEXT-PATH'];
+require('dotenv').config();
+const HOST = process.env.REACT_APP_HOST;
+const PORT = process.env.REACT_APP_HOST_PORT;
+const CONTEXT_PATH = process.env.REACT_APP_CONTEXT_PATH;
+
 
 class Login extends Component {
   constructor(props) {
@@ -29,9 +34,13 @@ class Login extends Component {
   onLogInPress() {
     // const email = this.state.email;
     // const password = this.state.password;
+    console.log("host" + HOST);
+    console.log("PORT" + PORT);
+    console.log("CONTEXT_PATH" + CONTEXT_PATH);
+
 
     axios
-      .post(`http://${IP}:${PORT}${CONTEXT_PATH}/users/login`, {
+      .post(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/login`, {
         email: this.state.email,
         password: this.state.password
       }).then((response) => {

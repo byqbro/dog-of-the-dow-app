@@ -1,5 +1,0 @@
-{
-  "IP" : "localhost",
-  "PORT": "8080",
-  "CONTEXT-PATH": "/mobile-app-ws"
-}

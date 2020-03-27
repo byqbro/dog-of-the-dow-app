@@ -97,7 +97,7 @@ class Dashboard extends Component {
               />
             </Col> */}
           </Row>
-          <Row>
+          {/* <Row>
             <Col md={8}>
               <Card
                 statsIcon="fa fa-history"
@@ -119,7 +119,7 @@ class Dashboard extends Component {
                 //   <div className="legend">{this.createLegend(legendSales)}</div>
                 // }
               />
-            </Col>
+            </Col> */}
             {/* <Col md={4}>
               <Card
                 statsIcon="fa fa-clock-o"
@@ -139,7 +139,7 @@ class Dashboard extends Component {
                 }
               />
             </Col> */}
-          </Row>
+          {/* </Row> */}
 
           {/* <Row>
             <Col md={6}>
