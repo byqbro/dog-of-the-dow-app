@@ -16,10 +16,10 @@ import avatar from "assets/img/faces/face-3.jpg";
 import logo from "assets/img/faces/logo.png";
 import axios from 'axios';
 
-const config = require('../config.json');
-const IP = config['IP'];
-const PORT = config['PORT'];
-const CONTEXT_PATH = config['CONTEXT-PATH'];
+require('dotenv').config();
+const HOST = process.env.REACT_APP_HOST;
+const PORT = process.env.REACT_APP_HOST_PORT;
+const CONTEXT_PATH = process.env.REACT_APP_CONTEXT_PATH;
 
 class UserProfile extends Component {
 
@@ -49,7 +49,7 @@ class UserProfile extends Component {
     // console.log("userprofile userId:" + profileUserId);
 
     axios
-    .get(`http://${IP}:${PORT}${CONTEXT_PATH}/users/${profileUserId}`, {
+    .get(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${profileUserId}`, {
       headers: {
         "Authorization" : sessionStorage.getItem('jwt')
       }
