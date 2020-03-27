@@ -1,0 +1,31 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "web",
+      "image": "xli68/prod-dod-web",
+      "hostname": "web",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 8080,
+          "containerPort": 80
+        }
+      ]
+    },
+    {
+      "name": "backend",
+      "image": "xli68/prod-dod-spb",
+      "hostname": "spb-server",
+      "essential": false,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 8080,
+          "containerPort": 8080
+        }
+      ]
+    }
+  ]
+}
