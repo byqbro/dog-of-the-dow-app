@@ -5,6 +5,7 @@ public class UserRest {
     private String userId;
     private String username;
     private String email;
+    private String encryptedPassword;
     private String firstName;
     private String lastName;
     private String createAt;
@@ -32,6 +33,14 @@ public class UserRest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 
     public String getFirstName() {

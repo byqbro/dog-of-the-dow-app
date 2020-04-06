@@ -29,6 +29,7 @@ class UserProfile extends Component {
       userId: "",
       username: "",
       email: "",
+      encryptedPassword: "",
       firstName: "",
       lastName: "",
       createAt: "",
@@ -59,6 +60,7 @@ class UserProfile extends Component {
         userId: data.userId,
         username: data.username,
         email: data.email,
+        encryptedPassword: data.encryptedPassword,
         firstName: data.firstName,
         lastName: data.lastName,
         createAt: data.createAt,
@@ -68,7 +70,46 @@ class UserProfile extends Component {
     }).catch((err) => {
       console.log(err);
     });
+  }
 
+  onUpdatePress() {
+    // if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null ) {
+    //   this.props.history.push('/login');
+    // }
+
+    // const profileUserId = sessionStorage.getItem('profileUserId');
+    // if (profileUserId == null) {
+    //   this.props.history.push('/admin/users');
+    // }
+
+    // axios
+    // .put(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${profileUserId}`, {
+    //   username: this.state.username,
+    //   email: this.state.email,
+    //   password: "123456Ab",
+    //   firstName: "updated_peter1",
+    //   lastName: "update_sun1"
+    // },
+    // {
+    //   headers: {
+    //     "Authorization" : sessionStorage.getItem('jwt')
+    //   }
+    // }).then((response) => {
+    //   const data = response.data;
+    //   this.setState({
+    //     userId: data.userId,
+    //     username: data.username,
+    //     email: data.email,
+    //     encryptedPassword: data.encryptedPassword,
+    //     firstName: data.firstName,
+    //     lastName: data.lastName,
+    //     createAt: data.createAt,
+    //     updateAt: data.updateAt
+  
+    //   });
+    // }).catch((err) => {
+    //   console.log(err);
+    // });
   }
 
 
@@ -119,6 +160,18 @@ class UserProfile extends Component {
                           bsClass: "form-control",
                           placeholder: "Email",
                           defaultValue: this.state.email
+                        }
+                      ]}
+                    />
+                    <FormInputs
+                      ncols={["col-md-6"]}
+                      properties={[
+                        {
+                          label: "Encrypted Password",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "Encrypted Password",
+                          defaultValue: this.state.encryptedPassword
                         }
                       ]}
                     />
@@ -179,7 +232,10 @@ class UserProfile extends Component {
                         // }
                       ]}
                     />
-                    <Button bsStyle="info" pullRight fill type="submit">
+                    <Button bsStyle="danger" pullRight fill type="submit">
+                      Delete User
+                    </Button>
+                    <Button bsStyle="info" pullRight fill type="submit" onClick={() => this.onUpdatePress()}>
                       Update Profile
                     </Button>
                     <div className="clearfix" />
