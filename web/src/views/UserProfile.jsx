@@ -35,6 +35,11 @@ class UserProfile extends Component {
       createAt: "",
       updateAt: ""
     }
+
+    this.handleChangeUsername = this.handleChangeUsername.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
+    this.handleChangeLastName = this.handleChangeLastName.bind(this);
   }
 
   componentDidMount() {
@@ -72,46 +77,86 @@ class UserProfile extends Component {
     });
   }
 
-  onUpdatePress() {
-    // if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null ) {
-    //   this.props.history.push('/login');
-    // }
+  onDeletePress() {
+    if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null ) {
+      this.props.history.push('/login');
+    }
 
-    // const profileUserId = sessionStorage.getItem('profileUserId');
-    // if (profileUserId == null) {
-    //   this.props.history.push('/admin/users');
-    // }
+    const profileUserId = sessionStorage.getItem('profileUserId');
+    if (profileUserId == null) {
+      this.props.history.push('/admin/users');
+    }
 
-    // axios
-    // .put(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${profileUserId}`, {
-    //   username: this.state.username,
-    //   email: this.state.email,
-    //   password: "123456Ab",
-    //   firstName: "updated_peter1",
-    //   lastName: "update_sun1"
-    // },
-    // {
-    //   headers: {
-    //     "Authorization" : sessionStorage.getItem('jwt')
-    //   }
-    // }).then((response) => {
-    //   const data = response.data;
-    //   this.setState({
-    //     userId: data.userId,
-    //     username: data.username,
-    //     email: data.email,
-    //     encryptedPassword: data.encryptedPassword,
-    //     firstName: data.firstName,
-    //     lastName: data.lastName,
-    //     createAt: data.createAt,
-    //     updateAt: data.updateAt
-  
-    //   });
-    // }).catch((err) => {
-    //   console.log(err);
-    // });
+    axios
+    .delete(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${profileUserId}`, {
+      headers: {
+        "Authorization" : sessionStorage.getItem('jwt')
+      }
+    }).then((response) => {
+      sessionStorage.removeItem('profileUserId');
+    }).catch((err) => {
+      console.log(err);
+    });
+
+    this.props.history.push('/admin/users');
   }
 
+  onUpdatePress() {
+    if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null ) {
+      this.props.history.push('/login');
+    }
+
+    const profileUserId = sessionStorage.getItem('profileUserId');
+    if (profileUserId == null) {
+      this.props.history.push('/admin/users');
+    }
+
+    axios
+    .put(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${profileUserId}`, {
+      username: this.state.username,
+      email: this.state.email,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName
+    },
+    {
+      headers: {
+        "Authorization" : sessionStorage.getItem('jwt')
+      }
+    }).then((response) => {
+      const data = response.data;
+      this.setState({
+        userId: data.userId,
+        username: data.username,
+        email: data.email,
+        encryptedPassword: data.encryptedPassword,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        createAt: data.createAt,
+        updateAt: data.updateAt
+  
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+
+    this.props.history.push('/admin/users');
+  }
+
+  handleChangeUsername(e) {
+    this.setState({ username: e.target.value });
+  }
+
+  handleChangeEmail(e) {
+    this.setState({ email: e.target.value });
+  }
+
+  handleChangeFirstName(e) {
+    this.setState({ firstName: e.target.value });
+  }
+
+  handleChangeLastName(e) {
+    this.setState({ lastName: e.target.value });
+  }
 
   render() {
     return (
@@ -123,6 +168,7 @@ class UserProfile extends Component {
                 title="Edit Profile"
                 content={
                   <form>
+                    
                     <FormInputs
                       ncols={["col-md-5"]}
                       properties={[
@@ -152,6 +198,7 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Username",
+                          onChange: this.handleChangeUsername,
                           defaultValue: this.state.username
                         },
                         {
@@ -159,6 +206,7 @@ class UserProfile extends Component {
                           type: "email",
                           bsClass: "form-control",
                           placeholder: "Email",
+                          onChange: this.handleChangeEmail,
                           defaultValue: this.state.email
                         }
                       ]}
@@ -171,7 +219,8 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Encrypted Password",
-                          defaultValue: this.state.encryptedPassword
+                          defaultValue: this.state.encryptedPassword,
+                          disabled: true
                         }
                       ]}
                     />
@@ -183,6 +232,7 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "First name",
+                          onChange: this.handleChangeFirstName,
                           defaultValue: this.state.firstName
                         },
                         {
@@ -190,6 +240,7 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Last name",
+                          onChange: this.handleChangeLastName,
                           defaultValue: this.state.lastName
                         }
                       ]}
@@ -232,16 +283,16 @@ class UserProfile extends Component {
                         // }
                       ]}
                     />
-                    <Button bsStyle="danger" pullRight fill type="submit">
-                      Delete User
-                    </Button>
-                    <Button bsStyle="info" pullRight fill type="submit" onClick={() => this.onUpdatePress()}>
-                      Update Profile
-                    </Button>
                     <div className="clearfix" />
                   </form>
                 }
               />
+              <Button bsStyle="danger" pullRight fill type="submit" onClick={() => this.onDeletePress()}>
+                Delete User
+              </Button>
+              <Button bsStyle="info" pullRight fill type="submit" onClick={() => this.onUpdatePress()}>
+                Update Profile
+              </Button>
             </Col>
             <Col md={4}>
               <UserCard
