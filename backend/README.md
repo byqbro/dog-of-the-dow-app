@@ -5,6 +5,7 @@
     * [Manage users](#manage-users)
         * [Get all users' information](#get-all-users'-information)
         * [Update a specific user's setting](#update-a-specific-user's-setting)
+        * [Reset a specific user's password](#reset-a-specific-user's-password)
         * [Delete a user](#delete-a-user)
         
 * User API
@@ -13,6 +14,7 @@
     * [Setting](#get-setting)
         * [Get Setting(get user's information)](#get-setting)
         * [Update Setting(change password, name, etc..)](#update-setting)
+        * [Reset Password(reset the password)](#reset-password)
     * [Transactions](#transactions)
         * [Get all the transactions](#get-all-the-transactions)
         * [Make a transaction](#make-a-transaction)
@@ -88,6 +90,7 @@ Example:    /mobile-app-ws/users?page=0&limit=3
             "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
             "username": "peter",
             "email": "peter@gmail.com",
+            "encryptedPassword": "$2a$10$wI2C7sJjPGmkUAwUT9kuaOZ7qCztTM47lYKT5G1sM9avbdvyaR6Ly",
             "firstName": "Peter",
             "lastName": "Sun",
             "createAt": "some date",
@@ -97,6 +100,7 @@ Example:    /mobile-app-ws/users?page=0&limit=3
             "userId": "wMmlY8M52TAfr2xWpnkSLrwj19MoSi",
             "username": "peter2",
             "email": "peter2@gamil.com",
+            "encryptedPassword": "$2a$10$IZ.HssE.LX9AdNoCQD0b.eAxivRb8sqjhbfG.HR8kAVP1kRF4g7XS",
             "firstName": "Peter2",
             "lastName": "Sun2",
             "createAt": "some date",
@@ -106,6 +110,7 @@ Example:    /mobile-app-ws/users?page=0&limit=3
             "userId": "OHcFr1TMJp9jKLegwV6NZxgVp6xHjR",
             "username": "peter3",
             "email": "peter3@gamil.com",
+            "encryptedPassword": "$2a$10$1f8p/U95LfYvwe9vPYFH1uwt2gz5eSRF6RF3blS3oBnVyGU/.NQgW",
             "firstName": "Peter3",
             "lastName": "Sun3",
             "createAt": "some date",
@@ -128,7 +133,6 @@ Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
 username     | String        | Required            | username
 email        | String        | Required            | email
-password     | String        | Required            | password
 firstName    | String        | Required            | first name
 lastName     | String        | Required            | last name
 
@@ -143,7 +147,6 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
     {
         "username": "peter",
         "email": "peter@gmail.com",
-        "password": "123456Abbb",
         "firstName": "Peter1",
         "lastName": "Sun1"
     }
@@ -154,6 +157,7 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
         "username": "peter",
         "email": "peter@gmail.com",
+        "encryptedPassword": "$2a$10$wI2C7sJjPGmkUAwUT9kuaOZ7qCztTM47lYKT5G1sM9avbdvyaR6Ly",
         "firstName": "Peter1",
         "lastName": "Sun1",
         "createAt": "some date",
@@ -166,8 +170,10 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "timestamp": "xxxxx",
         "error": "error message"
     }
+    
+### 3. Reset a specific user's password(reset the password) <a name="reset-a-specific-user's-password"></a>
 
-### 3. Delete a user <a name="delete-a-user"></a>
+### 4. Delete a user <a name="delete-a-user"></a>
 
 **Request:  `DELETE /mobile-app-ws/users/{userId}`**
 
@@ -231,6 +237,7 @@ Example:
         "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
         "username": "peter",
         "email": "peter@gmail.com",
+        "encryptedPassword": "$2a$10$wI2C7sJjPGmkUAwUT9kuaOZ7qCztTM47lYKT5G1sM9avbdvyaR6Ly",
         "firstName": "Peter",
         "lastName": "Sun",
         "createAt": "some date",
@@ -296,6 +303,7 @@ Example:    /mobile-app-ws/user/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
         "username": "peter",
         "email": "peter@gmail.com",
+        "encryptedPassword": "$2a$10$wI2C7sJjPGmkUAwUT9kuaOZ7qCztTM47lYKT5G1sM9avbdvyaR6Ly",
         "firstName": "Peter",
         "lastName": "Sun",
         "createAt": "some date",
@@ -309,7 +317,7 @@ Example:    /mobile-app-ws/user/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "error": "error message"
     }
 
-### 4. Update Setting(change password, name, etc..) <a name="update-setting"></a>
+### 4. Update Setting(username, name, etc..) <a name="update-setting"></a>
 
 **Request:	`PUT /mobile-app-ws/users/{userId}`**
 
@@ -318,7 +326,6 @@ Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
 username     | String        | Required            | username
 email        | String        | Required            | email
-password     | String        | Required            | password
 firstName    | String        | Required            | first name
 lastName     | String        | Required            | last name
 
@@ -333,7 +340,6 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
     {
         "username": "peter",
         "email": "peter@gmail.com",
-        "password": "123456Abbb",
         "firstName": "Peter1",
         "lastName": "Sun1"
     }
@@ -344,6 +350,7 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
         "username": "peter",
         "email": "peter@gmail.com",
+        "encryptedPassword": "$2a$10$wI2C7sJjPGmkUAwUT9kuaOZ7qCztTM47lYKT5G1sM9avbdvyaR6Ly",
         "firstName": "Peter1",
         "lastName": "Sun1",
         "createAt": "some date",
@@ -356,6 +363,8 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "timestamp": "xxxxx",
         "error": "error message"
     }
+    
+### 5. Reset Password(reset the password) <a name="reset-password"></a>
     
 ------
 
