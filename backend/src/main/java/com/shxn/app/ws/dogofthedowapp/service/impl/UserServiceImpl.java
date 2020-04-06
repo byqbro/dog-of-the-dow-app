@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
         //TODO: may check if the following attributes sent is empty or not
         userEntity.setUsername(userDto.getUsername());
         userEntity.setEmail(userDto.getEmail());
-        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        // userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         userEntity.setFirstName(userDto.getFirstName());
         userEntity.setLastName(userDto.getLastName());
         userEntity.setUpdateAt(utils.generateDateTimeNow());
