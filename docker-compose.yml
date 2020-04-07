@@ -18,7 +18,7 @@ services:
   spb-server:
     restart: on-failure
     build: 
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./backend
     expose:
       - "8080"
@@ -43,20 +43,20 @@ services:
   #     - "3000:3000"
   #   container_name: web-app
 
-  web:
-    build: 
-      dockerfile: Dockerfile
-      context: ./web
-    environment:
-      env_file: ./web/.env
-      NODE_ENV: development
-    # volumes: 
-    #   - /app/node_modules
-    #   - ./web:/app
-    restart: on-failure
-    ports:
-      - "3000:80"
-    container_name: web-app
+  # web:
+  #   build: 
+  #     dockerfile: Dockerfile
+  #     context: ./web
+  #   environment:
+  #     env_file: ./web/.env
+  #     NODE_ENV: development
+  #   # volumes: 
+  #   #   - /app/node_modules
+  #   #   - ./web:/app
+  #   restart: on-failure
+  #   ports:
+  #     - "3000:80"
+  #   container_name: web-app
   
   # nginx:
   #   restart: always
