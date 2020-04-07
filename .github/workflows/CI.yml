@@ -20,7 +20,7 @@ jobs:
 
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
-  push:
+  push-to-docker-hub:
     # Ensure test job passes before pushing image.
     needs: build-and-test
 
@@ -29,13 +29,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
+      - name: Build frontend image
         run:  docker build -t xli68/prod-dod-web ./web
-              docker build -t xli68/prod-dod-spb ./backend
 
       - name: Log into registry
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_ID }} --password-stdin
 
-      - name: Push image
+      - name: Push frontend image
         run: docker push xli68/prod-dod-web
-             docker push xli68/prod-dod-spb
+     
+      - name: Build backend image
+        run:  docker build -t xli68/prod-dod-spb ./backend
+
+      - name: Log into registry
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_ID }} --password-stdin
+
+      - name: Push backend image
+        run: docker push xli68/prod-dod-spb
