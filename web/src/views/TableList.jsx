@@ -45,6 +45,14 @@ class TableList extends Component {
   }
 
   componentDidMount() {
+    this.fetchUsers();
+  }
+
+  componentDidUpdate() {
+    this.fetchUsers();
+  }
+
+  fetchUsers() {
     if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null) {
       this.props.history.push('/login');
     }
@@ -60,7 +68,6 @@ class TableList extends Component {
     }).catch((err) => {
       console.log(err);
     });
-
   }
 
   onRowClick(user) {
@@ -85,7 +92,7 @@ class TableList extends Component {
     )
   }
 
-
+  
   render() {
     return (
       <div className="content">
