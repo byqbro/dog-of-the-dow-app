@@ -34,7 +34,7 @@ jobs:
               docker build -t xli68/prod-dod-spb ./backend
 
       - name: Log into registry
-        run: echo ${{DOCKER_PASSWORD}} | docker login -u ${{$DOCKER_ID}} --password-stdin
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_ID }} --password-stdin
 
       - name: Push image
         run: docker push xli68/prod-dod-web
