@@ -21,7 +21,7 @@ run a container for a image that dont have locally
 <!-- 
 
 -d \
--e MYSQL_ROOT_PASSWORD=rootpassword \
+-e MYSQL_ROOT_PASSWORD=root \
 -e MYSQL_DATABASE=dog_of_the_dow_app \
 -e MYSQL_USER=shihao \
 -e MYSQL_PASSWORD=shihao \
