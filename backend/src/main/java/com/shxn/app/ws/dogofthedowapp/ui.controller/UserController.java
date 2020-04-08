@@ -15,7 +15,6 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,6 +82,24 @@ public class UserController {
         BeanUtils.copyProperties(userDetails, userDto);
 
         UserDto updateUser = userService.updateUser(id, userDto);
+        BeanUtils.copyProperties(updateUser, returnValue);
+
+        return returnValue;
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or #id == principal.userId")
+    @PutMapping(path = "/{id}/password-update")
+    public UserRest updatePassword(@PathVariable String id, @RequestBody UserDetailsRequestModel userDetails) {
+        UserRest returnValue = new UserRest();
+
+        if (userDetails.getEmail().isEmpty() || userDetails.getPassword().isEmpty()) {
+            throw new UserServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
+        }
+
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(userDetails, userDto);
+
+        UserDto updateUser = userService.requestPasswordUpdate(id, userDto);
         BeanUtils.copyProperties(updateUser, returnValue);
 
         return returnValue;
