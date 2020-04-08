@@ -20,6 +20,7 @@ require('dotenv').config();
 const HOST = process.env.REACT_APP_HOST;
 const PORT = process.env.REACT_APP_HOST_PORT;
 const CONTEXT_PATH = process.env.REACT_APP_CONTEXT_PATH;
+const RESET_PASSWORD = process.env.REACT_APP_RESET_PASSWORD;
 
 class UserProfile extends Component {
 
@@ -35,6 +36,8 @@ class UserProfile extends Component {
       createAt: "",
       updateAt: ""
     }
+
+    this.checkLoginSession = this.checkLoginSession.bind(this);
 
     this.handleChangeUsername = this.handleChangeUsername.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
@@ -77,10 +80,14 @@ class UserProfile extends Component {
     });
   }
 
-  onDeletePress() {
+  checkLoginSession() {
     if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null ) {
       this.props.history.push('/login');
     }
+  }
+
+  onDeletePress() {
+    this.checkLoginSession();
 
     const profileUserId = sessionStorage.getItem('profileUserId');
     if (profileUserId == null) {
@@ -102,9 +109,7 @@ class UserProfile extends Component {
   }
 
   onUpdatePress() {
-    if (sessionStorage.getItem('userId') == null || sessionStorage.getItem('jwt') == null ) {
-      this.props.history.push('/login');
-    }
+    this.checkLoginSession();
 
     const profileUserId = sessionStorage.getItem('profileUserId');
     if (profileUserId == null) {
@@ -156,6 +161,42 @@ class UserProfile extends Component {
 
   handleChangeLastName(e) {
     this.setState({ lastName: e.target.value });
+  }
+
+  onResetPasswordPress() {
+    this.checkLoginSession();
+
+    const profileUserId = sessionStorage.getItem('profileUserId');
+    if (profileUserId == null) {
+      this.props.history.push('/admin/users');
+    }
+
+    axios
+    .put(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${profileUserId}/password-update`, {
+      email: this.state.email,
+      password: RESET_PASSWORD
+    },
+    {
+      headers: {
+        "Authorization" : sessionStorage.getItem('jwt')
+      }
+    }).then((response) => {
+      const data = response.data;
+      this.setState({
+        userId: data.userId,
+        username: data.username,
+        email: data.email,
+        encryptedPassword: data.encryptedPassword,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        createAt: data.createAt,
+        updateAt: data.updateAt
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+
+    this.props.history.push('/admin/users');
   }
 
   render() {
@@ -211,6 +252,9 @@ class UserProfile extends Component {
                         }
                       ]}
                     />
+                    <Button bsStyle="warning" pullRight fill type="submit" onClick={() => this.onResetPasswordPress()}>
+                      Reset Password
+                    </Button>
                     <FormInputs
                       ncols={["col-md-6"]}
                       properties={[

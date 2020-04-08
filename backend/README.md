@@ -5,7 +5,7 @@
     * [Manage users](#manage-users)
         * [Get all users' information](#get-all-users'-information)
         * [Update a specific user's setting](#update-a-specific-user's-setting)
-        * [Reset a specific user's password](#reset-a-specific-user's-password)
+        * [Update a specific user's password](#update-a-specific-user's-password)
         * [Delete a user](#delete-a-user)
         
 * User API
@@ -14,7 +14,7 @@
     * [Setting](#get-setting)
         * [Get Setting(get user's information)](#get-setting)
         * [Update Setting(change password, name, etc..)](#update-setting)
-        * [Reset Password(reset the password)](#reset-password)
+        * [Update Password(change/update the password)](#update-password)
     * [Transactions](#transactions)
         * [Get all the transactions](#get-all-the-transactions)
         * [Make a transaction](#make-a-transaction)
@@ -171,8 +171,48 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "error": "error message"
     }
     
-### 3. Reset a specific user's password(reset the password) <a name="reset-a-specific-user's-password"></a>
+### 3. Update a specific user's password(update/reset the password) <a name="update-a-specific-user's-password"></a>
 
+**Request:	`PUT /mobile-app-ws/users/{userId}/password-update`**
+
+Parameters   | Data Type     | Required / Optional | Description / Requirement
+------------ | ------------- | ------------------- | -------------------------
+email        | String        | Required            | email
+password     | String        | Required            | password 
+
+Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ/password-update
+
+    headers: {
+        "Authorization" : "Bearer <jwt token>"
+    }
+
+*Request body:*
+
+    {
+        "email": "peter@gmail.com",
+        "password": "123456",
+    }
+
+*Response(Success):*
+
+    {
+        "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
+        "username": "peter",
+        "email": "peter@gmail.com",
+        "encryptedPassword": "$2a$10$63Gt/RrFBRGkiUO3g3O9MerP2Dl.ZdRy6Vx42gNlWxIZclbWruqHq",
+        "firstName": "Peter1",
+        "lastName": "Sun1",
+        "createAt": "some date",
+        "updateAt": "some date"
+    }
+
+*Response(Fail):*
+
+    {
+        "timestamp": "xxxxx",
+        "error": "error message"
+    }
+    
 ### 4. Delete a user <a name="delete-a-user"></a>
 
 **Request:  `DELETE /mobile-app-ws/users/{userId}`**
@@ -321,7 +361,6 @@ Example:    /mobile-app-ws/user/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
 
 **Request:	`PUT /mobile-app-ws/users/{userId}`**
 
-
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
 username     | String        | Required            | username
@@ -364,8 +403,47 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ
         "error": "error message"
     }
     
-### 5. Reset Password(reset the password) <a name="reset-password"></a>
-    
+### 5. Update Password(change/update the password) <a name="update-password"></a>
+
+**Request:	`PUT /mobile-app-ws/users/{userId}/password-update`**
+
+Parameters   | Data Type     | Required / Optional | Description / Requirement
+------------ | ------------- | ------------------- | -------------------------
+email        | String        | Required            | email
+password     | String        | Required            | password 
+
+Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ/password-update
+
+    headers: {
+        "Authorization" : "Bearer <jwt token>"
+    }
+
+*Request body:*
+
+    {
+        "email": "peter@gmail.com",
+        "password": "123456",
+    }
+
+*Response(Success):*
+
+    {
+        "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
+        "username": "peter",
+        "email": "peter@gmail.com",
+        "encryptedPassword": "$2a$10$63Gt/RrFBRGkiUO3g3O9MerP2Dl.ZdRy6Vx42gNlWxIZclbWruqHq",
+        "firstName": "Peter1",
+        "lastName": "Sun1",
+        "createAt": "some date",
+        "updateAt": "some date"
+    }
+
+*Response(Fail):*
+
+    {
+        "timestamp": "xxxxx",
+        "error": "error message"
+    }
 ------
 
 ## Transactions
