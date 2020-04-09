@@ -1,0 +1,29 @@
+sudo: required
+language: generic
+services:
+  - docker
+before_install:
+
+  - docker-compose up --build --exit-code-from spb-server
+
+after_success:
+  - docker build -t xli68/prod-dod-web ./web
+  - docker build -t xli68/prod-dod-spb ./backend
+  # login to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push to docker hub
+  - docker push xli68/prod-dod-web
+  - docker push xli68/prod-dod-spb
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: us-west-1
+  app: Dog-of-the-Dow
+  env: DogOfTheDow-env
+  bucket_name: elasticbeanstalk-us-west-1-143309766575
+  bucket_path: Dog-of-the-Dow
+  on:
+    branch: xianan
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
