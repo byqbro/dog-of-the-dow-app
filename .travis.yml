@@ -20,7 +20,7 @@ deploy:
   provider: elasticbeanstalk
   region: us-west-1
   app: Dog-of-the-Dow
-  env: DogOfTheDow-env-1
+  env: DogOfTheDow-env
   bucket_name: elasticbeanstalk-us-west-1-143309766575
   bucket_path: Dog-of-the-Dow
   on:
