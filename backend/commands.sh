@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #Execute Spring application
-CMD="java -jar target/app.jar"
-$CMD &
-SERVICE_PID=$!
+# CMD="java -jar target/app.jar"
+# $CMD &
+# SERVICE_PID=$!
 
-#Execute Tests
-mvn test
+# #Execute Tests
+# mvn test
 
-#Wait for Spring execution
-wait "$SERVICE_PID"
+# #Wait for Spring execution
+# wait "$SERVICE_PID"
 
 mvn spring-boot:run
