@@ -16,4 +16,4 @@ RUN mvn install
 #Start container
 COPY commands.sh /scripts/commands.sh
 RUN ["chmod", "+x", "/scripts/commands-dev.sh"]
-ENTRYPOINT ["/scripts/commands-env.sh"]
+ENTRYPOINT ["/scripts/commands-dev.sh"]
