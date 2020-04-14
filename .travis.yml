@@ -9,11 +9,13 @@ before_install:
 after_success:
   - docker build -t xli68/prod-dod-web ./web
   - docker build -t xli68/prod-dod-spb ./backend
+  - docker build -t xli68/demo ./demo
   # login to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push to docker hub
   - docker push xli68/prod-dod-web
   - docker push xli68/prod-dod-spb
+  - docker push xli68/demo
 
 deploy:
   edge: true
