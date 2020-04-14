@@ -4,7 +4,7 @@
     {
       "name": "demo",
       "image": "xli68/demo",
-      "hostname": "spb-server",
+      "hostname": "demo",
       "essential": true,
       "memory": 128,
       "portMappings": [
