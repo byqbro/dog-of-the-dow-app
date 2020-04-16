@@ -24,8 +24,8 @@ const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_SIGNIN_SUCCESS:
       console.log('userinfo:', action.payload);
-      const userInfo = action.payload;
-      return {...state, ...initialState, userId: userInfo.id, jwt: userInfo.jwt };
+      const headers = action.payload;
+      return {...state, ...initialState, userId: headers.userid, jwt: headers.authorization };
     case USER_SIGNIN_FAIL:
       return {...state, error: "Incorrect email or password"};
     case USER_SETTING_UPDATE_SUCCESS:

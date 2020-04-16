@@ -2,13 +2,15 @@ import React from 'react';
 import { createStackNavigator, create} from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
+import AccountScreen from '../screens/AccountScreen';
 import MarketScreen from '../screens/MarketScreen';
 import SignInScreen from '../screens/SignInScreen';
 
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const AccountStack = createStackNavigator({
-  SignIn: SignInScreen
+  SignIn: SignInScreen,
+  Account: AccountScreen,
 });
 
 AccountStack.navigationOptions = {
