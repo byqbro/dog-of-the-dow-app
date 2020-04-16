@@ -32,6 +32,6 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      run: ｜
+      run: |
         docker build -t $env.ECR_REGISTRY/web:latest ./web
         docker push $env.ECR_REGISTRY/web:latest
