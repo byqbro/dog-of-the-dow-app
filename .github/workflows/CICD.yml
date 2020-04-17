@@ -36,5 +36,5 @@ jobs:
         docker build -t $ECR_REGISTRY/web:latest ./web
         docker push $ECR_REGISTRY/web:latest
         
-        docker build -t $ECR_REGISTRY/demo:latest ./demo
-        docker push $ECR_REGISTRY/demo:latest
+        docker build -t $ECR_REGISTRY/backend:latest ./backend
+        docker push $ECR_REGISTRY/backend:latest
