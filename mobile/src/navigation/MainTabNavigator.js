@@ -6,6 +6,7 @@ import AccountScreen from '../screens/AccountScreen';
 import MarketScreen from '../screens/MarketScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -13,6 +14,7 @@ const AccountStack = createStackNavigator({
   SignIn: SignInScreen,
   SignUp: SignUpScreen,
   Account: AccountScreen,
+  Profile: ProfileScreen,
 });
 
 AccountStack.navigationOptions = {

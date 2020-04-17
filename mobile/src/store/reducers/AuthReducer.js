@@ -1,9 +1,11 @@
 import { 
   USER_SIGNIN_SUCCESS, 
-  USER_SIGNIN_FAIL, 
+  USER_SIGNIN_FAIL,
+  USER_PROFILE_FETCH_SUCCESS,
+  USER_PROFILE_UPDATE_SUCCESS,
   USER_PASSWORD_UPDATE_SUCCESS,
-  USER_SETTING_UPDATE_SUCCESS,
 } from '../actions/ActionTypes';
+
 
 const initialState = {
   userId: -1,
@@ -13,11 +15,9 @@ const initialState = {
   encrypterPassword: '',
   firstName: '',
   lastName: '',
-  createAt: '',
-  updateAt: '',
   error: '',
   userSignInSuccess: false,
-  userUpdateSettingSuccess: false,
+  userUpdateProfileSuccess: false,
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -28,16 +28,18 @@ const AuthReducer = (state = initialState, action) => {
       return {...state, ...initialState, userId: headers.userid, jwt: headers.authorization };
     case USER_SIGNIN_FAIL:
       return {...state, error: "Incorrect email or password"};
-    case USER_SETTING_UPDATE_SUCCESS:
-      return {...state, 
-        userId: action.payload.id,
+    case USER_PROFILE_FETCH_SUCCESS:
+      return {...state,
         username: action.payload.username,
         email: action.payload.email,
-        encrypterPassword: action.payload.encrypterPassword,
         firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        createAt: action.payload.createAt,
-        updateAt: action.payload.updateAt };
+        lastName: action.payload.lastName };
+    case USER_PROFILE_UPDATE_SUCCESS:
+      return {...state,
+        username: action.payload.username,
+        email: action.payload.email,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName };
     case USER_PASSWORD_UPDATE_SUCCESS:
       return {...state, 
         userId: action.payload.id,
