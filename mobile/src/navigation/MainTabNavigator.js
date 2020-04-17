@@ -7,6 +7,8 @@ import MarketScreen from '../screens/MarketScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import UpdatePasswordScreen from '../screens/UpdatePasswordScreen';
+
 
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -15,6 +17,7 @@ const AccountStack = createStackNavigator({
   SignUp: SignUpScreen,
   Account: AccountScreen,
   Profile: ProfileScreen,
+  UpdatePassword: UpdatePasswordScreen,
 });
 
 AccountStack.navigationOptions = {

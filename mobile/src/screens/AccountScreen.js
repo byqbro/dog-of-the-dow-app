@@ -53,7 +53,7 @@ class AccountScreen extends Component {
               </View>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight underlayColor='white'>
+          <TouchableHighlight onPress={() => this.props.navigation.navigate('UpdatePassword')} underlayColor='white'>
             <View style={styles.touchableSection}>
               <IconM color={cusColors.iconColor} name="shield-key-outline" size={40} /> 
               <View style={styles.textView}>

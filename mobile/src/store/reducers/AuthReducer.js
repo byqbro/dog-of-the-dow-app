@@ -42,14 +42,11 @@ const AuthReducer = (state = initialState, action) => {
         lastName: action.payload.lastName };
     case USER_PASSWORD_UPDATE_SUCCESS:
       return {...state, 
-        userId: action.payload.id,
         username: action.payload.username,
         email: action.payload.email,
         encrypterPassword: action.payload.encrypterPassword,
         firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        createAt: action.payload.createAt,
-        updateAt: action.payload.updateAt };
+        lastName: action.payload.lastName };
     default:
         return state;
   };

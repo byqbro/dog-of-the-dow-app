@@ -76,3 +76,35 @@ export const profileUpdate = ({ username, email, firstName, lastName }) => {
     }
   }
 }
+
+export const passwordUpdate = ({ newPassword }) => {
+  return async (dispatch) => {
+    try {
+
+      const userId = await AsyncStorage.getItem('userId');
+      const jwt = await AsyncStorage.getItem('jwt');
+      const userInfo = await axios
+        .get(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/${userId}`, {
+          headers: {
+            "Authorization" : jwt
+          }
+        });
+
+      const email = userInfo.data.email;
+      // console.log("password update email:" + email);
+      const response = await axios
+        .put(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/${userId}/password-update`, {
+          email: email,
+          password: newPassword,
+        },
+        {
+          headers: {
+            "Authorization" : jwt
+          }
+      });
+      dispatch({ type: USER_PASSWORD_UPDATE_SUCCESS, payload: response.data });
+    } catch(err) {
+      console.log('err', err);
+    }
+  }
+}
