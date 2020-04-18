@@ -1,6 +1,5 @@
 name: CI-CD-Pipeline-to-AWS
 
-  
 on:
   push:
     # Publish `master` as Docker `latest` image.
