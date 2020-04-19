@@ -13,6 +13,7 @@ COPY . .
 #Build ( because you want to execute tests after the spring boot application is started you should disable test during build phase )
 RUN mvn install
 
+
 #Start container
 COPY commands.sh /scripts/commands.sh
 RUN ["chmod", "+x", "/scripts/commands.sh"]
