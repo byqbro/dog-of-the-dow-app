@@ -1,0 +1,5 @@
+{
+    "HOST" : "`${{ secrets.BACKEND_URL }}`",
+    "PORT": "8080",
+    "CONTEXT-PATH": "/mobile-app-ws"
+  }
