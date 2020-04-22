@@ -643,7 +643,8 @@ Example: /user/1/portfolio
     
 ## Troubleshooting/Issue
 
-1. If you are using H2 In-Memory Database for development, try to use `<version>1.4.19X</version>`.
+1. If you are using H2 In-Memory Database for development, try to use `<version>1.4.19X</version>`. 
+And for JDBC URL, try to use: jdbc:h2:mem:testdb <br />
 Otherwise may meet some errors like:<br />
 *`"A file path that is implicitly relative to the current working directory is not allowed in the database 
 URL "jdbc:h2:test". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-182] 90011/90011".`*<br />
