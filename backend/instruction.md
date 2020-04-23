@@ -27,7 +27,6 @@ run a container for a image that dont have locally
 -e MYSQL_PASSWORD=shihao \
 -p 3306:3306 \
 --name mysql \
---net=dod-test-network \
 mysql 
 
 -->
