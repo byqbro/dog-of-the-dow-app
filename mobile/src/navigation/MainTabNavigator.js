@@ -6,9 +6,9 @@ import AccountScreen from '../screens/AccountScreen';
 import MarketScreen from '../screens/MarketScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import StrategiesScreen from '../screens/StrategiesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import UpdatePasswordScreen from '../screens/UpdatePasswordScreen';
-
 
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -38,9 +38,21 @@ MarketStack.navigationOptions = {
   },
 }
 
+const StrategiesStack = createStackNavigator({
+  Strategies: StrategiesScreen
+});
+
+StrategiesStack.navigationOptions = {
+  tabBarLabel: 'Strategies',
+  tabBarIcon: ({ tintColor }) => {
+    return <IconM name="seed" size={30} color="cornflowerblue" />
+  },
+}
+
 const MainTabNavigator = createBottomTabNavigator(
   {
     MarketStack,
+    StrategiesStack,
     AccountStack,
   },
   {
