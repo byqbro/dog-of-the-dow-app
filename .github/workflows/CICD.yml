@@ -2,7 +2,11 @@ name: CI-CD-Pipeline-to-AWS
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
+  pull_request:
+    branches:
+      - CICD
 
 jobs:
   deploy:
