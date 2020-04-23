@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mysql-db:
+    restart: always
+    image: 'mysql'
+    container_name: mysql-db
+    environment:
+      MYSQL_DATABASE: dog_of_the_dow_app
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: shihao
+      MYSQL_PASSWORD: shihao
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+
+  spb-server:
+    restart: on-failure
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./backend
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/dog_of_the_dow_app
+      SPRING_DATASOURCE_USERNAME: shihao
+      SPRING_DATASOURCE_PASSWORD: shihao    
+    depends_on:
+      - mysql-db
