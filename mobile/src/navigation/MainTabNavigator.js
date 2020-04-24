@@ -9,6 +9,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import StrategiesScreen from '../screens/StrategiesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import UpdatePasswordScreen from '../screens/UpdatePasswordScreen';
+import StockScreen from '../screens/StockScreen';
 
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -28,7 +29,8 @@ AccountStack.navigationOptions = {
 }
 
 const MarketStack = createStackNavigator({
-  Market: MarketScreen
+  Market: MarketScreen,
+  Stock: StockScreen
 });
 
 MarketStack.navigationOptions = {
