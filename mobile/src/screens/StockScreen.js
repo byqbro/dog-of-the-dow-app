@@ -17,6 +17,7 @@ import cusColors from '../constants/Colors';
 import { Input, Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import IconE from 'react-native-vector-icons/EvilIcons';
+import { HOST, HOST_PORT, CONTEXT_PATH } from 'react-native-dotenv';
 
 
 class StockScreen extends Component {
@@ -63,8 +64,6 @@ class StockScreen extends Component {
         const profile = stockInfo.profile;
         const priceRange = profile.range.split('-');
         // console.log("stockInfo:", stockInfo);
-        // console.log("profile:", profile);
-        // console.log("priceRange:", priceRange);
 
         this.setState({ 
           symbol: stockInfo.symbol,
@@ -115,44 +114,46 @@ class StockScreen extends Component {
     const jwt = await AsyncStorage.getItem('jwt');
     // console.log("userSignInSuccess", this.state.userSignInSuccess);
 
-
-    // if (!this.state.userSignInSuccess) {
-    //   console.log("navi");
-    //   this.props.navigation.navigate('AccountStack', { screen: 'SignIn' });
-    // } else {
-    //   console.log("not navi");
-    //   this.setState({tradeModalVisible: true});
-    // }
-
     if (userId == null || jwt == null) {
       this.props.navigation.navigate('AccountStack', { screen: 'SignIn' });
     } else {
       this.setTradeModalVisible(true);
     }
-
-    // return (
-    //   <View>
-    //     <Modal
-    //       animationType="slide"
-    //       transparent={false}
-    //       visible={this.state.tradeModalVisible}
-    //       onRequestClose={() => {
-    //         Alert.alert('Modal has been closed.');
-    //       }}>
-    //         <View style={styles.tradeModalView}>
-    //           <Text style={{ color: 'white', fontSize: 18 }}>######</Text>
-    //         </View>
-    //     </Modal>
-    //   </View>
-    // );
   }
 
   onBuyPress() {
-
+    this.makeTransaction("buy");
   }
 
   onSellPress() {
+    this.makeTransaction("sell");
+  }
 
+  async makeTransaction(buyOrSell) {
+    const userId = await AsyncStorage.getItem('userId');
+    const jwt = await AsyncStorage.getItem('jwt');
+
+    axios
+      .post(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/transactions`, {
+        userId: userId,
+        stockSymbol: this.state.symbol,
+        stockName: this.state.companyName,
+        buyOrSell: buyOrSell,
+        price: parseFloat(this.state.buyOrSellPrice),
+        amount: parseFloat(this.state.amount),
+        currency: "USD"
+      },
+      {
+        headers: {
+          "Authorization": jwt
+        }
+    }).then((response) => {
+
+    }).catch((err) => {
+      console.log('err', err);
+    });
+
+    this.setTradeModalVisible(!this.state.tradeModalVisible);
   }
 
   inputStyle(color) {
@@ -369,7 +370,7 @@ const styles = StyleSheet.create({
   tradeBtn: {
     alignSelf: 'flex-end',
     backgroundColor: '#92d192',
-    width: 140,
+    width: 130,
     marginRight: 30,
     marginBottom: 15,
     borderRadius:20,
