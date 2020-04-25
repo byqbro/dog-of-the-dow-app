@@ -25,7 +25,7 @@ const AuthReducer = (state = initialState, action) => {
     case USER_SIGNIN_SUCCESS:
       console.log('userinfo:', action.payload);
       const headers = action.payload;
-      return {...state, ...initialState, userId: headers.userid, jwt: headers.authorization };
+      return {...state, ...initialState, userId: headers.userid, jwt: headers.authorization, userSignInSuccess: true };
     case USER_SIGNIN_FAIL:
       return {...state, error: "Incorrect email or password"};
     case USER_PROFILE_FETCH_SUCCESS:
@@ -39,7 +39,8 @@ const AuthReducer = (state = initialState, action) => {
         username: action.payload.username,
         email: action.payload.email,
         firstName: action.payload.firstName,
-        lastName: action.payload.lastName };
+        lastName: action.payload.lastName,
+        userUpdateProfileSuccess: true };
     case USER_PASSWORD_UPDATE_SUCCESS:
       return {...state, 
         username: action.payload.username,
