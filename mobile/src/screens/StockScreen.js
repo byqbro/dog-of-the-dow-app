@@ -199,13 +199,13 @@ class StockScreen extends Component {
                   Alert.alert('Modal has been closed.');
                 }}>
                   <View style={styles.tradeModalView}>
-                    <TouchableHighlight style={styles.calendarCloseTouch}
+                    <TouchableHighlight style={styles.tradeCloseTouch}
                         onPress={() => {
                           this.setTradeModalVisible(!this.state.tradeModalVisible);
                         }}
                         underlayColor='cusColors.background'
                         >
-                        <View style={styles.calendarCloseView}>
+                        <View style={styles.tradeCloseView}>
                           <IconE color='black' name="close-o" size={40} />
                           <Text style={styles.closeText}>Close</Text>
                         </View>
@@ -455,11 +455,11 @@ const styles = StyleSheet.create({
     paddingTop: '30%',
     backgroundColor: cusColors.background,
   },
-  calendarCloseTouch: {
+  tradeCloseTouch: {
     alignSelf: 'flex-end',
     marginRight: 50,
   },
-  calendarCloseView: {
+  tradeCloseView: {
     flexDirection: 'row',
   },
   closeText: {
