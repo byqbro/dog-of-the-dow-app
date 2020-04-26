@@ -10,6 +10,8 @@ import StrategiesScreen from '../screens/StrategiesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import UpdatePasswordScreen from '../screens/UpdatePasswordScreen';
 import StockScreen from '../screens/StockScreen';
+import TransactionsScreen from '../screens/TransactionsScreen';
+
 
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -18,6 +20,7 @@ const AccountStack = createStackNavigator({
   SignUp: SignUpScreen,
   Account: AccountScreen,
   Profile: ProfileScreen,
+  Transactions: TransactionsScreen,
   UpdatePassword: UpdatePasswordScreen,
 });
 
