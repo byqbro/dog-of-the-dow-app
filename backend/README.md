@@ -597,9 +597,9 @@ Example:    /mobile-app-ws/users/transactions
 
 ### 1. Get a user's portfolio <a name="get-a-user's-portfolio"></a>
 
-**Request:	`GET /user/{userId}/portfolio`**
+**Request:	`GET /mobile-app-ws/users/{userId}/portfolio`**
 
-Example: /user/1/portfolio
+Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ/portfolio
 
     headers: {
         "Authorization" : "Bearer <jwt token>"
@@ -607,30 +607,21 @@ Example: /user/1/portfolio
 
 *Response(Success):*
 
+totalTransactionsValue = ∑stock((amount * sellPrice) - (amount * buyPrice))
+
     {
-        "user": {
-            "userId": "1",
-            "username": "peter",
-            "email": "peter@gmail.com",
-            "password": "123456Ab",
-            "firstName": "peter",
-            "lastName": "sun",
-            "createAt": "some date",
-            "updateAt": "some date"
-        },
-        "portfolio": [
+        "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
+        "stockInfoList": [
             {
-                "stock_symbol": "AAPL",
-                "stock_name": "Apple Inc",
+                "symbol": "AAPL",
                 "amount": 100
             },
             {
-                "stock_symbol": "BA",
-                "stock_name": "Boeing Co",
+                "symbol": "BA",
                 "amount": 100
             }
         ],
-        "status": "success"
+        "totalTransactionsValue": -11077.5
     }
 
 *Response(Fail):*
