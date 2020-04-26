@@ -122,11 +122,11 @@ class StockScreen extends Component {
   }
 
   onBuyPress() {
-    this.makeTransaction("buy");
+    this.makeTransaction("Buy");
   }
 
   onSellPress() {
-    this.makeTransaction("sell");
+    this.makeTransaction("Sell");
   }
 
   async makeTransaction(buyOrSell) {
