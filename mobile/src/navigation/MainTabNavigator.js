@@ -8,6 +8,7 @@ import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import StrategiesScreen from '../screens/StrategiesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import PortfolioScreen from '../screens/PortfolioScreen';
 import UpdatePasswordScreen from '../screens/UpdatePasswordScreen';
 import StockScreen from '../screens/StockScreen';
 import TransactionsScreen from '../screens/TransactionsScreen';
@@ -20,6 +21,7 @@ const AccountStack = createStackNavigator({
   SignUp: SignUpScreen,
   Account: AccountScreen,
   Profile: ProfileScreen,
+  Portfolio: PortfolioScreen,
   Transactions: TransactionsScreen,
   UpdatePassword: UpdatePasswordScreen,
 });
