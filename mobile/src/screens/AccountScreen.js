@@ -37,7 +37,7 @@ class AccountScreen extends Component {
               </View>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight underlayColor='white'>
+          <TouchableHighlight onPress={() => this.props.navigation.navigate('Portfolio')} underlayColor='white'>
             <View style={styles.touchableSection}>
               <IconM color={cusColors.iconColor} name="ballot-outline" size={40} />
               <View style={styles.textView}>
@@ -45,7 +45,7 @@ class AccountScreen extends Component {
               </View>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight underlayColor='white'>
+          <TouchableHighlight onPress={() => this.props.navigation.navigate('Transactions')} underlayColor='white'>
             <View style={styles.touchableSection}>
               <IconM color={cusColors.iconColor} name="alpha-t-box-outline" size={40} />
               <View style={styles.textView}>
