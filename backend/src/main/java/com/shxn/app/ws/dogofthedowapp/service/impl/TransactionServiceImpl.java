@@ -99,6 +99,10 @@ public class TransactionServiceImpl implements TransactionService {
                 buyAndSellStockMap.put(symbol, buyAndSellStockMap.getOrDefault(symbol, 0.00) - amount);
                 totalTransactionsValue += price * amount;
             }
+
+            if (buyAndSellStockMap.containsKey(symbol) && buyAndSellStockMap.get(symbol) == 0.0) {
+                buyAndSellStockMap.remove(symbol);
+            }
         }
 
         List<StockInfoDto> stockInfoDtoList = new ArrayList<>();
