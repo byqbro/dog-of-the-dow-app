@@ -61,5 +61,5 @@ buck-out/
 # ios
 /ios/Podfile.lock
 
-__tests__/
+__tests__/__snapshots__
 package-lock.json
