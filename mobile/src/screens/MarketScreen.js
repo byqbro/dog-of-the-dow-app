@@ -71,7 +71,7 @@ class MarketScreen extends Component {
                           <Text style={{ color: 'white', fontSize: 25, fontWeight: 'bold' }}>{item.symbol}</Text>
                       </View>
                       <View style={styles.priceText}>
-                        <Text style={{ color: 'white', fontSize: 20 }}>${item.price}</Text>
+                        <Text style={{ color: 'white', fontSize: 20 }}>${(item.price).toFixed(2)}</Text>
                       </View>
                     </Card>
                   </TouchableOpacity>
