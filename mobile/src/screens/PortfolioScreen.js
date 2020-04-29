@@ -39,7 +39,7 @@ class PortfolioScreen extends Component {
         });
       
       const portfolio = portfolioResponse.data;
-      console.log("portfolio", portfolio);
+      // console.log("portfolio", portfolio);
 
       this.setState({ 
         stockInfoList: portfolio.stockInfoList,
@@ -61,7 +61,7 @@ class PortfolioScreen extends Component {
           let updateStockInfoList = this.state.stockInfoList;
           let portfolioValue = 0.0;
           updateStockInfoList.forEach((element, index) => {
-            element.price = stocksArray[index].price;
+            element.price = stocksArray[index].price.toFixed(2);
             portfolioValue += element.amount * stocksArray[index].price;
           });
 
