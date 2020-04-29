@@ -29,6 +29,7 @@ class StockScreen extends Component {
       volAvg: "",
       mktCap: "",
       lastDividend: "",
+      dividend: 0.00,
       priceYearlow: "",
       priceYearHigh: "",
       companyName: "",
@@ -64,15 +65,17 @@ class StockScreen extends Component {
         const profile = stockInfo.profile;
         const priceRange = profile.range.split('-');
         // console.log("stockInfo:", stockInfo);
+        // console.log("mktCap", this.moneyFormat(parseFloat(profile.mktCap)));
 
         this.setState({ 
           symbol: stockInfo.symbol,
-          price: profile.price,
-          volAvg: profile.volAvg,
-          mktCap: profile.mktCap,
+          price: profile.price.toFixed(2),
+          volAvg: this.moneyFormat(parseFloat(profile.volAvg)),
+          mktCap: this.moneyFormat(parseFloat(profile.mktCap)),
           lastDividend: profile.lastDiv,
-          priceYearlow: priceRange[0],
-          priceYearHigh: priceRange[1],
+          dividend: parseFloat(profile.lastDiv).toFixed(2) / profile.price.toFixed(2), 
+          priceYearlow: parseFloat(priceRange[0]).toFixed(2),
+          priceYearHigh: parseFloat(priceRange[1]).toFixed(2),
           companyName: profile.companyName,
           industry: profile.industry,
           website: profile.website,
@@ -90,14 +93,35 @@ class StockScreen extends Component {
         const stockInfo = response.data[0];
 
         this.setState({ 
-          dayLow: stockInfo.dayLow,
-          dayHigh: stockInfo.dayHigh,
-          volume: stockInfo.volume,
-          openPrice: stockInfo.open,
+          dayLow: stockInfo.dayLow.toFixed(2),
+          dayHigh: stockInfo.dayHigh.toFixed(2),
+          volume: this.moneyFormat(parseFloat(stockInfo.volume)),
+          openPrice: stockInfo.open.toFixed(2),
         });
     }).catch((err) => {
         console.log('err', err);
     });
+  }
+
+  moneyFormat(labelValue) {
+    // Twelve Zeroes for Trillions
+    return Math.abs(Number(labelValue)) >= 1.0e+12
+
+        ? (Math.abs(Number(labelValue)) / 1.0e+12).toFixed(2) + "T"
+        // Nine Zeroes for Billions
+        : Math.abs(Number(labelValue)) >= 1.0e+9
+
+        ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + "B"
+        // Six Zeroes for Millions 
+        : Math.abs(Number(labelValue)) >= 1.0e+6
+
+        ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + "M"
+        // Three Zeroes for Thousands
+        : Math.abs(Number(labelValue)) >= 1.0e+3
+
+        ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + "K"
+
+        : Math.abs(Number(labelValue));
   }
 
   setTradeModalVisible(visible) {
@@ -112,7 +136,6 @@ class StockScreen extends Component {
   async onTradePress() {
     const userId = await AsyncStorage.getItem('userId');
     const jwt = await AsyncStorage.getItem('jwt');
-    // console.log("userSignInSuccess", this.state.userSignInSuccess);
 
     if (userId == null || jwt == null) {
       this.props.navigation.navigate('AccountStack', { screen: 'SignIn' });
@@ -311,8 +334,9 @@ class StockScreen extends Component {
                     <Text style={styles.itemValue}>{this.state.mktCap}</Text>
                   </View>
                   <View style={styles.itemView}>
-                    <Text style={styles.itemName}>LAST DIV</Text>
-                    <Text style={styles.itemValue}>{this.state.lastDividend}</Text>
+                    <Text style={styles.itemName}>DIV/YIELD</Text>
+                    {/* <Text style={styles.itemValue}>{this.state.lastDividend}</Text> */}
+                    <Text style={styles.itemValue}>{(this.state.dividend * 100).toFixed(2)}%</Text>
                   </View>
                 </View>
               </View>
