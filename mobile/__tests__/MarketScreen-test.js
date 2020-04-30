@@ -5,6 +5,7 @@ import renderer from 'react-test-renderer';
 
 
 test('MarketScreen snapShot', ()=>{
+  jest.useFakeTimers();
   const snap = renderer.create(
     <MarketScreen />
   ).toJSON();
