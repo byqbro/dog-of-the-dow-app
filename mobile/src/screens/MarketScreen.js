@@ -32,7 +32,6 @@ class MarketScreen extends Component {
   }
 
   getStocksInfo() {
-    // console.log("api host", API_HOST);
     // console.log("Dow 30:", DOW_30_STOCKS);
 
     axios.get(`${API_HOST}stock/real-time-price/${DOW_30_STOCKS}`)
@@ -104,6 +103,7 @@ const styles = StyleSheet.create({
     padding: 10,
     shadowOpacity: 0.3,
     shadowRadius: 5,
+    shadowColor: 'white',
     borderRadius: 2,
   },
   symbolText: {
