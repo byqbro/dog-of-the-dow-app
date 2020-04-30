@@ -69,7 +69,7 @@ class Login extends Component {
             <form className="form">
               <div>
                 <FormGroup component="FormControl">
-                  <ControlLabel id="controlLabel">Email</ControlLabel>
+                  <ControlLabel id="controlLabel">Email-for-CICD-Demo</ControlLabel>
                   <FormControl
                     type="text"
                     onChange={(event) => {
