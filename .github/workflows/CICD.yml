@@ -3,10 +3,10 @@ name: CI-CD-Pipeline-to-AWS
 on:
   push:
     branches:
-      - master
+      - test
   pull_request:
     branches:
-      - test
+      - master
 
 jobs:
 #   Client-CICD:
@@ -79,7 +79,7 @@ jobs:
       - name: Run tests
         run: |
           cd mobile
-          npm test
+          npm test -- -u
 
     
                 
