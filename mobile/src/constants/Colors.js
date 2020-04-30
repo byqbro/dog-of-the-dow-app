@@ -1,10 +1,12 @@
 export default {
   headerColor: '#7ab4c2',
   oceanDreamColorPalette: ['#34617c', '#56829c', '#86a8bd', '#b1d5d6', '#9fc8c9'],
-  background: '#9fc8c9',
-  buttonColor: '#b1d5d6',
+  background: '#252737',
+  buttonColor: '#f9b517',
   iconColor: '#ffffff',
   headerText: '#ffffff',
+  cardBackground: '#4a4f76',
+  stockInfoItemName: '#ffd952',
 
   colorPattern: [
       '#2d2d2d',

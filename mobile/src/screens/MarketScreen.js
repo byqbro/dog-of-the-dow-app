@@ -4,6 +4,7 @@ import {
   View,
   Text,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
 import { API_HOST } from 'react-native-dotenv';
@@ -14,12 +15,12 @@ import { DOW_30_STOCKS } from '../constants/DowStocks';
 
 class MarketScreen extends Component {
   constructor(props) {
-      super(props);
-      this.state = {
-        "stocksInfo": []
-      }
+    super(props);
+    this.state = {
+      "stocksInfo": []
+    }
 
-      this.getStocksInfo = this.getStocksInfo.bind(this);
+    this.getStocksInfo = this.getStocksInfo.bind(this);
   }
 
   static navigationOptions = {
@@ -31,7 +32,6 @@ class MarketScreen extends Component {
   }
 
   getStocksInfo() {
-    // console.log("api host", API_HOST);
     // console.log("Dow 30:", DOW_30_STOCKS);
 
     axios.get(`${API_HOST}stock/real-time-price/${DOW_30_STOCKS}`)
@@ -55,15 +55,25 @@ class MarketScreen extends Component {
 
           <FlatList data={this.state.stocksInfo} renderItem={
             ({ item }) =>
-                <View>
-                    <Card style={styles.cardView}>
-                        <View style={styles.symbolText}>
-                            <Text style={{ color: 'white', fontSize: 25, fontWeight: 'bold' }}>{item.symbol}</Text>
-                        </View>
-                        <View style={styles.priceText}>
-                          <Text style={{ color: 'white', fontSize: 20 }}>${item.price}</Text>
-                        </View>
+                <View >
+                  <TouchableOpacity 
+                    onPress={() => {
+                      this.props.navigation.navigate({
+                          routeName: 'Stock',
+                          params: {
+                              stockSymbol: item.symbol,
+                          }
+                      });
+                    }}>
+                    <Card style={styles.cardView} >
+                      <View style={styles.symbolText}>
+                          <Text style={{ color: 'white', fontSize: 25, fontWeight: 'bold' }}>{item.symbol}</Text>
+                      </View>
+                      <View style={styles.priceText}>
+                        <Text style={{ color: 'white', fontSize: 20 }}>${(item.price).toFixed(2)}</Text>
+                      </View>
                     </Card>
+                  </TouchableOpacity>
                 </View>
           }
             keyExtractor={(item, index) => index.toString()} />
@@ -93,6 +103,7 @@ const styles = StyleSheet.create({
     padding: 10,
     shadowOpacity: 0.3,
     shadowRadius: 5,
+    shadowColor: 'white',
     borderRadius: 2,
   },
   symbolText: {

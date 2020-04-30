@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Fontisto';
 import { Input, Button } from 'react-native-elements';
 import Card from '../components/Card';
 import cusColors from '../constants/Colors';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 class SignInScreen extends Component {
@@ -21,12 +22,22 @@ class SignInScreen extends Component {
       email: "",
       password: "",
     }
+    
     this.onSignInPress = this.onSignInPress.bind(this);
     this.passwordInputStyle = this.passwordInputStyle.bind(this);
   }
+
   static navigationOptions = {
     title: 'Sign In',
   };
+
+  async componentDidMount() {
+    const userId = await AsyncStorage.getItem('userId');
+    const jwt = await AsyncStorage.getItem('jwt');
+    if (userId != null && jwt != null) {
+      this.props.navigation.replace('Account');
+    }
+  }
 
   onSignInPress() {
     let email = this.state.email;
@@ -142,6 +153,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardView: {
+    backgroundColor: cusColors.cardBackground,
     width: '80%',
     maxWidth: 500,
     height: 450,

@@ -465,7 +465,7 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ/transactions
             "transactionId": "iDwK7FPn9pCaS5FVLkHnCvujzZuwptAUj3bYrfNT",
             "stockSymbol": "AAPL",
             "stockName": "Apple Inc",
-            "buyOrSell": "buy",
+            "buyOrSell": "Buy",
             "price": 321.55,
             "amount": 100,
             "currency": "USD",
@@ -475,7 +475,7 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ/transactions
             "transactionId": "EpWsrbfPVS0kaaE2N1c2yfyHjEiBMb1qkguOwhiP",
             "stockSymbol": "BA",
             "stockName": "Boeing Co",
-            "buyOrSell": "buy",
+            "buyOrSell": "Buy",
             "price": 344.67,
             "amount": 100,
             "currency": "USD",
@@ -485,7 +485,7 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ/transactions
             "transactionId": "OfklBwqnggtMF0q4at7ph0dTyDeN1CpYsa1B4L8f",
             "stockSymbol": "AAPL",
             "stockName": "Apple Inc",
-            "buyOrSell": "sell",
+            "buyOrSell": "Sell",
             "price": 326.55,
             "amount": 50,
             "currency": "USD",
@@ -504,26 +504,26 @@ Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ/transactions
 
 **Request:	`POST /mobile-app-ws/users/transactions`**
 
-*buy a stock*
+*Buy a stock*
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
 userId       | String        | Required            | userId
 stockSymbol  | String        | Required            | stock symbol
 stockName    | String        | Required            | stock name
-buyOrSell    | String        | Required            | buy or sell
+buyOrSell    | String        | Required            | Buy or Sell(should be capital B or S)
 price        | double        | Required            | buy price
 amount       | double        | Required            | buy amount
 currency     | String        | Required            | currency
 
-*sell a stock*
+*Sell a stock*
 
 Parameters   | Data Type     | Required / Optional | Description / Requirement
 ------------ | ------------- | ------------------- | -------------------------
 userId       | String        | Required            | userId
 stockSymbol  | String        | Required            | stock symbol
 stockName    | String        | Required            | stock name
-buyOrSell    | String        | Required            | buy or sell
+buyOrSell    | String        | Required            | Buy or Sell(should be capital B or S)
 price        | double        | Required            | sell price
 amount       | double        | Required            | sell amount
 currency     | String        | Required            | currency
@@ -534,13 +534,13 @@ Example:    /mobile-app-ws/users/transactions
         "Authorization" : "Bearer <jwt token>"
     }
 
-*Request body(buy):*
+*Request body(Buy):*
 
     {
         "userId": "tpThhQkkXC9mSv5VmPPKdtdqRCA9qc",
         "stockSymbol": "AAPL",
         "stockName": "Apple Inc",
-        "buyOrSell": "buy",
+        "buyOrSell": "Buy",
         "price": 321.55,
         "amount": 100,
         "currency": "USD"
@@ -552,20 +552,20 @@ Example:    /mobile-app-ws/users/transactions
         "transactionId": "nYY6THQesYHvtHSRkPVz5yEne6mJyvVhjlwn9JIo",
         "stockSymbol": "AAPL",
         "stockName": "Apple Inc",
-        "buyOrSell": "buy",
+        "buyOrSell": "Buy",
         "price": 321.55,
         "amount": 100,
         "currency": "USD",
         "createAt": "some date"
     }
 
-*Request body(sell):*
+*Request body(Sell):*
 
     {
         "userId": "tpThhQkkXC9mSv5VmPPKdtdqRCA9qc",
         "stockSymbol": "AAPL",
         "stockName": "Apple Inc",
-        "buyOrSell": "sell",
+        "buyOrSell": "Sell",
         "price": 421.55,
         "amount": 50,
         "currency": "USD"
@@ -577,7 +577,7 @@ Example:    /mobile-app-ws/users/transactions
         "transactionId": "sR4rhzRkJTzPRzzLxnGOHXg9DKQXYfoAm0Izd8QF",
         "stockSymbol": "AAPL",
         "stockName": "Apple Inc",
-        "buyOrSell": "sell",
+        "buyOrSell": "Sell",
         "price": 421.55,
         "amount": 50,
         "currency": "USD",
@@ -597,9 +597,9 @@ Example:    /mobile-app-ws/users/transactions
 
 ### 1. Get a user's portfolio <a name="get-a-user's-portfolio"></a>
 
-**Request:	`GET /user/{userId}/portfolio`**
+**Request:	`GET /mobile-app-ws/users/{userId}/portfolio`**
 
-Example: /user/1/portfolio
+Example:    /mobile-app-ws/users/P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ/portfolio
 
     headers: {
         "Authorization" : "Bearer <jwt token>"
@@ -607,30 +607,21 @@ Example: /user/1/portfolio
 
 *Response(Success):*
 
+totalTransactionsValue = ∑stock((amount * sellPrice) - (amount * buyPrice))
+
     {
-        "user": {
-            "userId": "1",
-            "username": "peter",
-            "email": "peter@gmail.com",
-            "password": "123456Ab",
-            "firstName": "peter",
-            "lastName": "sun",
-            "createAt": "some date",
-            "updateAt": "some date"
-        },
-        "portfolio": [
+        "userId": "P8qmI1I2YfGL0ru4a0Yd0IuQXQx4XQ",
+        "stockInfoList": [
             {
-                "stock_symbol": "AAPL",
-                "stock_name": "Apple Inc",
+                "symbol": "AAPL",
                 "amount": 100
             },
             {
-                "stock_symbol": "BA",
-                "stock_name": "Boeing Co",
+                "symbol": "BA",
                 "amount": 100
             }
         ],
-        "status": "success"
+        "totalTransactionsValue": -11077.5
     }
 
 *Response(Fail):*

@@ -4,6 +4,8 @@ import com.shxn.app.ws.dogofthedowapp.exceptions.UserServiceException;
 import com.shxn.app.ws.dogofthedowapp.service.TransactionService;
 import com.shxn.app.ws.dogofthedowapp.service.UserService;
 import com.shxn.app.ws.dogofthedowapp.shared.Roles;
+import com.shxn.app.ws.dogofthedowapp.shared.dto.PortfolioDto;
+import com.shxn.app.ws.dogofthedowapp.shared.dto.StockInfoDto;
 import com.shxn.app.ws.dogofthedowapp.shared.dto.TransactionDto;
 import com.shxn.app.ws.dogofthedowapp.shared.dto.UserDto;
 import com.shxn.app.ws.dogofthedowapp.ui.model.request.TransactionRequestModel;
@@ -163,6 +165,17 @@ public class UserController {
             Type listType = new TypeToken<List<TransactionRest>>() {}.getType();
             returnValue = new ModelMapper().map(transactionDto, listType);
         }
+
+        return returnValue;
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or #id == principal.userId")
+    @GetMapping(path = "/{id}/portfolio")
+    public PortfolioRest getUserPortfolio(@PathVariable String id) {
+        PortfolioRest returnValue = new PortfolioRest();
+
+        PortfolioDto portfolioDto = transactionService.getPortfolio(id);
+        BeanUtils.copyProperties(portfolioDto, returnValue);
 
         return returnValue;
     }
