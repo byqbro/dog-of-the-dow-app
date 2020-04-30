@@ -229,11 +229,11 @@ class StockScreen extends Component {
                         underlayColor='cusColors.background'
                         >
                         <View style={styles.tradeCloseView}>
-                          <IconE color='black' name="close-o" size={40} />
+                          <IconE color='white' name="close-o" size={40} />
                           <Text style={styles.closeText}>Close</Text>
                         </View>
                       </TouchableHighlight>
-                    <Text style={{ color: 'black', fontSize: 28, marginBottom: 50 }}>{this.state.companyName}</Text>
+                    <Text style={{ color: 'white', fontSize: 28, marginBottom: 50 }}>{this.state.companyName}</Text>
                     <Card style={styles.tradeCardView}>
                       <View style={styles.tradeView}>
                         <Input
@@ -298,11 +298,11 @@ class StockScreen extends Component {
                 </View>
                 <View style={styles.itemsLeftView}>
                   <View style={styles.itemView}>
-                    <Text style={{ color: 'black', fontSize: 13, marginBottom: 5 }}>52 WK HIGH</Text>
+                    <Text style={{ color: cusColors.stockInfoItemName, fontSize: 13, marginBottom: 5 }}>52 WK HIGH</Text>
                     <Text style={{ color: 'white', position: 'absolute', right: 2, fontSize: 13, marginBottom: 5 }}>{this.state.priceYearHigh}</Text>
                   </View>
                   <View style={styles.itemView}>
-                    <Text style={{ color: 'black', fontSize: 13, marginBottom: 5 }}>52 WK LOW</Text>
+                    <Text style={{ color: cusColors.stockInfoItemName, fontSize: 13, marginBottom: 5 }}>52 WK LOW</Text>
                     <Text style={{ color: 'white', position: 'absolute', right: 2, fontSize: 13, marginBottom: 5 }}>{this.state.priceYearlow}</Text>
                   </View>
                 </View>
@@ -446,12 +446,12 @@ const styles = StyleSheet.create({
   },
   itemView: {
     flexDirection: 'row',
-    borderBottomColor: 'black',
+    borderBottomColor: 'white',
     borderBottomWidth: 2,
     marginBottom: 8,
   },
   itemName: {
-    color: 'black', 
+    color: cusColors.stockInfoItemName, 
     fontSize: 18,
     marginBottom: 5,
   },
@@ -459,7 +459,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 2,
     color: 'white', 
-    fontSize: 18, 
+    fontSize: 18,
     marginBottom: 5,
   },
   descriptionView: {
@@ -487,14 +487,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   closeText: {
+    color: 'white',
     fontSize: 18,
     paddingTop: 5,
   },
   tradeCardView: {
+    backgroundColor: cusColors.cardBackground,
     width: '80%',
     maxWidth: 500,
     height: 450,
-    padding: 20
+    padding: 20,
   },
   tradeView: {
     marginTop: 26,
@@ -528,6 +530,7 @@ const styles = StyleSheet.create({
     marginTop: 35
   },
   button: {
+    backgroundColor: cusColors.buttonColor,
     width: 130,
     borderRadius:15,
   },

@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   resultTitle: {
     height: 34,
-    color: "black",
+    color: 'white',
     fontSize: 25,
     fontWeight: 'bold',
   },
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     shadowOpacity: 0.5,
     shadowRadius: 5,
-    borderRadius: 5,
+    shadowColor: 'white',
+    borderRadius: 8,
   },
   itemsView: {
     width: '82%',
