@@ -1,12 +1,9 @@
 name: CI-CD-Pipeline-to-AWS
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
-      - test
+      - master
 
 jobs:
   Client-CICD:
@@ -74,10 +71,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install npm dependencies
         run: |
+          cd mobile
           npm install
       - name: Run tests
         run: |
-          npm test
+          cd mobile
+          npm test -- -u
 
     
                 
