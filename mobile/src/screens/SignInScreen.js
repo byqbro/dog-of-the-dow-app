@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardView: {
+    backgroundColor: cusColors.cardBackground,
     width: '80%',
     maxWidth: 500,
     height: 450,

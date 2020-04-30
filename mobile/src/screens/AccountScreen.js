@@ -29,7 +29,7 @@ class AccountScreen extends Component {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={{marginTop: '5%'}}>
-          <TouchableHighlight onPress={() => this.props.navigation.navigate('Profile')} underlayColor='white'>
+          <TouchableHighlight onPress={() => this.props.navigation.navigate('Profile')} underlayColor='cusColors.background'>
             <View style={styles.touchableSection}>
               <IconA color={cusColors.iconColor} name="profile" size={40} />
               <View style={styles.textView}>
@@ -37,7 +37,7 @@ class AccountScreen extends Component {
               </View>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => this.props.navigation.navigate('Portfolio')} underlayColor='white'>
+          <TouchableHighlight onPress={() => this.props.navigation.navigate('Portfolio')} underlayColor='cusColors.background'>
             <View style={styles.touchableSection}>
               <IconM color={cusColors.iconColor} name="ballot-outline" size={40} />
               <View style={styles.textView}>
@@ -45,7 +45,7 @@ class AccountScreen extends Component {
               </View>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => this.props.navigation.navigate('Transactions')} underlayColor='white'>
+          <TouchableHighlight onPress={() => this.props.navigation.navigate('Transactions')} underlayColor='cusColors.background'>
             <View style={styles.touchableSection}>
               <IconM color={cusColors.iconColor} name="alpha-t-box-outline" size={40} />
               <View style={styles.textView}>
@@ -53,7 +53,7 @@ class AccountScreen extends Component {
               </View>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => this.props.navigation.navigate('UpdatePassword')} underlayColor='white'>
+          <TouchableHighlight onPress={() => this.props.navigation.navigate('UpdatePassword')} underlayColor='cusColors.background'>
             <View style={styles.touchableSection}>
               <IconM color={cusColors.iconColor} name="shield-key-outline" size={40} /> 
               <View style={styles.textView}>
@@ -69,7 +69,7 @@ class AccountScreen extends Component {
               </View>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={() => this.onSignOutPress()} underlayColor='white'>
+          <TouchableHighlight onPress={() => this.onSignOutPress()} underlayColor='cusColors.background'>
             <View style={styles.touchableSection}>
               <IconM color={cusColors.iconColor} name="logout" size={40} />
               <View style={styles.textView}>
