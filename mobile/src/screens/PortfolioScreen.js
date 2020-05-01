@@ -39,7 +39,6 @@ class PortfolioScreen extends Component {
         });
       
       const portfolio = portfolioResponse.data;
-      // console.log("portfolio", portfolio);
 
       this.setState({ 
         stockInfoList: portfolio.stockInfoList,
@@ -47,8 +46,10 @@ class PortfolioScreen extends Component {
       });
 
       let stockSymbols = "";
+      let numOfStocks = 0;
       this.state.stockInfoList.forEach((element) => {
         stockSymbols += element.symbol + ",";
+        numOfStocks++;
       });
 
       if (stockSymbols != "") {
@@ -56,9 +57,12 @@ class PortfolioScreen extends Component {
         const response = await axios
           .get(`${API_HOST}stock/real-time-price/${stockSymbols}`);
 
-          // TODO: one stock kind needs to change response
-          const stocksArray = response.data.companiesPriceList;
-          console.log("stockArray", response);
+          let stocksArray = [];
+          if (numOfStocks > 1) {
+            stocksArray = response.data.companiesPriceList;
+          } else {
+            stocksArray.push(response.data);
+          }
 
           let updateStockInfoList = this.state.stockInfoList;
           let portfolioValue = 0.0;
