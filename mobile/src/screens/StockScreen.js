@@ -195,7 +195,7 @@ class StockScreen extends Component {
     if (this.state.buyOrSellPrice != "" && this.state.amount != "") {
       const price = parseFloat(this.state.buyOrSellPrice);
       const amount = parseFloat(this.state.amount);
-      const total = price * amount;
+      const total = (price * amount).toFixed(2);
       return total;
     }
 
