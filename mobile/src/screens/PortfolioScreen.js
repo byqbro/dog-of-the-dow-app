@@ -6,7 +6,7 @@ import {
   FlatList,
 } from 'react-native';
 import axios from 'axios';
-import { HOST, HOST_PORT, CONTEXT_PATH, API_HOST } from 'react-native-dotenv';
+import { HOST, PORT, CONTEXT_PATH, API_HOST } from 'react-native-dotenv';
 import AsyncStorage from '@react-native-community/async-storage';
 import cusColors from '../constants/Colors';
 import Card from '../components/Card';
@@ -32,7 +32,7 @@ class PortfolioScreen extends Component {
       const userId = await AsyncStorage.getItem('userId');
       const jwt = await AsyncStorage.getItem('jwt');
       const portfolioResponse = await axios
-        .get(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/${userId}/portfolio`, {
+        .get(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${userId}/portfolio`, {
           headers: {
             "Authorization" : jwt
           }
@@ -56,7 +56,9 @@ class PortfolioScreen extends Component {
         const response = await axios
           .get(`${API_HOST}stock/real-time-price/${stockSymbols}`);
 
+          // TODO: one stock kind needs to change response
           const stocksArray = response.data.companiesPriceList;
+          console.log("stockArray", response);
 
           let updateStockInfoList = this.state.stockInfoList;
           let portfolioValue = 0.0;

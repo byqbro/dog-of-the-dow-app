@@ -6,7 +6,7 @@ import {
   FlatList,
 } from 'react-native';
 import axios from 'axios';
-import { HOST, HOST_PORT, CONTEXT_PATH } from 'react-native-dotenv';
+import { HOST, PORT, CONTEXT_PATH } from 'react-native-dotenv';
 import AsyncStorage from '@react-native-community/async-storage';
 import cusColors from '../constants/Colors';
 import Card from '../components/Card';
@@ -29,7 +29,7 @@ class TransactionsScreen extends Component {
     const jwt = await AsyncStorage.getItem('jwt');
 
     axios
-    .get(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/${userId}/transactions`, {
+    .get(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${userId}/transactions`, {
       headers: {
         "Authorization": jwt
       }
