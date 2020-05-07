@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { USER_SIGNUP_SUCCESS, USER_SIGNUP_FAIL } from '../actions/ActionTypes';
-import { HOST, HOST_PORT, CONTEXT_PATH } from 'react-native-dotenv';
+import { HOST, PORT, CONTEXT_PATH } from 'react-native-dotenv';
 
 export const signUpSubmit = ({ username, email, password, firstName, lastName }, callback) => {
   return (dispatch) => {
-    axios.post(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users`, {
+    axios.post(`http://${HOST}:${PORT}${CONTEXT_PATH}/users`, {
       username: username,
       email: email,
       password: password,

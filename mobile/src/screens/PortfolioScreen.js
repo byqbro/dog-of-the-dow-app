@@ -6,7 +6,7 @@ import {
   FlatList,
 } from 'react-native';
 import axios from 'axios';
-import { HOST, HOST_PORT, CONTEXT_PATH, API_HOST } from 'react-native-dotenv';
+import { HOST, PORT, CONTEXT_PATH, API_HOST } from 'react-native-dotenv';
 import AsyncStorage from '@react-native-community/async-storage';
 import cusColors from '../constants/Colors';
 import Card from '../components/Card';
@@ -32,14 +32,13 @@ class PortfolioScreen extends Component {
       const userId = await AsyncStorage.getItem('userId');
       const jwt = await AsyncStorage.getItem('jwt');
       const portfolioResponse = await axios
-        .get(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/${userId}/portfolio`, {
+        .get(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${userId}/portfolio`, {
           headers: {
             "Authorization" : jwt
           }
         });
       
       const portfolio = portfolioResponse.data;
-      // console.log("portfolio", portfolio);
 
       this.setState({ 
         stockInfoList: portfolio.stockInfoList,
@@ -47,8 +46,10 @@ class PortfolioScreen extends Component {
       });
 
       let stockSymbols = "";
+      let numOfStocks = 0;
       this.state.stockInfoList.forEach((element) => {
         stockSymbols += element.symbol + ",";
+        numOfStocks++;
       });
 
       if (stockSymbols != "") {
@@ -56,7 +57,12 @@ class PortfolioScreen extends Component {
         const response = await axios
           .get(`${API_HOST}stock/real-time-price/${stockSymbols}`);
 
-          const stocksArray = response.data.companiesPriceList;
+          let stocksArray = [];
+          if (numOfStocks > 1) {
+            stocksArray = response.data.companiesPriceList;
+          } else {
+            stocksArray.push(response.data);
+          }
 
           let updateStockInfoList = this.state.stockInfoList;
           let portfolioValue = 0.0;

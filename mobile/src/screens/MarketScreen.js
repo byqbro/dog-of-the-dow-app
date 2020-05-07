@@ -31,17 +31,13 @@ class MarketScreen extends Component {
     this.getStocksInfo();
   }
 
-  getStocksInfo() {
-    // console.log("Dow 30:", DOW_30_STOCKS);
+  async getStocksInfo() {
+    const response = await axios
+      .get(`${API_HOST}stock/real-time-price/${DOW_30_STOCKS}`);
 
-    axios.get(`${API_HOST}stock/real-time-price/${DOW_30_STOCKS}`)
-      .then((response) => {
-        const stocksArray = response.data.companiesPriceList;
-        // console.log(response.data.companiesPriceList);
-        this.setState({ stocksInfo: stocksArray });
-    }).catch((err) => {
-        console.log('err', err);
-    });
+    // console.log(response.data.companiesPriceList);
+    const stocksArray = response.data.companiesPriceList;
+    this.setState({ stocksInfo: stocksArray });
   }
 
   render() {
@@ -53,7 +49,7 @@ class MarketScreen extends Component {
               </Text>
           </View>
 
-          <FlatList data={this.state.stocksInfo} renderItem={
+          <FlatList testId={'stockInfoFlatList'} data={this.state.stocksInfo} renderItem={
             ({ item }) =>
                 <View >
                   <TouchableOpacity 
