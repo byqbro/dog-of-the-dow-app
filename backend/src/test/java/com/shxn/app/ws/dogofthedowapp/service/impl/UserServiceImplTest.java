@@ -1,7 +1,9 @@
 package com.shxn.app.ws.dogofthedowapp.service.impl;
 
 import com.shxn.app.ws.dogofthedowapp.exceptions.UserServiceException;
+import com.shxn.app.ws.dogofthedowapp.io.entity.RoleEntity;
 import com.shxn.app.ws.dogofthedowapp.io.entity.UserEntity;
+import com.shxn.app.ws.dogofthedowapp.io.repositories.RoleRepository;
 import com.shxn.app.ws.dogofthedowapp.io.repositories.UserRepository;
 import com.shxn.app.ws.dogofthedowapp.shared.Roles;
 import com.shxn.app.ws.dogofthedowapp.shared.Utils;
@@ -30,6 +32,9 @@ class UserServiceImplTest {
     UserRepository userRepository;
 
     @Mock
+    RoleRepository roleRepository;
+
+    @Mock
     Utils utils;
 
     @Mock
@@ -40,6 +45,8 @@ class UserServiceImplTest {
     String dateTimeNow = "2020-02-28 00:59:13 PST";
 
     UserEntity userEntity;
+
+    RoleEntity roleEntity;
 
     @BeforeEach
     void setUp() {
@@ -55,12 +62,12 @@ class UserServiceImplTest {
         userEntity.setLastName("Sun");
         userEntity.setCreateAt(dateTimeNow);
         userEntity.setUpdateAt("2020-02-29 00:59:13 PST");
+
+        roleEntity = new RoleEntity(Roles.ROLE_USER.name());
     }
 
     @Test
     final void testGetUser() {
-
-
         when(userRepository.findByEmail(anyString())).thenReturn(userEntity);
 
         UserDto userDto = userService.getUser("peter@gmail.com");
@@ -97,29 +104,30 @@ class UserServiceImplTest {
         );
     }
 
-//    @Test
-//    final void testCreateUser() {
-//        when(userRepository.findByEmail(anyString())).thenReturn(null);
-//        when(utils.generateUserId(anyInt())).thenReturn(userId);
-//        when(utils.generateDateTimeNow()).thenReturn(dateTimeNow);
-//        when(bCryptPasswordEncoder.encode(anyString())).thenReturn(encryptedPassword);
-//        when(userRepository.save(any(UserEntity.class))).thenReturn(userEntity);
-//
-//        UserDto userDto = new UserDto();
-//        userDto.setUsername("peter");
-//        userDto.setEmail("peter@gmail.com");
-//        userDto.setPassword("123456Ab");
-//        userDto.setFirstName("Peter");
-//        userDto.setLastName("Sun");
-//        userDto.setRoles(new HashSet<>(Arrays.asList(Roles.ROLE_USER.name())));
-//
-//        UserDto storedUserDetails = userService.createUser(userDto);
-//        assertNotNull(storedUserDetails);
-//        assertEquals(userEntity.getFirstName(), storedUserDetails.getFirstName());
-//        assertEquals(userEntity.getLastName(), storedUserDetails.getLastName());
-//        assertNotNull(storedUserDetails.getUserId());
-//        verify(bCryptPasswordEncoder, times(1)).encode("123456Ab");
-//        verify(userRepository, times(1)).save(any(UserEntity.class));
-//    }
+    @Test
+    final void testCreateUser() {
+        when(userRepository.findByEmail(anyString())).thenReturn(null);
+        when(utils.generateUserId(anyInt())).thenReturn(userId);
+        when(utils.generateDateTimeNow()).thenReturn(dateTimeNow);
+        when(bCryptPasswordEncoder.encode(anyString())).thenReturn(encryptedPassword);
+        when(userRepository.save(any(UserEntity.class))).thenReturn(userEntity);
+        when(roleRepository.findByName(anyString())).thenReturn(roleEntity);
+
+        UserDto userDto = new UserDto();
+        userDto.setUsername("peter");
+        userDto.setEmail("peter@gmail.com");
+        userDto.setPassword("123456Ab");
+        userDto.setFirstName("Peter");
+        userDto.setLastName("Sun");
+        userDto.setRoles(new HashSet<>(Arrays.asList(Roles.ROLE_USER.name())));
+
+        UserDto storedUserDetails = userService.createUser(userDto);
+        assertNotNull(storedUserDetails);
+        assertEquals(userEntity.getFirstName(), storedUserDetails.getFirstName());
+        assertEquals(userEntity.getLastName(), storedUserDetails.getLastName());
+        assertNotNull(storedUserDetails.getUserId());
+        verify(bCryptPasswordEncoder, times(1)).encode("123456Ab");
+        verify(userRepository, times(1)).save(any(UserEntity.class));
+    }
 
 }
