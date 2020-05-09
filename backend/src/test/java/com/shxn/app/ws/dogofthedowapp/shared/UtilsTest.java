@@ -20,16 +20,16 @@ class UtilsTest {
     void setUp() {
     }
 
-//    @Test
-//    final void testGenerateUserId() {
-//        String userId = utils.generateUserId(Utils.PUBLIC_USER_ID_LEN);
-//        String userId2 = utils.generateUserId(Utils.PUBLIC_USER_ID_LEN);
-//
-//        assertNotNull(userId);
-//        assertNotNull(userId2);
-//
-//        assertTrue(userId.length() == Utils.PUBLIC_USER_ID_LEN);
-//        assertTrue(userId2.length() == Utils.PUBLIC_USER_ID_LEN);
-//        assertFalse(userId.equalsIgnoreCase(userId2));
-//    }
+    @Test
+    final void testGenerateUserId() {
+        String userId = utils.generateUserId(Utils.PUBLIC_USER_ID_LEN);
+        String userId2 = utils.generateUserId(Utils.PUBLIC_USER_ID_LEN);
+
+        assertNotNull(userId);
+        assertNotNull(userId2);
+
+        assertTrue(userId.length() == Utils.PUBLIC_USER_ID_LEN);
+        assertTrue(userId2.length() == Utils.PUBLIC_USER_ID_LEN);
+        assertFalse(userId.equalsIgnoreCase(userId2));
+    }
 }
