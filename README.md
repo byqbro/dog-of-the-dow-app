@@ -68,7 +68,7 @@ Github action workflows:
 ![](/images/cicdPipeline.png)<br><br>
 
 ### Development Steps 3: AWS Pre-Configuration
-![](/images/awsSetup.png)<br><br>
+![](/images/awsSetUp.png)<br><br>
 
 ### Development Steps 4: Make a commit from local to AWS
 ![](/images/localToAws.png)<br><br>
