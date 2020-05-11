@@ -22,6 +22,7 @@ The Dog of the Dow is a stock-picking strategy that picks the Dow stocks with th
 - [Mobile Tech Stack](#mobile-tech-stack)
 - [Team Collaboration](#team-collaboration)
 - [Challenges](#challenges)
+- [Issues and solutions](#issues-and-solutions)
 
 ## Core Feature and User Flow Design
 ### Admin Web
@@ -105,7 +106,7 @@ Github action workflows:
 
 ### Team Collaboration
 - Scrum meetings 4 times a week on Zoom
-- Use Notion to share notes
+- Use [Notion](https://www.notion.so/) to share notes
 - Required code review for every merge
 
 ### Challenges
@@ -116,3 +117,11 @@ Github action workflows:
   - Switch from AWS Elastic Beanstalk to ECS
 - Version conflict
 - Simplest way may not be the right way; complicate way may not be the the wrong way
+
+### Issues and solutions
+- Xcode setup error: Multiple commands produce '...'
+    - [hampustagerud's Solution](https://github.com/oblador/react-native-vector-icons/issues/851)  
+- AWS ECS error: service XYZ was unable to place a task because no container instance met all of its requirements. The closest matching container-instance ABC has inssufficent memory available.
+    - Delete the Service, restart a new service with same task definition
+- Overwrite priority: ECS container environment variable > application properties
+- Make sure using same data type when perform a sorting/comparsion, toFix() method change the data type to string
