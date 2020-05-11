@@ -641,7 +641,18 @@ Otherwise may meet some errors like:<br />
 URL "jdbc:h2:test". Use an absolute path, ~/name, ./name, or the baseDir setting instead. [90011-182] 90011/90011".`*<br />
 Or *`Database not found, and IFEXISTS=true, so we cant auto-create it`*
 
-2. On the server side, set the response header attribute as capital words.<br />
+
+2. If you are using H2 In-Memory Database for development, add the following code in WebSecurity file:
+
+
+    in configure(HttpSecurity http) method add:
+    http.headers().frameOptions().disable();
+
+also add the following code in application.properties file:
+
+    spring.h2.console.enabled=true
+
+3. On the server side, set the response header attribute as capital words.<br />
 However, when using Postman to test, you will get the response as the same **capital** attribute, while via browser to send request,
 you will get response as the **lower case** attribute.
 
