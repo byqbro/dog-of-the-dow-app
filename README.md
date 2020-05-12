@@ -16,12 +16,14 @@ The Dog of the Dow is a stock-picking strategy that picks the Dow stocks with th
   - [CICD Pipeline](#development-steps-2-cicd-pipeline)
   - [AWS Pre-Configuration](#development-steps-3-aws-pre-configuration)
   - [Make a commit from local to AWS](#development-steps-4-make-a-commit-from-local-to-aws)
+- [AWS Setup](#aws-setup)
 - [Backend Tech Stack](#backend-tech-stack)
 - [Database](#database)
 - [Web Tech Stack](#web-tech-stack)
 - [Mobile Tech Stack](#mobile-tech-stack)
 - [Team Collaboration](#team-collaboration)
 - [Challenges](#challenges)
+- [Issues and solutions](#issues-and-solutions)
 
 ## Core Feature and User Flow Design
 ### Admin Web
@@ -73,6 +75,28 @@ Github action workflows:
 ### Development Steps 4: Make a commit from local to AWS
 ![](/images/localToAws.png)<br><br>
 
+### AWS Setup
+- ECS(Elastic Container Service)
+    - Create cluster EC2 Linux + Networking
+        - t2 micro
+        - create a new VPC
+    - Create task definition EC2 version
+        - Task memory 512 MB
+        - Add container setup container environment variable
+    - Create service with task definition
+
+- ECR(Elastic Container Registory)
+    - Create repository
+        - Name the repository name match on Github action CICD process
+
+- RDS
+    - Choose same VPC, and security group with cluster
+
+- Resources: https://www.youtube.com/watch?v=yjb5kfRUw0A
+- Resources: https://medium.com/@ryanzhou7/connecting-a-mysql-workbench-to-amazon-web-services-relational-database-service-36ae1f23d424
+
+    
+
 ### Backend Tech Stack
 #### Java(Spring Boot)
 
@@ -105,7 +129,7 @@ Github action workflows:
 
 ### Team Collaboration
 - Scrum meetings 4 times a week on Zoom
-- Use Notion to share notes
+- Use [Notion](https://www.notion.so/) to share notes
 - Required code review for every merge
 
 ### Challenges
@@ -116,3 +140,11 @@ Github action workflows:
   - Switch from AWS Elastic Beanstalk to ECS
 - Version conflict
 - Simplest way may not be the right way; complicate way may not be the the wrong way
+
+### Issues and solutions
+- Xcode setup error: Multiple commands produce '...'
+    - [hampustagerud's Solution](https://github.com/oblador/react-native-vector-icons/issues/851)  
+- AWS ECS error: service XYZ was unable to place a task because no container instance met all of its requirements. The closest matching container-instance ABC has inssufficent memory available.
+    - Delete the Service, restart a new service with same task definition
+- Overwrite priority: ECS container environment variable > application properties
+- Make sure using same data type when perform a sorting/comparsion, toFix() method change the data type to string
