@@ -17,7 +17,7 @@ COPY . .
 ARG JAR_FILE=target/*.jar
 
 # copy jar file in to container
-COPY ${JAR_FILE} /app.jar
+COPY ${JAR_FILE} app.jar
 
 # open to port 8080
 EXPOSE 8080
