@@ -15,6 +15,7 @@ import { HOST, PORT, CONTEXT_PATH } from 'react-native-dotenv';
 
 export const signInSubmit = ({ email, password }, callback) => {
   return (dispatch) => {
+    console.log(HOST);
     axios.post(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/login`, {
       email: email,
       password: password
