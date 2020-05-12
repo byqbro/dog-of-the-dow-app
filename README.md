@@ -16,6 +16,7 @@ The Dog of the Dow is a stock-picking strategy that picks the Dow stocks with th
   - [CICD Pipeline](#development-steps-2-cicd-pipeline)
   - [AWS Pre-Configuration](#development-steps-3-aws-pre-configuration)
   - [Make a commit from local to AWS](#development-steps-4-make-a-commit-from-local-to-aws)
+- [AWS Setup](#aws-setup)
 - [Backend Tech Stack](#backend-tech-stack)
 - [Database](#database)
 - [Web Tech Stack](#web-tech-stack)
@@ -73,6 +74,28 @@ Github action workflows:
 
 ### Development Steps 4: Make a commit from local to AWS
 ![](/images/localToAws.png)<br><br>
+
+### AWS Setup
+- ECS(Elastic Container Service)
+    - Create cluster EC2 Linux + Networking
+        - t2 micro
+        - create a new VPC
+    - Create task definition EC2 version
+        - Task memory 512 MB
+        - Add container setup container environment variable
+    - Create service with task definition
+
+- ECR(Elastic Container Registory)
+    - Create repository
+        - Name the repository name match on Github action CICD process
+
+- RDS
+    - Choose same VPC, and security group with cluster
+
+- Resources: https://www.youtube.com/watch?v=yjb5kfRUw0A
+- Resources: https://medium.com/@ryanzhou7/connecting-a-mysql-workbench-to-amazon-web-services-relational-database-service-36ae1f23d424
+
+    
 
 ### Backend Tech Stack
 #### Java(Spring Boot)
