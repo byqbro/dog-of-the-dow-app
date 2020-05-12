@@ -17,12 +17,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
-      - name: Build, tag, and test image
+      
+      - name: Run Jest Test
         run: |
           cd web/
           CI=true npm test
-          cd ..
+        
+      - name: Build, tag, and test image
+        run: |
           docker build -t xli68/web:latest ./web
   
   Server-CI:
