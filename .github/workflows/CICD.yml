@@ -40,6 +40,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+         java-version: 1.8
+ 
+      - name: Build with Maven
+        run: |
+           cd backend/
+           sh mysql.sh
+           mvn install
+           mvn test
+           mvn package
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -58,8 +71,6 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REACT_APP_HOST: ${{ secrets.BACKEND_URL }} 
         run: |
-          sh ./backend/mysql.sh
-          docker container ls
           docker build -t $ECR_REGISTRY/backend:latest ./backend
           docker push $ECR_REGISTRY/backend:latest
 
