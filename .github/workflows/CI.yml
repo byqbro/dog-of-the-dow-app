@@ -20,7 +20,7 @@ jobs:
         
       - name: Build, tag, and test image
         run: |
-          cd web
+          cd web/
           CI=true npm test
           cd ..
           docker build -t xli68/web:latest ./web
