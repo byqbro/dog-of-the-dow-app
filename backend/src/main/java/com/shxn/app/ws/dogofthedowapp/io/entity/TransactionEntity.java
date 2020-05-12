@@ -18,7 +18,7 @@ public class TransactionEntity implements Serializable {
     @Column(nullable = false, length = 10)
     private String stockSymbol;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 100)
     private String stockName;
 
     @Column(nullable = false, length = 6)

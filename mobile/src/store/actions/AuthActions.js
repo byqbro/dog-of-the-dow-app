@@ -10,13 +10,12 @@ import {
   USER_PASSWORD_UPDATE_FAIL,
 } from '../actions/ActionTypes';
 import AsyncStorage from '@react-native-community/async-storage';
-import { HOST, HOST_PORT, CONTEXT_PATH } from 'react-native-dotenv';
+import { HOST, PORT, CONTEXT_PATH } from 'react-native-dotenv';
 
 
 export const signInSubmit = ({ email, password }, callback) => {
   return (dispatch) => {
-    
-    axios.post(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/login`, {
+    axios.post(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/login`, {
       email: email,
       password: password
     }).then((response) => {
@@ -40,7 +39,7 @@ export const profileFetch = () => {
       const jwt = await AsyncStorage.getItem('jwt');
 
       const response = await axios
-        .get(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/${userId}`, {
+        .get(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${userId}`, {
           headers: {
             "Authorization" : jwt
           }
@@ -59,7 +58,7 @@ export const profileUpdate = ({ username, email, firstName, lastName }) => {
       const jwt = await AsyncStorage.getItem('jwt');
 
       const response = await axios
-        .put(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/${userId}`, {
+        .put(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${userId}`, {
           username: username,
           email: email,
           firstName: firstName,
@@ -84,7 +83,7 @@ export const passwordUpdate = ({ newPassword }) => {
       const userId = await AsyncStorage.getItem('userId');
       const jwt = await AsyncStorage.getItem('jwt');
       const userInfo = await axios
-        .get(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/${userId}`, {
+        .get(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${userId}`, {
           headers: {
             "Authorization" : jwt
           }
@@ -93,7 +92,7 @@ export const passwordUpdate = ({ newPassword }) => {
       const email = userInfo.data.email;
       // console.log("password update email:" + email);
       const response = await axios
-        .put(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/${userId}/password-update`, {
+        .put(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/${userId}/password-update`, {
           email: email,
           password: newPassword,
         },

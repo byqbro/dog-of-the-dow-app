@@ -17,7 +17,7 @@ import cusColors from '../constants/Colors';
 import { Input, Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import IconE from 'react-native-vector-icons/EvilIcons';
-import { HOST, HOST_PORT, CONTEXT_PATH } from 'react-native-dotenv';
+import { HOST, PORT, CONTEXT_PATH } from 'react-native-dotenv';
 
 
 class StockScreen extends Component {
@@ -157,7 +157,7 @@ class StockScreen extends Component {
     const jwt = await AsyncStorage.getItem('jwt');
 
     axios
-      .post(`http://${HOST}:${HOST_PORT}${CONTEXT_PATH}/users/transactions`, {
+      .post(`http://${HOST}:${PORT}${CONTEXT_PATH}/users/transactions`, {
         userId: userId,
         stockSymbol: this.state.symbol,
         stockName: this.state.companyName,
@@ -195,7 +195,7 @@ class StockScreen extends Component {
     if (this.state.buyOrSellPrice != "" && this.state.amount != "") {
       const price = parseFloat(this.state.buyOrSellPrice);
       const amount = parseFloat(this.state.amount);
-      const total = price * amount;
+      const total = (price * amount).toFixed(2);
       return total;
     }
 
