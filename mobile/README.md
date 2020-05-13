@@ -33,3 +33,7 @@
 ### Using Jest for testing Async Storage module
 
   - If you are using Async Storage mock, make sure to check out [docs on how to integrate it with this module.](https://github.com/react-native-community/async-storage/blob/master/docs/Jest-integration.md)
+  
+### Clean Cache
+  - npm start -- --reset-cache
+  - npm cache clean --force
